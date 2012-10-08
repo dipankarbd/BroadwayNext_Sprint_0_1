@@ -1,0 +1,187 @@
+@charset "UTF-8";
+/* CSS Document */
+
+
+.textieldcalender{
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 12px;
+	color: #000;
+	background-color: #FFFFFF;
+	background-repeat: no-repeat;
+	line-height: 15px;
+	width: 25px;
+	font-weight: lighter;
+	text-transform: uppercase;
+	letter-spacing: 0px;
+	padding-left: 0px;
+	text-align: center;
+	background-image: url(custom-theme/images/switch.png);
+}
+.clicked
+{
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 12px;
+	color: #999;
+	background-color: #CCFF00;
+	background-repeat: no-repeat;
+	border: thin solid #E5E5E5;
+	line-height: 15px;
+	width: 25px;
+	font-weight: lighter;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	padding-left: 0px;
+	text-align: center;
+    
+}
+.textieldcalendertotal{
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 12px;
+	color: #000;
+	background-color: #CF0;
+	background-repeat: no-repeat;
+	border: thin solid #E5E5E5;
+	line-height: 15px;
+	width: 25px;
+	font-weight: lighter;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	padding-left: 0px;
+	text-align: center;
+}
+.textieldcalendertotalswitch{
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 12px;
+	color: #000;
+	background-color: #FFF;
+	background-repeat: no-repeat;
+	line-height: 15px;
+	width: 25px;
+	font-weight: lighter;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	padding-left: 0px;
+	text-align: center;
+	background-image: url(custom-theme/images/greenswitch.png);
+}
+.textieldcalendersmall{
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 12px;
+	color: #000;
+	background-color: #FFF;
+	background-repeat: no-repeat;
+	line-height: 15px;
+	width: 150px;
+	font-weight: lighter;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	padding-left: 0px;
+	text-align: center;
+	background-image: url(custom-theme/images/calenderbuttonsmaller.png);
+}
+.textieldmenu {
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 10px;
+	color: #999;
+	background-repeat: no-repeat;
+	border: thin solid #E5E5E5;
+	line-height: 15px;
+	width: 100%;
+	font-weight: lighter;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	text-indent: 30px;
+	vertical-align: middle;
+	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMCIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+
+background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); /* FF3.6+ */
+
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
+
+background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
+
+background: -o-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* Opera 11.10+ */
+
+background: -ms-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* IE10+ */
+
+background: linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* W3C */
+
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=0 ); /* IE6-8 */
+
+
+}
+.textieldmenu:hover {
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 12px;
+	color: #999;
+	background-color: #999999;
+	background-repeat: no-repeat;
+	border: thin solid #E5E5E5;
+	line-height: 15px;
+	width: 100%;
+	font-weight: lighter;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	margin-left: 30px;
+}
+.textieldcalendermenu:hover {
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 10px;
+	color: #000;
+	background-color: #CCFF00;
+	background-repeat: no-repeat;
+	border: thin solid #E5E5E5;
+	line-height: 15px;
+	width: 100%;
+	font-weight: lighter;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	text-indent: 30px;
+}
+.textieldcalenderdates {
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 12px;
+	color: #999;
+	background-color: #FFFFFF;
+	background-repeat: no-repeat;
+	border: thin solid #E5E5E5;
+	line-height: 15px;
+	width: 25px;
+	font-weight: lighter;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	padding-left: 0px;
+	text-align: center;
+}
+.textieldcalenderdates:link{
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 12px;
+	color: #000;
+	background-color: #CCFF00;
+	background-repeat: no-repeat;
+	border: thin solid #E5E5E5;
+	line-height: 15px;
+	width: 25px;
+	font-weight: lighter;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	padding-left: 0px;
+	text-align: center;
+}
+.textieldcalenderdates:hover {
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 12px;
+	color: #000;
+	background-color: #CCFF00;
+	background-repeat: no-repeat;
+	border: thin solid #E5E5E5;
+	line-height: 15px;
+	width: 25px;
+	font-weight: lighter;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	padding-left: 0px;
+	text-align: center;
+}

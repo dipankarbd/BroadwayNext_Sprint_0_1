@@ -1,0 +1,118 @@
+﻿<h3>Remit To</h3>
+<hr />
+<!--<div><pre data-bind="text: ko.toJSON($data, null, 2)"></pre></div>-->
+
+<div data-bind="with: selectedVendor">
+
+
+     <!-- ko foreach: $data.RemitToes -->
+        Vendor Name
+     
+            <input class="textbox" type="text" data-bind="value: Zip, enable: inEditMode" />
+        Company
+            <input class="textbox" type="text" data-bind="value: Company, enable: inEditMode" />
+        Address1
+            <input class="textbox" type="text" data-bind="value: Address1, enable: inEditMode" />
+        Address2
+            <input class="textbox" type="text" data-bind="value: Address2, enable: inEditMode" />
+        City
+            <input class="textbox" type="text" data-bind="value: City, enable: inEditMode" />
+        
+        
+    <!-- /ko -->
+
+
+</div>
+
+
+<!--<div class="bottomwrapper" data-bind="with: selectedVendor.VendorRemitToes">
+    <div class="eightypercent">
+
+        <div class="boxholder">
+            Remit Type 
+       
+            <select name="remittype" class="dropdownbox">
+            </select>
+            Vendor Name
+     
+            <input class="textbox" type="text"  data-bind="value: Zip, enable: inEditMode"/>
+            Company
+            <input class="textbox" type="text" data-bind="value: Company, enable: inEditMode"/>
+            Address1
+            <input class="textbox" type="text" data-bind="value: Address1, enable: inEditMode"/>
+            Address2
+            <input class="textbox" type="text" data-bind="value: Address2, enable: inEditMode"/>
+            City
+            <input class="textbox" type="text" data-bind="value: City, enable: inEditMode"/>
+            <div>
+                <div class="state">State </div>
+                <div class="zip">
+                    Zip
+ 
+                </div>
+            </div>
+            <div class="state">
+                <select name="state" class="dropdownbox" data-bind="enable: inEditMode">
+                </select>
+            </div>
+            <div class="zip">
+                <input name="zip" class="textbox" type="text" data-bind="value: Zip, enable: inEditMode"/>
+            </div>
+            <div></div>
+            Country
+            <select name="Country2" class="dropdownbox">
+            </select>
+            Province
+            <input name="Province 2" class="textbox" type="text" data-bind="value: Province, enable: inEditMode"/>
+
+            <br>
+        </div>
+        <div class="boxholder">
+
+            <div class="threequarterboxholder">
+                Phone
+        
+                <input name="phone" class="textbox" type="text" data-bind="value: Phone, enable: inEditMode"/>
+            </div>
+            <div class="onethirdboxholder">
+                Ext
+        
+                <input name="phoneexttwo2" class="textbox" type="text" data-bind="value: PhoneExt, enable: inEditMode"/>
+            </div>
+
+            Contact
+       
+            <input name="Contact 2" class="textbox" type="text" data-bind="value: Contact, enable: inEditMode"/>
+            Email
+       
+            <input name="Email 2" class="textbox" type="text" data-bind="value: Email, enable: inEditMode"/>
+        </div>
+        <div class="boxholder"><span class="texttypeinstructions">* zipcode is typed automatically pull state, provence and count</span></div>
+        <div class="boxholder"></div>
+        <div class="boxholder"></div>
+        <div class="boxholder">
+            <p>&nbsp;</p>
+        </div>
+    </div>
+
+    <!--<div class="btn-group btn-group-vertical">
+        <button class="btn">Edit*</button>
+
+        <button class="btn">Save</button>
+
+        <button class="btn">Cancel</button>
+        <button class="btn">Price List(3)</button>
+        <button class="btn btn-danger">Clear*</button>
+    </div>-->
+
+<div class="btn-group btn-group-vertical">
+    <button class="btn">Edit</button>
+    <!-- ko with:editingVendor -->
+    <button class="btn" data-bind="enable : hasChanges, click: saveDetails">Save</button>
+    <button class="btn" data-bind="enable : hasChanges, click: cancelEdit">Cancel</button>
+    <input id="remitToEdited" type="hidden" data-bind="value: hasChanges" />
+    <!-- /ko -->
+    <button class="btn">Price List(3)</button>
+</div>
+
+

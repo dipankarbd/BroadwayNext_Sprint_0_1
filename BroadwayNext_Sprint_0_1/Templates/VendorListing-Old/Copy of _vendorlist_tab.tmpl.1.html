@@ -1,0 +1,264 @@
+﻿<!--
+    This version works with KO Grid
+    Works... 
+    Next Version -=> use KO data Pager
+
+-->
+
+
+<div data-bind="koGrid: {
+                    data: vendors,
+                    columnDefs: [ { field: 'VendorNum', width: 140 },
+                                  { field: 'Company',   width: 140 },
+                                  { field: 'Address1', width: 140 },
+                                  { field: 'City', width: 140 },               
+                                  { field: 'State', width: 140 },
+                                  { field: 'Zip', width: 140 },
+                                  { field: 'Phone', width: 140 },
+                                  { field: 'Fax', width: 140 }
+                                ],
+                    autogenerateColumns : false, 
+                    isMultiSelect : false,
+                    selectedItem : selectedVendor
+    }">
+
+</div>
+
+    <button class="btn" data-bind="enable: $root.selectedVendor, click: $root.editVendor">Edit</button>
+
+
+
+<!--
+    KO Grid Master/Detail
+    ----------------------
+    <div id="sandBox" class="example" style="height: 600px; max-width: 700px; float: left; margin-left: 100px;" 
+        data-bind="koGrid: { data: myObsArray,
+                             columnDefs: [ { field: 'Sku', width: 140 },
+                                        { field: 'Vendor', width: 100 },
+                                        { field: 'SeasonCode', displayName: 'Season Code', width: 150 },
+                                        { field: 'Mfg_Id', displayName: 'M0fg ID', width: 180 },
+                                        { field: 'UPC', width: 170 }],
+                             autogenerateColumns: false,
+                             selectedItem: mySelectedItem,
+                             isMultiSelect: false }">
+
+</div>
+-->
+<!--
+
+<script type="text/html" id="editTemplate">
+    <div data-bind="kgCell: $cell">
+        <input type="text" data-bind="value: $cellValue" style="width: 120px;"/>
+    </div>
+</script>
+
+<div id="sandBox" class="example" style="height: 600px; max-width: 700px;" 
+        data-bind="koGrid: { data: myObsArray,
+                             columnDefs: [ { field: 'Sku', width: 140 },
+                                        { field: 'Vendor', width: 100, headerClass: 'specialHeader' },
+                                        { field: 'SeasonCode', displayName: 'Season Code', width: 150, cellTemplate: 'editTemplate' },
+                                        { field: 'Mfg_Id', displayName: 'Mfg ID', width: 180, cellClass: 'specialCell' },
+                                        { field: 'UPC', width: 170 }],
+                             autogenerateColumns: false }">
+
+</div>
+-->
+<!-- 
+    KO GRID -- Advanced Sample
+    ----------------------------
+    <div id="sandBox" class="example" style="height: 600px; max-width: 700px;" 
+        data-bind="koGrid: { data: myObsArray,
+                             columnDefs: [ { field: 'Sku', width: 140 },
+                                        { field: 'Vendor', width: 100 },
+                                        { field: 'SeasonCode', displayName: 'Season Code', width: 150 },
+                                        { field: 'Mfg_Id', displayName: 'Mfg ID', width: 180 },
+                                        { field: 'UPC', width: 170 }],
+                             autogenerateColumns: false,
+                             isMultiSelect: false,
+                             enablePaging: true,
+                             useExternalFiltering: true,
+                             useExternalSorting: true,
+                             filterInfo: filterInfo,
+                             sortInfo: sortInfo,
+                             pageSize: pageSize,
+                             pageSizes: [25, 50, 75],
+                             currentPage: currentPage,
+                             totalServerItems: totalServerItems,
+                             selectedItem: selectedItem }">
+
+    </div>
+-->
+
+<!--<div style="width:100%">
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Vendor #</th>
+                <th>Company</th>
+                <th>Address1</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip</th>
+                <th>Phone</th>
+                <th>Fax</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: vendors ">
+            <tr data-bind="click:selectVendor">
+                
+                <td data-bind="text: VendorNum"></td>
+                <td data-bind="text: Company"></td>
+                <td data-bind="text: Address1"></td>
+                <td data-bind="text: City"></td>
+                <td data-bind="text: State"></td>
+                <td data-bind="text: Zip"></td>
+                <td data-bind="text: Phone"></td>
+                <td data-bind="text: Fax"></td>
+            </tr>
+    </tbody>
+        
+    </table>
+    <button class="btn" data-bind="enable: isSelected, click: editVendor">Edit</button>
+
+</div>-->
+<!--<td data-bind="text: $.index"></td>-->
+
+
+
+
+
+
+
+
+<!--<div class="eightypercent ">
+    <div class="nintyeightscroll">
+        <div class="texttypebar">Vendor Listing</div>
+
+        <table style="width: 5080px;" border="0" cellpadding="0" cellspacing="0">
+            <thead>
+                <tr>
+                    <th style="width: 120px;">Vendor #</th>
+                    <th style="width: 100px;">Company</th>
+                    <th style="width: 100px;">Address1</th>
+                    <th style="width: 100px;">City</th>
+                    <th style="width: 100px;">State</th>
+                    <th style="width: 100px;">Zip</th>
+                    <th style="width: 100px;">Phone</th>
+                    <th style="width: 100px;">Fax</th>
+                    <th style="width: 100px;">DBA</th>
+                    <th style="width: 100px;">VendorType</th>
+                    <th style="width: 100px;">Terms</th>
+                    <th style="width: 100px;">Emergency</th>
+                    <th style="width: 100px;">Active</th>
+                    <th style="width: 100px;">W9</th>
+                    <th style="width: 100px;">InputDate</th>
+                    <th style="width: 100px;">InputBy</th>
+                    <th style="width: 100px;">NP</th>
+                    <th style="width: 100px;">SC</th>
+                    <th style="width: 100px;">LP</th>
+                    <th style="width: 100px;">SV</th>
+                    <th style="width: 100px;">GL</th>
+                    <th style="width: 100px;">GL Date</th>
+                    <th style="width: 100px;">WC</th>
+                    <th style="width: 100px;">WC Date</th>
+                    <th style="width: 100px;">Auto</th>
+                    <th style="width: 100px;">Auto Date</th>
+                    <th style="width: 100px;">GL Nof</th>
+                    <th style="width: 100px;">WC Nof</th>
+                    <th style="width: 100px;">Auto Nif</th>
+                    <th style="width: 100px;">GL Add.Insure</th>
+                    <th style="width: 100px;">Rehire</th>
+                    <th style="width: 100px;">Grade</th>
+                    <th style="width: 160px;">Remit To Company</th>
+                    <th style="width: 170px;">Remit To Address 1</th>
+                    <th style="width: 170px;">Remit To Address 2</th>
+                    <th style="width: 150px;">Remit To City</th>
+                    <th style="width: 150px;">Remit To State</th>
+                    <th style="width: 150px;">Remit To Zip</th>
+                    <th style="width: 150px;">Remit To Phone</th>
+                    <th style="width: 150px;">Remit To Fax</th>
+                    <th style="width: 150px;">Remit To Contact</th>
+                    <th style="width: 150px;">Price List Count</th>
+                    <th style="width: 100px;">Comment 1</th>
+                    <th style="width: 100px;">Province</th>
+                    <th style="width: 100px;">PVA</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td class="tdalt">cell</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">&nbsp;</td>
+                    <td class="tdalt">cell</td>
+                    <td class="tdalt">cell</td>
+                </tr>
+            </tbody>
+
+
+
+
+
+
+
+
+
+
+        </table>
+    </div>
+    <div class="nintyeight">
+        <label for="vendortrades"></label>
+        <textarea name="vendortrades" rows="5" class="textboxlesslarger">Vendor trades displayed here.</textarea>
+    </div>
+</div>
+
+<div class="btn-group btn-group-vertical">
+    <button class="btn">New</button>
+
+    <button class="btn">Edit*</button>
+
+    <button class="btn">Price List(3)</button>
+
+    <button class="btn btn-danger">Delete</button>
+</div>-->

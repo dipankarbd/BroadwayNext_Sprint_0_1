@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BroadwayNext_Sprint_0_1", "BroadwayNext_Sprint_0_1\BroadwayNext_Sprint_0_1.csproj", "{7836537A-9AF5-4D62-96A1-CA61B28224AF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7836537A-9AF5-4D62-96A1-CA61B28224AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7836537A-9AF5-4D62-96A1-CA61B28224AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7836537A-9AF5-4D62-96A1-CA61B28224AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7836537A-9AF5-4D62-96A1-CA61B28224AF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

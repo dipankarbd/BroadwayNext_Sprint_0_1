@@ -1,0 +1,616 @@
+/*
+ *  psd2css.css
+ *
+ *  This is your external CSS style sheet. It defines all of the CSS styles that you
+ *  are using in your page.  If you are going to create multiple pages from the same
+ *  PSD file (like a template), you will share this CSS style sheet between the various
+ *  pages.
+ *
+ *  This file was originally generated at http://psd2cssonline.com 
+ *  August 17, 2012, 2:38 pm with psd2css Online version 1.95
+ *
+ */
+
+.boxholder{
+	width:17%;
+	height: auto;
+	float: left;
+	display:block;
+	padding-left:1%;
+	color: #000;
+		}
+		
+  .border {
+	display:block;
+	float : left;
+	border: thin solid #666;
+	width:19%;
+	height: auto;
+}
+
+ .thirtypercent {
+width: 29%;
+.horzporpertiesforboxes
+}
+  .elasticbox{
+	width:auto;
+	display:block;
+	float: left;
+	
+}
+
+  .elasticboxextended{
+	width: 80%;
+	
+	display: block;
+	float: left;
+
+}
+ .halfoffield{
+	width: 49%;
+	display:block;
+	margin:0;
+	float:left;
+	padding-top:0;
+	padding-right:0;
+	padding-bottom:0;
+	padding-left:1%;
+}
+ .textsizerbox{
+	width: 20%;
+	display: block;
+	margin:0;
+	float: right;
+	padding-top: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+	padding-left:1%;
+	font-size: 15px;
+	color: #000;
+}
+
+/* this one used to line up labels and filedds horizontally ie; phone number and ext*/
+ .thirdoffield{
+	width: 50%;
+	display: block;
+	margin:0;
+	float: left;
+	padding-top: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+	
+}
+ .zip{
+	width: 71%;
+	display: block;
+	margin:0;
+	float: left;
+	padding-top: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+
+	
+}
+
+ .state{
+	width: 29%;
+	display: block;
+	margin:0;
+	float: left;
+	padding-top: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+}
+
+.itemscentered{
+	width:100%;
+	height: auto;
+	float: left;
+	display:none;
+	padding-left: 20%;
+	display: block;
+	padding-top: 1%;
+		}
+/* this one used as a box holder to divide the page in 5 columns across*/
+
+	
+.nintyeight{
+		width:98%;
+	height: auto;
+	display:block;
+	
+		}
+.nintysix{
+	width: 90%;
+	display:block;
+	height: auto;
+	float : left;
+	padding-right:0;
+	padding-left:6px;
+	position: relative;
+		}
+.nintyeightscroll{
+		width:98%;
+	height: auto;
+	display:block;
+	overflow: scroll;	
+		}
+.onethirdboxholder{
+	width:32.5%;
+	display:block;
+	margin:0;
+	float: left;
+	padding-left:2px;
+
+		}
+			
+.onefifthboxholder{
+	width:12%;
+	height: auto;
+	float: left;
+	display:block;
+	padding-left:1%;
+	color: #000;
+		}
+.threequarterboxholder{
+	width:74%;
+	height: auto;
+	float: left;
+	display:block;
+	padding-left:1%;
+	color: #000;
+		}
+		
+.doubleboxholder{
+	width:17%;
+	height: auto;
+	float: left;
+	display:block;
+	padding-left:1%;
+	color: #000;
+		}
+		
+		
+.boxholderbuttons{
+	width:11.5%;
+	height: auto;
+	float:left;
+	display:block;
+	margin-left:6%;
+	
+		}
+
+.eightypercent {
+width: 81%;
+display:block;
+	height: auto;
+	background-color: #FFF;
+	float : left;
+}
+.eightypercenttop {
+width: 80.25%;
+display:block;
+	height: auto;
+	background-color: #FFF;
+	float : left;
+}
+
+/* these used for the grids */
+.gridholder{
+	width:100%;
+	height: auto;
+	overflow: scroll;
+
+	}
+	
+.stgridbottom {
+width: 79%;
+display:block;
+	height: auto;
+	background-color: #FFF;
+	float : left;
+}	
+
+
+
+/* You named this layer bottomtabs */
+#topwrapper{
+	width:100%;
+	height: auto;
+	}
+	#stars{
+	
+	}
+.topwrapper{
+	width:100%;
+	height: auto;
+	float: left;
+	display:block;
+	}
+
+#bottomwrappertwo{
+	width:100%;
+	height: auto;
+	float: left;
+	display:block;
+	}
+
+.bottomwrapper{
+	width:100%;
+	height: auto;
+	float: left;
+	display:inline-block;
+	}
+
+#bottomwrapper{
+	width:100%;
+	height: auto;
+	float: left;
+	display:inline-block;
+	}
+
+#topgridwithfour {
+	width: 80%;
+	display: inline-block;
+	margin:0;
+	padding:0;
+	float: right;
+}
+.topgridwithfour {
+	width: 100%;
+	display: inline-block;
+	margin:0;
+	padding:0;
+	float: left;
+}
+.halfofpage {
+	width: 35%;
+	display: inline-block;
+	margin:0;
+	padding:0;
+	float: left;
+}
+.halfofgrid {
+	width: 50%;
+	display: inline-block;
+	margin:0;
+	padding:0;
+	float: left;
+}
+.smallerbox {
+	top: 43px;
+	float: left;
+	width: 10%;
+	height: auto;
+	padding: 5px;
+}
+.emailbuttons {
+	width: 4%;
+	display: inline-block;
+	margin:0;
+	padding:0;
+	float: left;
+}
+.emailbuttonswithsubject {
+	width: 8%;
+	display: inline-block;
+	margin:0;
+	padding:0;
+	float: left;
+}
+/* You named this layer bottomrightsidebuttons */
+#bottomrightsidebuttons {
+	 float: right;
+	width: 16%;
+	margin:0;
+padding:0;
+}
+.popupwindow {
+float: left;
+	width: 450px;
+	height: auto;
+	background-color: #FFF;
+	padding: 5px;
+
+}
+.popupwindowgrid {
+float: left;
+	width: 215px;
+	height: auto;
+	background-color: #FFF;
+	padding: 5px;
+
+
+}
+.popupwindowgridsideline {
+
+	width: 210px;
+	height: auto;
+	background-color: #FFF;
+	padding: 5px;
+	float : left;
+}
+.popupwindowgridbottom {
+float: left;
+	width: 445px;
+	height: auto;
+	background-color: #FFF;
+	padding: 5px;
+	float : left;
+
+}
+.bottomrightsidebuttons {
+	width: 18%;
+	height: auto;
+	background-color: #FFF;
+	padding: 5px;
+	float : left;
+
+}
+.keyindicatersred {
+
+
+	height: auto;
+	background-color: #FFF;
+	padding: 5px;
+	color: #FFF;
+		line-height: 15px;
+	font-weight: bold;
+	letter-spacing: 1px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 5px;
+	border: thin inset #999;
+	background-color: #CC0000;
+	float: right
+
+}
+.keyindicatersblue {
+
+
+	height: auto;
+	background-color: #FFF;
+	padding: 5px;
+	color: #FFF;
+	line-height: 15px;
+	font-weight: bold;
+	letter-spacing: 1px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 5px;
+	border: thin inset #999;
+	background-color: #3300CC;
+	float: right;
+
+}
+.keyindicaterspurple {
+
+	height: auto;
+	background-color: #FFF;
+	padding: 5px;
+	color: #FFF;
+	line-height: 15px;
+	font-weight: bold;
+	letter-spacing: 1px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 5px;
+	border: thin inset #999;
+	background-color: #9900FF;
+	float: right;
+
+}
+.keyindicatergreen {
+
+
+	height: auto;
+	background-color: #FFF;
+	padding: 5px;
+	color: #FFF;
+	line-height: 15px;
+	font-weight: bold;
+	letter-spacing: 1px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 5px;
+	border: thin inset #999;
+	background-color: #009900;
+	float: right;
+
+}
+.bottomrightsidebuttonssmall {
+float: left;
+	width: 16%;
+	height: auto;
+	background-color: #FFF;
+	padding: 5px;
+
+}
+.sthalfdivider {
+float: left;
+	width: 46%;
+	height: auto;
+	background-color: #FFF;
+	padding: 5px;
+	float : left;
+
+}
+.sthalfdividersmaller {
+float: left;
+	width: 40%;
+	height: auto;
+	background-color: #FFF;
+	padding: 5px;
+	float : left;
+
+}
+
+.stgridbottomnoline {
+width: 80%;
+	height: auto;
+	padding: 5px;
+	float : left;
+}
+.stgridbottomsixtypercent {
+	width: 58%;
+	height: auto;
+	background-color: #FFF;
+	float : left;
+	
+}
+	
+.ndgridbottomfield {
+width: 18%;
+	height: auto;
+	background-color: #FFF;
+	padding: 5px;
+	float : left;
+}
+
+
+/* You named this layer 1stgrid */
+#stgridtop {
+	top: 43px;
+	width: 18%;
+	height: auto;
+	background-color: #FFF;
+	padding: 5px;
+	float : left;
+	display: inline-block;
+}
+.stgridtop {
+	top: 43px;
+	width: 23%;
+	height: auto;
+	background-color: #FFF;
+	padding: 5px;
+	float : left;
+}
+.stgridbottomsmallest {
+	top: 43px;
+	width: 18%;
+	height: auto;
+	background-color: #FFF;
+	padding: 5px;
+	float : left;
+}
+
+/* You named this layer 2ndgrid */
+#ndgridtop {
+	top: +43px;
+width: 18%;
+	height: auto;
+	background-color: #FFF;
+	padding: 5px;
+	float : left;
+}
+
+/* You named this layer 3rdgrid */
+#rdgridtop {
+	top: 43px;
+	width: 18%;
+		height: auto;
+	background-color: #FFF;
+	padding: 5px;
+	float : left;
+}
+
+/* You named this layer 4thgrid */
+#thgridtop {
+	top: +43px;
+width: 18%;
+height: auto;
+	background-color: #FFF;
+	padding: 5px;
+	float : left;
+
+} 
+/* You named this layer topbuttons */
+#topbuttons{
+	top: 43px;
+	float: left;
+	width: 16%;
+	height: auto;
+	padding: 5px;
+	float : left;
+}
+.topbuttons{
+	top: 43px;
+	float: left;
+	width: 16%;
+	height: auto;
+	padding: 5px;
+	float : left;
+}
+.topbuttonssmaller{
+	top: 43px;
+	float: left;
+	width: 15%;
+	height: auto;
+	padding: 5px;
+	float : left;
+}
+
+.greenbilledbox {
+	color: #000;
+	-moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+	border: medium inset #999;
+	width: 40%;
+	height: auto;
+border-right-width: thin;
+	border-right-style: inset;
+	border-right-color: #666;
+	background-color: #CF2;
+	padding: 5px;
+	
+}
+.whitebox {
+	color: #000;
+	-moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+	border: medium inset #999;
+	width: 40%;
+	height: auto;
+border-right-width: thin;
+	border-right-style: inset;
+	border-right-color: #666;
+	background-color: #FFF;
+	padding: 5px;
+	float : left;
+	diplay: inline;
+}
+.greenbox {
+	color: #000;
+	-moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+	border: medium inset #999;
+	width: 95%;
+	height: auto;
+border-right-width: thin;
+	border-right-style: inset;
+	border-right-color: #666;
+	background-color: #CF2;
+	padding: 5px;
+
+}
+
+.purpleoverntebox {
+	color: #FFFFFF;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	border: medium inset #999;
+	width: 40%;
+	height: auto;
+	border-right-width: thin;
+	border-right-style: inset;
+	border-right-color: #666;
+	background-color: #FFF;
+	background-image: url(custom-theme/images/overntealarm.gif);
+	padding: 5px;
+	float : left;
+}

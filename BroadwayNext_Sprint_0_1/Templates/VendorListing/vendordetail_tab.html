@@ -1,0 +1,196 @@
+﻿<div class="bottomwrapper" data-bind="with: selectedVendor">
+    <!--<pre data-bind="text: ko.toJSON($data, null, 2)"></pre>-->
+    <div class="eightypercent ">
+        <div class="boxholder">
+            <div>
+                Vendor #
+             
+                <input type="checkbox" />
+                <label for="checkbox2"></label>
+                Active
+                <input type="text" class="textboxfilled" disabled="disabled" data-bind="value: Vendnum"/>
+
+
+            </div>
+            <div></div>
+            <div class="reqlabel" >Company</div>
+            <input type="text" class="textbox" data-bind="value: Company, enable: $root.inEditMode"  />
+            DBA
+            <input type="text" class="textbox" data-bind="value: DBA, enable: $root.inEditMode" />
+            <div class="reqlabel">Address 1</div>
+            <input type="text" class="textbox" data-bind="value: Address1 , enable: $root.inEditMode" />
+            Address 2
+            <input type="text" class="textbox" data-bind="value: Address2 , enable: $root.inEditMode" />
+            <div class="reqlabel">City</div>
+            <input type="text" class="textbox" data-bind="value: City , enable: $root.inEditMode" />
+
+            <div class="state">
+                <div class="reqlabel">State</div>
+                <select class="textbox" data-bind="options: $root.states,
+                                                    value: State,
+                                                    enable: $root.inEditMode">
+                </select>
+            </div>
+            <div class="zip">
+                <div class="reqlabel">Zip</div>
+                <input type="text" class="textbox" data-bind="value: Zip , enable: $root.inEditMode" />
+            </div>
+            <div class="reqlabel">Required</div>
+            <span class="texttypeinstructions">* zipcode is typed automatically pull state, province and country</span>
+            <div></div>
+        </div>
+
+        <div class="boxholder">
+            Country
+            
+            <select class="dropdownbox" data-bind="options: $root.countries,
+                                                    value: Country,
+                                                    enable: $root.inEditMode">
+            </select>
+            Province
+            <input type="text" class="textbox" data-bind="value: Province , enable: $root.inEditMode"  />
+            <div class="threequarterboxholder">
+                <div class="reqlabel">Phone</div>
+                <input type="text" class="textbox" data-bind="value: Phone , enable: $root.inEditMode" />
+            </div>
+            <div class="onethirdboxholder">
+                Ext
+           
+                <input type="text" class="textbox" data-bind="value: PhoneExt , enable: $root.inEditMode" />
+            </div>
+            <div class="halfoffield">Fax </div>
+            <input type="text" class="textbox" data-bind="value: Fax , enable: $root.inEditMode"  />
+            Mobile
+           
+            <input type="text" class="textbox" data-bind="value: Mobile , enable: $root.inEditMode" />
+            Emergency
+            <input type="text" class="textbox" data-bind="value: Emergency , enable: $root.inEditMode"  />
+            Contact
+           
+            <input type="text" class="textbox" data-bind="value: Contact , enable: $root.inEditMode" />
+            Email
+         
+            <input type="text" class="textbox" data-bind="value: Email , enable: $root.inEditMode" />
+            Auto Email
+ 
+            <select multiple="multiple">
+                <option>123@broadwaynational.com</option>
+                <option>123@broadwaynational.com</option>
+                <option>123@broadwaynational.com</option>
+                <option>123@broadwaynational.com</option>
+                <option>123@broadwaynational.com</option>
+            </select>
+            <br />
+        </div>
+
+
+        <div class="boxholder">
+            Comment
+             
+            <input type="text" class="textbox" data-bind="value: Comment , enable: $root.inEditMode" />
+            Type <span class="rdgrid">
+                <select class="dropdownbox">
+                </select>
+            </span>GL#
+           
+            <input type="text" class="textbox" data-bind="value: GLnum, enable: $root.inEditMode" />
+            <div class="thirtypercent">
+                <div class="reqlabel">Tax ID</div>
+            </div>
+            <div class="thirtypercent">&nbsp;&nbsp; &nbsp; or</div>
+            <div class="thirtypercent">
+                <div class="reqlabel">SSN</div>
+            </div>
+            <div class="halfoffield">
+                <input type="text" class="textbox" data-bind="value: TaxID, enable: $root.inEditMode" />
+            </div>
+            <div class="thirdoffield">
+                <input type="text" class="textbox" data-bind="enable: $root.inEditMode" />
+            </div>
+            <br />
+            Net Days
+         
+            <input type="text" class="textbox" data-bind="value: NetDays, enable: $root.inEditMode" />
+            <span class="texttypesmallercheckbox">
+                <input type="checkbox" data-bind="checked: CheckTax1099, enable: $root.inEditMode">
+                Checked for 1099</span><span class="texttypesmallercheckbox">
+                    <br>
+                    <input type="checkbox" data-bind="checked: PVA, enable: $root.inEditMode"/>
+                    <label for="radio2"></label>
+                    PVA </span><span class="texttypesmallercheckbox">
+                        <br>
+                        <input type="checkbox" data-bind="checked: SignedContract, enable: $root.inEditMode"  />
+                        <label for="radio3"></label>
+                        Signed Contract</span><br>
+            <span class="texttypesmallercheckbox">
+                <input type="checkbox" data-bind="checked: CreditCardHolder, enable: $root.inEditMode" />
+                Credit Card
+                <br>
+                <input type="checkbox" data-bind="checked: W9, enable: $root.inEditMode" />
+                W9 </span>
+            <br>
+
+            <div>
+                <br />
+            </div>
+        </div>
+
+
+        <div class="boxholder">
+            Payment Terms
+   
+            <select class="dropdownbox">
+            </select>
+
+            Cash Discount
+            <select class="dropdownbox">
+            </select>
+
+
+            Input By<br />
+            <input type="text" class="textboxfilled" value="Arun" />
+            Input Date
+   
+            <input type="text" class="textboxfilled" value="08/15/2012" />
+            <input type="text" class="textboxfilled" data-bind="date: InputDate"/>
+            <br />
+
+            Pricing Schedule
+       
+            <input type="text" class="textboxfilled" value="2012 Pricing" />
+        </div>
+
+
+
+        <div class="boxholder">
+            <br />
+            <div class="sectionheadings">Web Access</div>
+            User Name
+ 
+            <input type="text" class="textbox" />
+            Password
+ 
+            <input type="text" class="textbox" />
+
+            Price Reviewed Date
+ 
+            <input type="text" class="textboxfilled" />
+            Price Reviewed By
+ 
+            <input type="text" class="textboxfilled" />
+
+        </div>
+
+    </div>
+
+    <div class="btn-group btn-group-vertical" data-bind="ifnot: ($root.inEditMode)">
+        <button class="btn" data-bind="click: $root.editVendor">Edit Vendor*</button>
+        <button class="btn">Price List(3)*</button>
+    </div>
+    <div class="btn-group btn-group-vertical" data-bind="if: ($root.inEditMode)">
+        <!-- ko with: $root.editingVendor -->
+        <button class="btn btn-large btn-success" id="remitToSave" data-bind="enable: hasChanges, click: $root.saveDetails">Save</button>
+        <button class="btn btn-large" id="remitToCancel" data-bind="enable: hasChanges, click: $root.cancelEdit">Cancel</button>
+        <!-- /ko -->
+    </div>
+</div>

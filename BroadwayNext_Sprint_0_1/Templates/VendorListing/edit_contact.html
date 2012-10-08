@@ -1,0 +1,87 @@
+﻿<div class="popupwindow">
+    <div id="pagetitle">Add/Edit /View Contacts</div>
+    <div class="popupwindowgrid">
+        Last Name
+ 
+        <input type="text" class="textbox" data-bind="value: Lastname" />
+        First Name
+ 
+        <input type="text" class="textbox" data-bind="value: Firstname" />
+        Address 1
+ 
+        <input type="text" class="textbox" data-bind="value: Address1" />
+        Address 2
+ 
+        <input type="text" class="textbox" data-bind="value: Address2" />
+        City
+ 
+        <input type="text" class="textbox" data-bind="value: City">
+        <div class="state">
+            State 
+            
+            <select class="dropdownbox" data-bind="options: $root.states,value: State"></select>
+        </div>
+        <div class="zip">
+            Zip
+   
+            <input type="text" class="textbox" data-bind="value: Zip" />
+        </div>
+        <div align="left">
+            Country
+    
+             <select class="dropdownbox" data-bind="options: $root.countries"></select>
+            Province
+ 
+            <input type="text" class="textbox" />
+        </div>
+    </div>
+    <div class="popupwindowgrid">
+
+        <div class="threequarterboxholder">
+            Phone
+   
+            <input type="text" class="textbox" data-bind="value: Phone" />
+        </div>
+        <div class="onethirdboxholder">
+            Ext
+   
+            <input type="text" class="textbox" data-bind="value: PhoneExt" />
+        </div>
+        Fax
+   
+        <input type="text" class="textbox" data-bind="value: Fax" />
+        Mobile
+   
+        <input type="text" class="textbox" data-bind="value: Mobile" />
+        Title
+   
+        <input type="text" class="textbox" data-bind="value: Title" />
+        Vendor#
+   
+        <input type="text" class="textboxfilled" data-bind="value: Vendnum" />
+        <div class="halfoffield">
+            Input Date
+   
+            <input type="text" class="textboxfilled" data-bind="value: InputDateFormated" />
+        </div>
+        <div class="halfoffield">
+            Input By
+   
+            <input type="text" class="textboxfilled" data-bind="value: InputBy" />
+        </div>
+
+        <input type="checkbox" data-bind="checked: ActiveType" />
+        <label for="active">Active</label>
+        <br>
+    </div>
+    <div class="popupwindowgridbottom">
+        <div class="sectionheadings">Comments</div>
+        <div>
+            <textarea name="note type" cols="70%" rows="10" class="notepad" id="note type">Type Notes here</textarea>
+        </div>
+        <div class="btn-group">
+            <button class="btn" data-bind="click:$root.saveContact">Save</button>
+            <button class="btn" data-bind="click:$root.cancelEdit">Cancel</button>
+        </div>
+    </div>
+</div>

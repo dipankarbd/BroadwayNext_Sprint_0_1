@@ -1,0 +1,128 @@
+﻿<div class="eightypercent ">
+    <div class="nintyeightscroll">
+        <div class="texttypebar">Vendor Listing</div>
+
+        <table style="width: 5080px;" border="0" cellpadding="0" cellspacing="0">
+            <thead>
+                <tr>
+                    <th style="width: 120px;">Vendor #</th>
+                    <th style="width: 100px;">Company</th>
+                    <th style="width: 100px;">Address1</th>
+                    <th style="width: 100px;">City</th>
+                    <th style="width: 100px;">State</th>
+                    <th style="width: 100px;">Zip</th>
+                    <th style="width: 100px;">Phone</th>
+                    <th style="width: 100px;">Fax</th>
+                    <th style="width: 100px;">DBA</th>
+                    <th style="width: 100px;">VendorType</th>
+                    <th style="width: 100px;">Terms</th>
+                    <th style="width: 100px;">Emergency</th>
+                    <th style="width: 100px;">Active</th>
+                    <th style="width: 100px;">W9</th>
+                    <th style="width: 100px;">InputDate</th>
+                    <th style="width: 100px;">InputBy</th>
+                    <th style="width: 100px;">NP</th>
+                    <th style="width: 100px;">SC</th>
+                    <th style="width: 100px;">LP</th>
+                    <th style="width: 100px;">SV</th>
+                    <th style="width: 100px;">GL</th>
+                    <th style="width: 100px;">GL Date</th>
+                    <th style="width: 100px;">WC</th>
+                    <th style="width: 100px;">WC Date</th>
+                    <th style="width: 100px;">Auto</th>
+                    <th style="width: 100px;">Auto Date</th>
+                    <th style="width: 100px;">GL Nof</th>
+                    <th style="width: 100px;">WC Nof</th>
+                    <th style="width: 100px;">Auto Nif</th>
+                    <th style="width: 100px;">GL Add.Insure</th>
+                    <th style="width: 100px;">Rehire</th>
+                    <th style="width: 100px;">Grade</th>
+                    <th style="width: 160px;">Remit To Company</th>
+                    <th style="width: 170px;">Remit To Address 1</th>
+                    <th style="width: 170px;">Remit To Address 2</th>
+                    <th style="width: 150px;">Remit To City</th>
+                    <th style="width: 150px;">Remit To State</th>
+                    <th style="width: 150px;">Remit To Zip</th>
+                    <th style="width: 150px;">Remit To Phone</th>
+                    <th style="width: 150px;">Remit To Fax</th>
+                    <th style="width: 150px;">Remit To Contact</th>
+                    <th style="width: 150px;">Price List Count</th>
+                    <th style="width: 100px;">Comment 1</th>
+                    <th style="width: 100px;">Province</th>
+                    <th style="width: 100px;">PVA</th>
+                </tr>
+            </thead>
+
+            <tbody data-bind="foreach: $root.vendors">
+                <tr data-bind="click: $root.selectVendor">
+                    <td class="left" data-bind="text:Vendnum"></td>
+                    <td class="left" data-bind="text:Company"></td>
+                    <td class="left" data-bind="text:Address1"></td>
+                    <td class="left" data-bind="text:City"></td>
+                    <td class="left" data-bind="text:State"></td>
+                    <td class="left" data-bind="text:Zip"></td>
+                    <td class="left" data-bind="text:Phone"></td>
+                    <td class="left" data-bind="text:Fax"></td>
+                    <td class="left">&nbsp;</td>
+                    <td class="left">&nbsp;</td>
+                    <td class="left">&nbsp;</td>
+                    <td class="left">&nbsp;</td>
+                    <td class="left">&nbsp;</td>
+                    <td class="left">&nbsp;</td>
+                    <td class="left">&nbsp;</td>
+                    <td class="left">&nbsp;</td>
+                    <td class="left">&nbsp;</td>
+                    <td class="left">&nbsp;</td>
+                    <td class="left">&nbsp;</td>
+                    <td class="left">&nbsp;</td>
+                    <td class="left">&nbsp;</td>
+                    <td class="left">&nbsp;</td>
+                    <td class="left">&nbsp;</td>
+                    <td class="left">&nbsp;</td>
+                    <td class="left">&nbsp;</td>
+                    <td class="left">&nbsp;</td>
+                    <td class="left">&nbsp;</td>
+                    <td class="left">&nbsp;</td>
+                    <td class="left">&nbsp;</td>
+                    <td class="left">&nbsp;</td>
+                    <td class="left">&nbsp;</td>
+                    <td class="left">&nbsp;</td>
+                    <td class="left">&nbsp;</td>
+                    <td class="left">&nbsp;</td>
+                    <td class="left">&nbsp;</td>
+                    <td class="left">&nbsp;</td>
+                    <td class="left">&nbsp;</td>
+                    <td class="left">&nbsp;</td>
+                    <td class="left">&nbsp;</td>
+                    <td class="left">&nbsp;</td>
+                    <td class="left">&nbsp;</td>
+                    <td class="left">&nbsp;</td>
+                    <td class="left">&nbsp;</td>
+                    <td class="left">cell</td>
+                    <td class="left">&nbsp;</td>
+                </tr>
+            </tbody>
+
+
+        </table>
+    </div>
+    <div class="recordfooter">3,456 Vendors</div>
+    <div id="grdPager" data-bind="gridpager:totalPages, pagesize:pageSize, currentpage:currentPage, datasource:fetchData">
+    </div>
+    <div class="nintyeight">
+        <label for="vendortrades"></label>
+        <textarea name="vendortrades" rows="5" class="textboxlesslarger" id="vendortrades">Vendor trades displayed here.</textarea>
+    </div>
+</div>
+
+<div class="btn-group btn-group-vertical">
+    <button class="btn">New Vendor</button>
+
+    <!-- ko if: vendors().length -->
+        <button class="btn" data-bind="enable: selectedVendor, click: editVendor">Edit Vendor*</button>
+
+        <button class="btn" data-bind="enable: selectedVendor">Price List(3)*</button>
+
+        <button class="btn btn-danger" data-bind="enable: selectedVendor">Delete*</button>
+   <!-- /ko -->
+</div>

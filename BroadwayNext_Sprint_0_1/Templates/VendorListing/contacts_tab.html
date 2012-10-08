@@ -1,0 +1,86 @@
+﻿<div class="bottomwrapper">
+    <div class="eightypercent">
+        <div class="nintyeight">
+            <div class="texttypebar">Contacts</div>
+            <div>
+                <div class="gridholder">
+                    <table id="sample4" style="width: 2000px;" border="0" cellpadding="0" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Active</th>
+                                <th>Last Name</th>
+                                <th>First Name</th>
+                                <th>Address 1</th>
+                                <th>Address 2</th>
+                                <th>City</th>
+                                <th>State</th>
+                                <th>Zip</th>
+                                <th>Country</th>
+                                <th>Province</th>
+                                <th>Phone</th>
+                                <th>Ext</th>
+                                <th>Title</th>
+                                <th>Fax</th>
+                                <th>Mobile</th>
+                                <th>Email</th>
+                                <th>Input Date</th>
+                                <th>Input By</th>
+                                <th>Vendor #</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach: contacts">
+                            <tr data-bind="click : $root.selectContact">
+                                <td class="left">
+                                    <input type="checkbox" data-bind="checked: ActiveType" /></td>
+                                <td class="left" data-bind="text:Lastname"></td>
+                                <td class="left" data-bind="text:Firstname"></td>
+                                <td class="left" data-bind="text:Address1"></td>
+                                <td class="left" data-bind="text:Address2"></td>
+                                <td class="left" data-bind="text:City"></td>
+                                <td class="left" data-bind="text:State"></td>
+                                <td class="left" data-bind="text:Zip"></td>
+                                <td class="left">&nbsp;</td>
+                                <td class="left">&nbsp;</td>
+                                <td class="left" data-bind="text:Phone"></td>
+                                <td class="left" data-bind="text:PhoneExt"></td>
+                                <td class="left" data-bind="text:Title"></td>
+                                <td class="left" data-bind="text:Fax"></td>
+                                <td class="left" data-bind="text:Mobile"></td>
+                                <td class="left" data-bind="text:Email"></td>
+                                <td class="left" data-bind="text:InputDateFormated"></td>
+                                <td class="left" data-bind="text:InputBy"></td>
+                                <td class="left" data-bind="text:Vendnum">&nbsp;</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="recordfooter"><span data-bind="text: $root.totalContacts"></span>&nbsp;Contacts</div>
+            <div data-bind="gridpager: $root.contactsGridTotalPages, pagesize: $root.contactsGridPageSize, currentpage: $root.contactsGridCurrentPage, datasource: $root.fetchContacts">
+            </div>
+            <label for="contactscomments"></label>
+            <textarea name="contactscomments" cols="45" rows="5" class="textboxlesslarger">Contacts comments here.</textarea>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn btn-small">View</button>
+            <button class="btn btn-small" data-bind="click:addNewContact">Add</button>
+
+            <button class="btn btn-small" data-bind="click:editContact">Edit*</button>
+            <button class="btn btn btn-danger btn btn-small">Delete*</button>
+        </div>
+
+        <br>
+        <br>
+    </div>
+    <div class="btn-group btn-group-vertical">
+        <button class="btn">Edit Vendor*</button>
+
+        <button class="btn">Price List(3)*</button>
+    </div>
+</div>
+
+<div id="dialog-contact" title="Add/Edit Contact" data-bind="with:editingContact">
+    <div data-bind="template: { name: 'edit_contact' , templateUrl: 'Templates/VendorListing'}">
+    </div>
+</div>

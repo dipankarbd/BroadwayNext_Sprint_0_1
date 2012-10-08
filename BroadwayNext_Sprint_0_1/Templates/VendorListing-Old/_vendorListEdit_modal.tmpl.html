@@ -1,0 +1,22 @@
+﻿<div id="main" data-bind="with: editingVendor">
+    <div class="modal-header">
+        <h3>Edit Vendor</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+    </div>
+    <div class="modal-body">
+        <label>Company</label>
+        <input type="text" data-bind="value: Company, valueUpdate: 'afterkeydown'" />
+        <br />
+        <label>Address1</label>
+        <input type="text" data-bind="value: Address1, valueUpdate: 'afterkeydown'" />
+        <br />
+        <label>City</label>
+        <input type="text" data-bind="value:City, valueUpdate: 'afterkeydown'" />
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn close" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button type="button" class="btn" aria-hidden="true" data-bind="enable: hasChanges, click: cancelEdit">Cancel</button>
+        <button type="button" class="btn btn-primary" data-bind="enable: hasChanges, click:saveEdit">Save</button>
+
+    </div>
+</div>
