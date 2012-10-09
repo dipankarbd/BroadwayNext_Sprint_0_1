@@ -201,14 +201,17 @@ bn.vmVendorList = (function ($, bn, undefined) {
         currentPage = ko.observable(1),
         totalRows = ko.observable(0),
         //-----
-
+        applyMask = function () {
+            $("#vendorphone").mask("(999) 999-9999");
+            $("#vendorfax").mask("(999) 999-9999");
+        },
         selectedVendor = ko.observable(),
 
         selectVendor = function (p) {
             //debugger;
             selectedVendor(p);
             //set Selected Flag
-            isSelected(true);
+            isSelected(true); 
         },
 
         editingVendor = ko.observable(),
@@ -227,6 +230,7 @@ bn.vmVendorList = (function ($, bn, undefined) {
             ko.editable(selectedVendor());
             editingVendor(vendor);
             editingVendor().beginEdit();
+            applyMask();
         },
 
         //Command for the Edit Button... Set VM to 'Editing' mode...
@@ -241,6 +245,7 @@ bn.vmVendorList = (function ($, bn, undefined) {
             ko.editable(editingVendor());
             editingVendor().beginEdit();
             //--
+            applyMask();
         },
 
         cancelEdit = function () {
