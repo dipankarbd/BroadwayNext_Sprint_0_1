@@ -29,33 +29,6 @@ namespace BroadwayNext_Sprint_0_1.Controllers
             return View();
         }
 
-        //Dipankar's Contoller Methods
-        //================================================================================
-        //public JsonResult GetAllVendors(int pageSize, int currentPage)
-        //{
-        //    TGFContext db = new TGFContext();
-
-        //    db.Configuration.ProxyCreationEnabled = false;
-
-        //    //var vendors, rowCount;
-        //    try
-        //    {
-
-        //        var vendors = db.Vendors.Include("VendorInsurances").Include("VendorRemitToes").Include("VendorNotes").OrderBy(v => v.Vendnum).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
-
-        //        int rowCount = db.Vendors.Count();
-
-        //        return Json(new { Data = vendors, VirtualRowCount = rowCount }, JsonRequestBehavior.AllowGet);
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-
-        //        throw;
-        //    }
-            
-            
-        //}
 
         public JsonResult GetVendorContacts(Guid vendorId, int pageSize, int currentPage)
         {
@@ -106,7 +79,7 @@ namespace BroadwayNext_Sprint_0_1.Controllers
         //=================     /Dipankar      ================================================ 
 
 
-        public JsonResult GetAllVendorsTEST(int pageSize, int currentPage, int? vendorNum, string companyName = null)
+        public JsonResult GetAllVendors(int pageSize, int currentPage, int? vendorNum, string companyName = null)
         {
             TGFContext db = new TGFContext();
 
@@ -154,32 +127,7 @@ namespace BroadwayNext_Sprint_0_1.Controllers
         }
 
 
-        //public JsonResult GetAllVendors(int pageSize, int currentPage)
-        //{
-        //    TGFContext db = new TGFContext();
-
-        //    db.Configuration.ProxyCreationEnabled = false;
-
-        //    //var vendors, rowCount;
-        //    try
-        //    {
-
-        //        var vendors = db.Vendors.Include("VendorInsurances").Include("VendorRemitToes").Include("VendorNotes").OrderBy(v => v.Vendnum).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
-
-        //        int rowCount = db.Vendors.Count();
-
-        //        return Json(new { Data = vendors, VirtualRowCount = rowCount }, JsonRequestBehavior.AllowGet);
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-
-        //        throw;
-        //    }
-        //}
-
-
-
+       
         public JsonResult GetVendors()
         {
             //Tested -- Works
@@ -246,32 +194,7 @@ namespace BroadwayNext_Sprint_0_1.Controllers
             {
 
                 string error = "";
-                //if (!ModelState.IsValid)
-                //{
-
-                //    // my custom error class
-                //    //var error = new ApiMessageError() { message = "Model is invalid" };
-                //    foreach (var prop in ModelState.Values)
-                //    {
-                //        //error = "";
-                //        if (prop.Errors.Any())
-                //            error = prop.Errors.First().ErrorMessage + " < ## >";
-                //        //error.errors.Add(prop.Errors.First().ErrorMessage);
-                //    }
-                //    string last = error;
-                //    // Return the error object as a response with an error code
-                //    //return Request.CreateResponse<ApiMessageError>(HttpStatusCode.Conflict, error);
-                //}
-                //if (ModelState.IsValid)
-                //{
-
-                    //foreach (var remitToes in vendor.VendorRemitToes)
-                    //    {
-                    //        Uow.RemitTo.Update(remitToes);
-                    //    }
-                    //Uow.Vendors.Update(vendor);
-                    //Uow.RemitTo.Update(vendor.VendorRemitToes);
-
+               
                     if (vendor.VendorID == Guid.Empty)  //This is New
                     {
                         vendor.VendorID = Guid.NewGuid();
@@ -292,37 +215,6 @@ namespace BroadwayNext_Sprint_0_1.Controllers
 
                         result = Uow.Commit() > 0;
                     }
-
-                    //DbConnection con = Uow.Vendors.context.ObjectContext.Connection;
-                    //if (con.State == ConnectionState.Closed)
-                    //{
-                    //    con.Open();
-                    //}
-                    //DbTransaction dbTrans = con.BeginTransaction();
-                    //try
-                    //{
-                    //    foreach (var remitToes in vendor.VendorRemitToes)
-                    //    {
-                    //        Uow.RemitTo.Update(remitToes);
-                    //    }
-                    //    Uow.Vendors.Update(vendor);
-                       
-                    //    int i = Uow.Commit();
-                    //    dbTrans.Commit();
-                    //}
-                    //catch (Exception ex)
-                    //{
-                    //    dbTrans.Rollback();
-                    //    throw;
-                    //}
-                    //finally
-                    //{
-                    //    if (con.State == ConnectionState.Open)
-                    //        con.Close();
-                    //}
-
-                    //return RedirectToAction("Index");
-                //}
 
                 //return Json(new { Success = result, VendorContact = contact });
                 return Json (new { Sucess = result} ); 

@@ -259,7 +259,7 @@ bn.vmVendorList = (function ($, bn, undefined) {
 
         saveDetails = function () {
             //var data = ko.toJSON(
-            alert(editingVendor().error().length);
+            //alert(editingVendor().error().length);
             editingVendor().commit();
             bn.ajaxService.updateVendors(editingVendor, onSuccessSaveDetails, onErrorSaveDetails);
 
@@ -271,8 +271,8 @@ bn.vmVendorList = (function ($, bn, undefined) {
             //Reload
             loadVendors();
             //--Reset
-            //selectedVendor(undefined);
-            //editingVendor(undefined);
+            selectedVendor(undefined);
+            editingVendor(undefined);
             isSelected(false);
             inEditMode(false);
             //--
@@ -392,10 +392,7 @@ bn.vmVendorList = (function ($, bn, undefined) {
 $(function () {
 
     $('#tabstwo').tabs(),
-    //$("#mainModal03").modal('hide'),
 
-    //bn.vmVendorList.loadVendors();
-    //bn.vmVendorList.loadVendors();
     $("#tabstwo").bind("tabsselect", function (e, tab) {
         if (tab.index > 0) {
             bn.vmVendorList.showDetails(tab, e);
@@ -404,17 +401,15 @@ $(function () {
 
     //Set up notification when selecttion changes
     bn.vmVendorList.selectedVendor.subscribe(function (data) {
-        var vendorID = ko.utils.unwrapObservable(data.VendorID);
-        var vendorNum = ko.utils.unwrapObservable(data.Vendnum);
-        //send notification
-        amplify.publish("VendorSelectionChanged", vendorID, vendorNum);
+        if (data) {
+            var vendorID = ko.utils.unwrapObservable(data.VendorID);
+            var vendorNum = ko.utils.unwrapObservable(data.Vendnum);
+            //send notification
+            amplify.publish("VendorSelectionChanged", vendorID, vendorNum);
+        }
     });
     
     amplify.subscribe("EditVendor", bn.vmVendorList.editVendor);
-
-    //bn.ajaxService.getVendors(null, success, onError);
-    //ko.applyBindings(bn.vmVendorList);
-    //ko.applyBindings(bn.vmContactList, document.getElementById("tabs-6"));
 
 });
 
