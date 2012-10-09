@@ -529,16 +529,6 @@
     <Content Include="Scripts\TrafficCop.min.gz.js" />
     <Content Include="Scripts\TrafficCop.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Templates\VendorListing-Old\Copy of _remitto_tab.tmpl.html" />
-    <Content Include="Templates\VendorListing-Old\Copy of _vendordetail_tab.tmpl.html" />
-    <Content Include="Templates\VendorListing-Old\Copy of _vendorlist_tab.tmpl.0.html" />
-    <Content Include="Templates\VendorListing-Old\Copy of _vendorlist_tab.tmpl.1.html" />
-    <Content Include="Templates\VendorListing-Old\_remitto_tab.tmpl.html" />
-    <Content Include="Templates\VendorListing-Old\_search_top.tmpl.html" />
-    <Content Include="Templates\VendorListing-Old\_top_buttons_template.tmpl.html" />
-    <Content Include="Templates\VendorListing-Old\_vendordetail_tab.tmpl.html" />
-    <Content Include="Templates\VendorListing-Old\_vendorListEdit_modal.tmpl.html" />
-    <Content Include="Templates\VendorListing-Old\_vendorlist_tab.tmpl.html" />
     <Content Include="Templates\VendorListing\audittrail_tab.html" />
     <Content Include="Templates\VendorListing\contacts_tab.html" />
     <Content Include="Templates\VendorListing\documents_tab.html" />
