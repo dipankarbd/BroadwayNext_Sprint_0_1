@@ -122,6 +122,10 @@ bn.vmContactList = (function ($, bn, undefined) {
             });
         },
 
+        editVendor = function () {
+            amplify.publish("EditVendor");
+        },
+
         //subscribe to receive Selected Vendor ID & Num
         onVendorSelectionChanged = function (id, num) {
             if (id) {
@@ -163,7 +167,8 @@ bn.vmContactList = (function ($, bn, undefined) {
         totalContacts: totalContacts,
         contactsGridPageSize: contactsGridPageSize,
         contactsGridTotalPages: contactsGridTotalPages,
-        contactsGridCurrentPage: contactsGridCurrentPage
+        contactsGridCurrentPage: contactsGridCurrentPage,
+        editVendor: editVendor
     };
 
 

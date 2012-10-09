@@ -259,6 +259,7 @@ bn.vmVendorList = (function ($, bn, undefined) {
 
         saveDetails = function () {
             //var data = ko.toJSON(
+            alert(editingVendor().error().length);
             editingVendor().commit();
             bn.ajaxService.updateVendors(editingVendor, onSuccessSaveDetails, onErrorSaveDetails);
 
@@ -343,7 +344,10 @@ bn.vmVendorList = (function ($, bn, undefined) {
             //$.getJSON("/VendorListing/getallvendors", { pageSize: pageSize(), currentPage: currentPage() }, function (result) {
             //    onSuccessLoadVendor(result);
             //});
-            bn.ajaxService.getVendors({ pageSize: pageSize(), currentPage: currentPage() }, onSuccessLoadVendor, onErrorLoadVendor);
+            //get the SEARCH string...
+            var vendorNum = $('#searchVendNum').val();
+            //--
+            bn.ajaxService.getVendors({ pageSize: pageSize(), currentPage: currentPage(), vendorNum: vendorNum }, onSuccessLoadVendor, onErrorLoadVendor);
         },
 
         //#region Private Members
@@ -406,6 +410,8 @@ $(function () {
         amplify.publish("VendorSelectionChanged", vendorID, vendorNum);
     });
     
+    amplify.subscribe("EditVendor", bn.vmVendorList.editVendor);
+
     //bn.ajaxService.getVendors(null, success, onError);
     //ko.applyBindings(bn.vmVendorList);
     //ko.applyBindings(bn.vmContactList, document.getElementById("tabs-6"));

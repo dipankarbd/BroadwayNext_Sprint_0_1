@@ -1,5 +1,5 @@
 ﻿<div class="bottomwrapper">
-    <!-- <pre data-bind="text: ko.toJSON($root, null, 2)"></pre>-->
+     <!--<pre data-bind="text: ko.toJSON($root, null, 2)"></pre>-->
     <div class="eightypercent">
         <div class="nintyeight">
             <div class="texttypebar">Contacts</div>
@@ -74,15 +74,15 @@
         <br>
         <br>
     </div>
-    <div class="btn-group btn-group-vertical" data-bind="ifnot: ($root.inEditMode)">
+    <div class="btn-group btn-group-vertical" >
         <button class="btn" data-bind="click: $root.editVendor">Edit Vendor*</button>
         <button class="btn">Price List(3)*</button>
     </div>
-    <div class="btn-group btn-group-vertical">
+   <!-- <div class="btn-group btn-group-vertical">
         <button class="btn">Edit Vendor*</button>
 
         <button class="btn">Price List(3)*</button>
-    </div>
+    </div>-->
 </div>
 
 <div id="dialog-contact" title="Add/Edit Contact" data-bind="with:editingContact">

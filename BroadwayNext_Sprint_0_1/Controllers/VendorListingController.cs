@@ -31,31 +31,31 @@ namespace BroadwayNext_Sprint_0_1.Controllers
 
         //Dipankar's Contoller Methods
         //================================================================================
-        public JsonResult GetAllVendors(int pageSize, int currentPage)
-        {
-            TGFContext db = new TGFContext();
+        //public JsonResult GetAllVendors(int pageSize, int currentPage)
+        //{
+        //    TGFContext db = new TGFContext();
 
-            db.Configuration.ProxyCreationEnabled = false;
+        //    db.Configuration.ProxyCreationEnabled = false;
 
-            //var vendors, rowCount;
-            try
-            {
+        //    //var vendors, rowCount;
+        //    try
+        //    {
 
-                var vendors = db.Vendors.Include("VendorInsurances").Include("VendorRemitToes").Include("VendorNotes").OrderBy(v => v.Vendnum).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+        //        var vendors = db.Vendors.Include("VendorInsurances").Include("VendorRemitToes").Include("VendorNotes").OrderBy(v => v.Vendnum).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 
-                int rowCount = db.Vendors.Count();
+        //        int rowCount = db.Vendors.Count();
 
-                return Json(new { Data = vendors, VirtualRowCount = rowCount }, JsonRequestBehavior.AllowGet);
+        //        return Json(new { Data = vendors, VirtualRowCount = rowCount }, JsonRequestBehavior.AllowGet);
 
-            }
-            catch (Exception ex)
-            {
+        //    }
+        //    catch (Exception ex)
+        //    {
 
-                throw;
-            }
+        //        throw;
+        //    }
             
             
-        }
+        //}
 
         public JsonResult GetVendorContacts(Guid vendorId, int pageSize, int currentPage)
         {
@@ -116,13 +116,13 @@ namespace BroadwayNext_Sprint_0_1.Controllers
             Expression<Func<Vendor, bool>> filterVendorNum= null;
             if (vendorNum.HasValue)
             {
-                filterVendorNum = (v => v.Vendnum == 1578511699);
+                filterVendorNum = (v => v.Vendnum == vendorNum);   //1578511699
             }
 
-            Expression<Func<Vendor, bool>> filterActive = null;
-            if (string.IsNullOrEmpty(companyName))
+            Expression<Func<Vendor, bool>> filterName = null;
+            if (!string.IsNullOrEmpty(companyName))
             {
-                filterActive = (v => v.Company.Equals(companyName, StringComparison.CurrentCultureIgnoreCase));
+                filterName = (v => v.Company.Equals(companyName, StringComparison.CurrentCultureIgnoreCase));
             }
 
             try
@@ -134,13 +134,13 @@ namespace BroadwayNext_Sprint_0_1.Controllers
                     vendors = vendors.Where(filterVendorNum);
                 }
 
-                if (filterActive != null)
+                if (filterName != null)
                 {
-                    vendors = vendors.Where(filterActive);
+                    vendors = vendors.Where(filterName);
                 }
+                int rowCount = vendors.Count();
                 vendors = vendors.Include("VendorInsurances").Include("VendorRemitToes").Include("VendorNotes").OrderBy(v => v.Vendnum).Skip((currentPage - 1) * pageSize).Take(pageSize);
 
-                int rowCount = vendors.Count();
                 return Json(new { Data = vendors.ToList(), VirtualRowCount = rowCount }, JsonRequestBehavior.AllowGet);
 
             }

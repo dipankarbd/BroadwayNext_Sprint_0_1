@@ -92,7 +92,7 @@
             var pageSize = ko.utils.unwrapObservable(allBindings.pagesize) || 10;
             var curentPage = ko.utils.unwrapObservable(allBindings.currentpage) || 1;
 
-            console.log('total pages:' + totalPages + ', currentPage:' + curentPage + ', pageSize:' + pageSize);
+            //console.log('total pages:' + totalPages + ', currentPage:' + curentPage + ', pageSize:' + pageSize);
             var pagerItemCount = 5;
             var offset = Math.ceil(pagerItemCount / 2) - 1;
             var start = curentPage - offset;
@@ -101,6 +101,7 @@
             var end = start + pagerItemCount - 1;
             if (end > totalPages) end = totalPages;
 
+            if (totalPages < 2) return;
 
             var i = 0;
 
