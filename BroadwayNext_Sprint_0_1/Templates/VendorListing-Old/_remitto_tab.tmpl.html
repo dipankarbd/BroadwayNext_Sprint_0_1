@@ -108,8 +108,8 @@
 <div class="btn-group btn-group-vertical">
     <button class="btn">Edit</button>
     <!-- ko with:editingVendor -->
-    <button class="btn" data-bind="enable : hasChanges, click: saveDetails">Save</button>
-    <button class="btn" data-bind="enable : hasChanges, click: cancelEdit">Cancel</button>
+    <button class="btn" data-bind="click: saveDetails">Save</button>
+    <button class="btn" data-bind="click: cancelEdit">Cancel</button>
     <input id="remitToEdited" type="hidden" data-bind="value: hasChanges" />
     <!-- /ko -->
     <button class="btn">Price List(3)</button>

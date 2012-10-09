@@ -1,5 +1,5 @@
 ﻿<div class="bottomwrapper" data-bind="with: selectedVendor">
-    <!--<pre data-bind="text: ko.toJSON($data, null, 2)"></pre>-->
+    <!--<pre data-bind="text: ko.toJSON($root, null, 2)"></pre>-->
     <div class="eightypercent ">
         <div class="boxholder">
             <div>
@@ -8,7 +8,7 @@
                 <input type="checkbox" />
                 <label for="checkbox2"></label>
                 Active
-                <input type="text" class="textboxfilled" disabled="disabled" data-bind="value: Vendnum"/>
+                <input type="text" class="textboxfilled" data-bind="value: Vendnum, enable: $root.inEditMode"/>
 
 
             </div>
@@ -151,8 +151,8 @@
             <input type="text" class="textboxfilled" value="Arun" />
             Input Date
    
-            <input type="text" class="textboxfilled" value="08/15/2012" />
-            <input type="text" class="textboxfilled" data-bind="date: InputDate"/>
+           <!-- <input type="text" class="textboxfilled" value="08/15/2012" />-->
+            <input type="text" class="textboxfilled" data-bind="value: InputDate"/>
             <br />
 
             Pricing Schedule
@@ -189,8 +189,8 @@
     </div>
     <div class="btn-group btn-group-vertical" data-bind="if: ($root.inEditMode)">
         <!-- ko with: $root.editingVendor -->
-        <button class="btn btn-large btn-success" id="remitToSave" data-bind="enable: hasChanges, click: $root.saveDetails">Save</button>
-        <button class="btn btn-large" id="remitToCancel" data-bind="enable: hasChanges, click: $root.cancelEdit">Cancel</button>
+        <button class="btn btn-large btn-success" id="remitToSave" data-bind="click: $root.saveDetails">Save</button>
+        <button class="btn btn-large" id="remitToCancel" data-bind="click: $root.cancelEdit">Cancel</button>
         <!-- /ko -->
     </div>
 </div>

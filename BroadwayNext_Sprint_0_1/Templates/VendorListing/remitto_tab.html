@@ -1,7 +1,7 @@
 ﻿<div class="bottomwrapper" data-bind="with: selectedVendor">
    
-    <!-- <pre data-bind="text: ko.toJSON($data, null, 2)"></pre>-->
-     <!-- ko foreach: $data.RemitToes -->
+     <!--<pre data-bind="text: ko.toJSON($data, null, 2)"></pre>-->
+     <!-- ko foreach: $data.VendorRemitToes -->
     <div class="eightypercent">
 
         <div class="boxholder">
@@ -78,8 +78,8 @@
     </div>
     <div class="btn-group btn-group-vertical" data-bind="if: ($root.inEditMode)">
         <!-- ko with: $root.editingVendor -->
-        <button class="btn btn-large btn-success" id="remitToSave" data-bind="enable: hasChanges, click: $root.saveDetails">Save</button>
-        <button class="btn btn-large" id="remitToCancel" data-bind="enable: hasChanges, click: $root.cancelEdit">Cancel</button>
+        <button class="btn btn-large btn-success" id="remitToSave" data-bind="click: $root.saveDetails">Save</button>
+        <button class="btn btn-large" id="remitToCancel" data-bind="click: $root.cancelEdit">Cancel</button>
         <!-- /ko -->
     </div>
 

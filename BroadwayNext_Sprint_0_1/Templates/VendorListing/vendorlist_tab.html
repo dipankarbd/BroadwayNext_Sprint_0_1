@@ -63,6 +63,13 @@
                     <td class="left" data-bind="text:Zip"></td>
                     <td class="left" data-bind="text:Phone"></td>
                     <td class="left" data-bind="text:Fax"></td>
+                    <td class="left" data-bind="text:DBA"></td>
+                    <td class="left">&nbsp;</td>
+                    <td class="left" data-bind="text:PaymentTerms">&nbsp;</td>
+                    <td class="left" data-bind="text:Emergency"></td>
+                    <td class="left">?</td>
+                    <td class="left"><input type="checkbox" data-bind="checked: W9" /></td>
+                    <td class="left" data-bind="text: InputDate"></td>
                     <td class="left">&nbsp;</td>
                     <td class="left">&nbsp;</td>
                     <td class="left">&nbsp;</td>
@@ -79,35 +86,33 @@
                     <td class="left">&nbsp;</td>
                     <td class="left">&nbsp;</td>
                     <td class="left">&nbsp;</td>
+                     <td class="left">&nbsp;</td>
+                    <!-- ko foreach: $data.VendorRemitToes -->
+                        <td class="left" data-bind="text: Company"></td>
+                        <td class="left" data-bind="text: Address1"></td>
+                        <td class="left" data-bind="text: Address2"></td>
+                        <td class="left" data-bind="text: City"></td>
+                        <td class="left" data-bind="text: State"></td>
+                        <td class="left" data-bind="text: Zip"></td>
+                        <td class="left" data-bind="text: Phone"></td>
+                        <td class="left" data-bind="text: Email"></td>
+                        <td class="left" data-bind="text: Contact"></td>
+                    <!-- /ko -->
                     <td class="left">&nbsp;</td>
-                    <td class="left">&nbsp;</td>
-                    <td class="left">&nbsp;</td>
-                    <td class="left">&nbsp;</td>
-                    <td class="left">&nbsp;</td>
-                    <td class="left">&nbsp;</td>
-                    <td class="left">&nbsp;</td>
-                    <td class="left">&nbsp;</td>
-                    <td class="left">&nbsp;</td>
-                    <td class="left">&nbsp;</td>
-                    <td class="left">&nbsp;</td>
-                    <td class="left">&nbsp;</td>
-                    <td class="left">&nbsp;</td>
-                    <td class="left">&nbsp;</td>
-                    <td class="left">&nbsp;</td>
-                    <td class="left">&nbsp;</td>
-                    <td class="left">&nbsp;</td>
-                    <td class="left">&nbsp;</td>
-                    <td class="left">&nbsp;</td>
-                    <td class="left">cell</td>
-                    <td class="left">&nbsp;</td>
+                    <td class="left" data-bind="text: Comment"></td>
+                    <td class="left" data-bind="text: Province"></td>
+                    <td class="left"><input type="checkbox" data-bind="checked: PVA" /></td>
                 </tr>
             </tbody>
 
 
         </table>
     </div>
-    <div class="recordfooter">3,456 Vendors</div>
-    <div id="grdPager" data-bind="gridpager:totalPages, pagesize:pageSize, currentpage:currentPage, datasource:fetchData">
+    <div class="recordfooter">
+        <span data-bind="text: totalRows()"></span>
+        <span>Vendors</span>
+    </div>
+    <div id="grdPager" data-bind="gridpager:totalPages, pagesize:pageSize, currentpage:currentPage, datasource: loadVendors">
     </div>
     <div class="nintyeight">
         <label for="vendortrades"></label>
@@ -116,7 +121,7 @@
 </div>
 
 <div class="btn-group btn-group-vertical">
-    <button class="btn">New Vendor</button>
+    <button class="btn" data-bind="click: createVendor">New Vendor</button>
 
     <!-- ko if: vendors().length -->
         <button class="btn" data-bind="enable: selectedVendor, click: editVendor">Edit Vendor*</button>

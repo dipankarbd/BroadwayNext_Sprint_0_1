@@ -11,6 +11,7 @@ Next Version ==>
 */
 
 var bn = bn || {};
+
 //#region
 /*
 VendorID: "7bfbadb3-e64b-0691-7dc9-002012a97909"
@@ -98,7 +99,7 @@ bn.RemitTo = function (data) {
     this.Address2 = ko.observable(data.Address2);
     this.City = ko.observable(data.City);
     this.State = ko.observable(data.State);
-    this.Zip = ko.observable(data.Zip);
+    this.Zip = (data.zip) ? ko.observable(data.Zip) : ko.observable();
     this.Country = ko.observable(data.Country);
     this.Province = ko.observable(data.Province);
     this.Phone = ko.observable(data.Phone);
@@ -151,17 +152,27 @@ bn.Vendor = function (data) {
     this.WebAccessUser = ko.observable(data.WebAccessUser);
     this.WebAccessPwd = ko.observable(data.WebAccessPwd);
     this.InputBy = ko.observable(data.InputBy);
-    //if (data.date) {
-    //    var date = moment(data.InputDate).format("MM-DD-YYYY");
-    //    this.InputDate = ko.observable(date);
-    //}
-    this.InputDate = ko.observable(data.InputDate);
+    if (data.InputDate) {
+        var newInputDate = moment(data.InputDate).format("MM/DD/YYYY");
+        this.InputDate = ko.observable(newInputDate);
+    }
+    else {
+        this.InputDate = ko.observable();
+    }
+    //this.InputDate = ko.observable(data.InputDate);
     this.LastModifiedBy = ko.observable(data.LastModifiedBy);
-    this.LastModifiedDate = ko.observable(data.LastModifiedDate);
+    if (data.LastModifiedDate) {
+        var newDate = moment(data.LastModifiedDate).format("MM/DD/YYYY");
+        this.LastModifiedDate = ko.observable(newDate);
+    }
+    else {
+        this.LastModifiedDate = ko.observable();
+    }
+    //this.LastModifiedDate = ko.observable(data.LastModifiedDate);
     this.GradeID = ko.observable(data.GradeID);
 
     // Vendor Remit To
-    this.RemitToes = ko.observableArray(data.VendorRemitToes);
+    this.VendorRemitToes = ko.observableArray(data.VendorRemitToes);
 
     // Vendor Insurances
 
@@ -181,20 +192,17 @@ bn.vmVendorList = (function ($, bn, undefined) {
         self = this,
         vendors = ko.observableArray([]),
         countries = ["USA", "Canada"],
-        states = ko.observableArray(["AL", "CA", "NY", "WI", "MT", "MD"]),
+        states = ko.observableArray(["AL", "CA", "NY", "WI", "MT", "MD"]),  //Eventually they will come from DB
         selectedState = ko.observable(""),
 
         //-----
         pageSize = ko.observable(10),
         totalPages = ko.observable(0),
         currentPage = ko.observable(1),
+        totalRows = ko.observable(0),
         //-----
 
         selectedVendor = ko.observable(),
-
-        
-
-        
 
         selectVendor = function (p) {
             //debugger;
@@ -205,15 +213,32 @@ bn.vmVendorList = (function ($, bn, undefined) {
 
         editingVendor = ko.observable(),
 
+        createVendor = function (vm, v) {
+            inEditMode(true);
+            //make blank skeleton and pass it over
+            var remiTo = [new bn.RemitTo({})];
+            var vendor = new bn.Vendor({});
+            vendor.VendorRemitToes = remiTo;
+
+            //now fix selection
+            selectedVendor(vendor);
+            fixTabNavigation();
+
+            ko.editable(selectedVendor());
+            editingVendor(vendor);
+            editingVendor().beginEdit();
+        },
+
         //Command for the Edit Button... Set VM to 'Editing' mode...
         editVendor = function (vm, v) {
-            
+
             inEditMode(true);   //Set the editMode flag
             fixTabNavigation();    //Fix tab States
-        
+
             //--Make the row Editable with rollback option
-            ko.editable(selectedVendor());
+            //ko.editable(selectedVendor());
             editingVendor(selectedVendor());
+            ko.editable(editingVendor());
             editingVendor().beginEdit();
             //--
         },
@@ -226,28 +251,42 @@ bn.vmVendorList = (function ($, bn, undefined) {
             fixTabNavigation(); //Reset Tab States
         },
 
-        
+
         saveDetails = function () {
             //var data = ko.toJSON(
-            bn.ajaxService.updateVendors(editingVendor,onSuccessSaveDetails, onErrorSaveDetails);
+            editingVendor().commit();
+            bn.ajaxService.updateVendors(editingVendor, onSuccessSaveDetails, onErrorSaveDetails);
 
         },
         //callback methods for 'saveDetails'
         onSuccessSaveDetails = function (result) {
-            alert('Inside onSuccessSaveDetails');
+            //alert('Inside onSuccessSaveDetails');
+            toastr.success("Record has been updated successfully", "Success");
+            //Reload
+            loadVendors();
+            //--Reset
+            //selectedVendor(undefined);
+            //editingVendor(undefined);
+            isSelected(false);
+            inEditMode(false);
+            //--
+            fixTabNavigation();
+            
+
         },
         onErrorSaveDetails = function (error) {
-            alert('Inside onErrorSaveDetails');
+            //alert('Inside onErrorSaveDetails');
+            toastr.error("An unexpected error occurred. Please try again", "Error");
         },
-    
-        saveEdit = function () {
-            editingVendor().commit();
-            selectedVendor(undefined);
-            editingVendor(undefined);
-            isSelected(false);
-            $("#mainModal03").modal("hide");
-            inEditMode(false);
-        },
+
+        //saveEdit = function () {
+        //    editingVendor().commit();
+        //    selectedVendor(undefined);
+        //    editingVendor(undefined);
+        //    isSelected(false);
+        //    $("#mainModal03").modal("hide");
+        //    inEditMode(false);
+        //},
 
         inEditMode = ko.observable(false),
 
@@ -266,42 +305,42 @@ bn.vmVendorList = (function ($, bn, undefined) {
         onSuccessLoadVendor = function (result) {
             //debugger;
             totalPages(Math.ceil(result.VirtualRowCount / pageSize()));
-            console.log('--'+totalPages());
+            console.log('--' + totalPages());
             //--
+            //Set Total Row Count
+            totalRows(result.VirtualRowCount);
             var temp = [];
             //var mappedVendors = $.map(result.Data, function (item) { return new bn.Vendor(item) });
             var mappedVendors = $.map(result.Data, function (data) {
 
                 //Create the RemitTo
-                var RemitTo = ko.utils.arrayMap(data.VendorRemitToes, function(RemitTo){
-                return new bn.RemitTo(RemitTo);
+                var RemitTo = ko.utils.arrayMap(data.VendorRemitToes, function (RemitTo) {
+                    return new bn.RemitTo(RemitTo);
                 });
                 //build the Insurance ... there will always be 3 [GL, WC, Auto]
                 //----
-                
+
                 //----
                 data.VendorRemitToes = RemitTo;
                 //Now create the Parent vendor
                 return new bn.Vendor(data);
             });
             //Load up in one go
+            vendors([]);
             return vendors.push.apply(vendors, mappedVendors);
         },
 
         onErrorLoadVendor = function (err) {
-
+            toastr.error("An unexpected error occurred. Please try again", "Error");
         },
 
-        fetchData = function () {
-            $.getJSON("/VendorListing/getallvendors", { pageSize: pageSize(), currentPage: currentPage() }, function (result) {
-                onSuccessLoadVendor(result);
-                //self.totalPages(Math.ceil(result.VirtualRowCount / pageSize()));
-                //var mappedVendors = $.map(result.Data, function (item) { return new bn.vm.Vendor(item) });
-                ////var viewModel = ko.mapping.fromJS(result.Data);
-                ////self.vendors(viewModel);
-            });
+        loadVendors = function () {
+            //$.getJSON("/VendorListing/getallvendors", { pageSize: pageSize(), currentPage: currentPage() }, function (result) {
+            //    onSuccessLoadVendor(result);
+            //});
+            bn.ajaxService.getVendors({ pageSize: pageSize(), currentPage: currentPage() }, onSuccessLoadVendor, onErrorLoadVendor);
         },
-        
+
         //#region Private Members
         fixTabNavigation = function () {
             if (inEditMode()) {
@@ -310,14 +349,10 @@ bn.vmVendorList = (function ($, bn, undefined) {
             }
             else {
                 $('#tabstwo').tabs("option", "disabled", []);
+                $('#tabstwo').tabs("select", 0);
             }
-        },
-        //#endregion
-
-        loadVendors = function () {
-            //debugger;
-            bn.ajaxService.getVendors(null, onSuccessLoadVendor, onErrorLoadVendor);
         };
+        //#endregion
 
         return {
             states: states,
@@ -330,16 +365,16 @@ bn.vmVendorList = (function ($, bn, undefined) {
             editVendor: editVendor,
             editingVendor: editingVendor,
             cancelEdit: cancelEdit,
-            saveEdit: saveEdit,
-            //pager options
+            //--pager options
             pageSize : pageSize,
             totalPages : totalPages,
-            currentPage : currentPage,
-            //methods
+            currentPage: currentPage,
+            totalRows: totalRows,
+            //--methods
             loadVendors: loadVendors,
             saveDetails: saveDetails,
             showDetails: showDetails,
-            fetchData: fetchData
+            createVendor: createVendor
         };
 
 })(jQuery, bn);
@@ -350,7 +385,7 @@ $(function () {
     $('#tabstwo').tabs(),
     //$("#mainModal03").modal('hide'),
 
-    bn.vmVendorList.fetchData();
+    //bn.vmVendorList.loadVendors();
     //bn.vmVendorList.loadVendors();
     $("#tabstwo").bind("tabsselect", function (e, tab) {
         if (tab.index > 0) {

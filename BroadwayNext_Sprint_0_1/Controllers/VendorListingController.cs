@@ -29,7 +29,7 @@ namespace BroadwayNext_Sprint_0_1.Controllers
 
         //Dipankar's Contoller Methods
         //================================================================================
-        public JsonResult getallvendors(int pageSize, int currentPage)
+        public JsonResult GetAllVendors(int pageSize, int currentPage)
         {
             TGFContext db = new TGFContext();
 
@@ -152,7 +152,7 @@ namespace BroadwayNext_Sprint_0_1.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Vendor vendor, bool? RemitTohasChanged)
+        public ActionResult Save(Vendor vendor)
         {
 
             vendor.InputDate = DateTime.Now;
@@ -163,28 +163,31 @@ namespace BroadwayNext_Sprint_0_1.Controllers
                 remitTo.InputDate = DateTime.Now;
                 remitTo.LastModifiedDate = DateTime.Now;
             }
+
+            var result = false;
+
             using (Uow)
             {
 
                 string error = "";
-                if (!ModelState.IsValid)
-                {
+                //if (!ModelState.IsValid)
+                //{
 
-                    // my custom error class
-                    //var error = new ApiMessageError() { message = "Model is invalid" };
-                    foreach (var prop in ModelState.Values)
-                    {
-                        //error = "";
-                        if (prop.Errors.Any())
-                            error = prop.Errors.First().ErrorMessage + " < ## >";
-                        //error.errors.Add(prop.Errors.First().ErrorMessage);
-                    }
-                    string last = error;
-                    // Return the error object as a response with an error code
-                    //return Request.CreateResponse<ApiMessageError>(HttpStatusCode.Conflict, error);
-                }
-                if (ModelState.IsValid)
-                {
+                //    // my custom error class
+                //    //var error = new ApiMessageError() { message = "Model is invalid" };
+                //    foreach (var prop in ModelState.Values)
+                //    {
+                //        //error = "";
+                //        if (prop.Errors.Any())
+                //            error = prop.Errors.First().ErrorMessage + " < ## >";
+                //        //error.errors.Add(prop.Errors.First().ErrorMessage);
+                //    }
+                //    string last = error;
+                //    // Return the error object as a response with an error code
+                //    //return Request.CreateResponse<ApiMessageError>(HttpStatusCode.Conflict, error);
+                //}
+                //if (ModelState.IsValid)
+                //{
 
                     //foreach (var remitToes in vendor.VendorRemitToes)
                     //    {
@@ -192,37 +195,61 @@ namespace BroadwayNext_Sprint_0_1.Controllers
                     //    }
                     //Uow.Vendors.Update(vendor);
                     //Uow.RemitTo.Update(vendor.VendorRemitToes);
-                    DbConnection con = Uow.Vendors.context.ObjectContext.Connection;
-                    if (con.State == ConnectionState.Closed)
+
+                    if (vendor.VendorID == Guid.Empty)  //This is New
                     {
-                        con.Open();
+                        vendor.VendorID = Guid.NewGuid();
+                        Uow.Vendors.Insert(vendor);
+                        foreach (var remitToes in vendor.VendorRemitToes)
+                        {
+                            Uow.RemitTo.Insert(remitToes);
+                        }
+                        result = Uow.Commit() > 0;
                     }
-                    DbTransaction dbTrans = con.BeginTransaction();
-                    try
+                    else
                     {
                         foreach (var remitToes in vendor.VendorRemitToes)
                         {
                             Uow.RemitTo.Update(remitToes);
                         }
                         Uow.Vendors.Update(vendor);
-                       
-                        int i = Uow.Commit();
-                        dbTrans.Commit();
-                    }
-                    catch (Exception ex)
-                    {
-                        dbTrans.Rollback();
-                        throw;
-                    }
-                    finally
-                    {
-                        if (con.State == ConnectionState.Open)
-                            con.Close();
+
+                        result = Uow.Commit() > 0;
                     }
 
-                    return RedirectToAction("Index");
-                }
-                return View(vendor); 
+                    //DbConnection con = Uow.Vendors.context.ObjectContext.Connection;
+                    //if (con.State == ConnectionState.Closed)
+                    //{
+                    //    con.Open();
+                    //}
+                    //DbTransaction dbTrans = con.BeginTransaction();
+                    //try
+                    //{
+                    //    foreach (var remitToes in vendor.VendorRemitToes)
+                    //    {
+                    //        Uow.RemitTo.Update(remitToes);
+                    //    }
+                    //    Uow.Vendors.Update(vendor);
+                       
+                    //    int i = Uow.Commit();
+                    //    dbTrans.Commit();
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    dbTrans.Rollback();
+                    //    throw;
+                    //}
+                    //finally
+                    //{
+                    //    if (con.State == ConnectionState.Open)
+                    //        con.Close();
+                    //}
+
+                    //return RedirectToAction("Index");
+                //}
+
+                //return Json(new { Success = result, VendorContact = contact });
+                return Json (new { Sucess = result} ); 
             }
         }
 

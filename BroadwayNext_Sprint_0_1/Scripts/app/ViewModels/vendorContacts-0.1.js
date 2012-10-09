@@ -51,6 +51,8 @@ bn.vmContactList = (function ($, bn, undefined) {
         contactsGridTotalPages = ko.observable(0),
         contactsGridCurrentPage = ko.observable(1),
 
+        
+
         fetchContacts = function () {
             console.log('will fetch contact now');
             $.getJSON("/vendorlisting/getvendorcontacts", { vendorId: vendorId(), pageSize: contactsGridPageSize(), currentPage: contactsGridCurrentPage() }, function (result) {
@@ -111,6 +113,7 @@ bn.vmContactList = (function ($, bn, undefined) {
                     editingContact(undefined);
                     if (result.Success === true) {
                         fetchContacts();
+                        toastr.success("Contact information updated successfully", "Success");
                         $("#dialog-contact").dialog("close");
                     }
                 }
@@ -122,7 +125,8 @@ bn.vmContactList = (function ($, bn, undefined) {
             if (id) {
                 vendorId(id);
                 vendorNum = num;
-                fetchContacts();    //Re-load on valid ID  
+                if(id)
+                    fetchContacts();    //Re-load on valid ID  
             }
 
             //console.log(vendorId() + " -- " + vendorNum);

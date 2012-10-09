@@ -1,6 +1,13 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
+<style type="text/css">
+    label { display: compact; }
+    .validationMessage { color: Red; }
+    .toast {
+	    font-weight: bold;
+    }
+</style>
 
 @section styles
 {
@@ -20,7 +27,10 @@
     <link href="@Url.Content("~/Content/css/tcal.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/css/jquery.rating.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/css/bootstrap.css")" rel="stylesheet" type="text/css"> 
+    <link href="~/Content/toastr.css" rel="stylesheet" />
+    <link href="~/Content/toastr-responsive.css" rel="stylesheet" />
     
+
 }
 @section scripts
 {
@@ -44,23 +54,22 @@
     <script  type="text/javascript" src="~/Scripts/moment.min.js"></script>
     <script  type="text/javascript" src="~/Scripts/knockout.validation.debug.js"></script>
     <script  type="text/javascript" src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/toastr.js"></script>
+
 
    @* <script src="~/Scripts/KoGrid-1.2.0.debug.js"></script>
     <script src="~/Scripts/ko.datasource.js"></script>*@
 
     @*App Specific*@
     @* <script src="~/Scripts/app/main.js"></script>*@
-    <script src="~/Scripts/app/dataService.js"></script>
-    <script src="~/Scripts/app/binding-handlers.js"></script>
-    <script src="~/Scripts/app/ViewModels/vendorListing-0.8.js"></script>
-    <script src="~/Scripts/app/ViewModels/vendorContacts-0.1.js"></script>
-    <script src="~/Scripts/app/main.js"></script>
+    <script type="text/javascript" src="~/Scripts/app/dataService.js"></script>
+    <script type="text/javascript" src="~/Scripts/app/binding-handlers.js"></script>
+    <script type="text/javascript" src="~/Scripts/app/ViewModels/vendorListing-0.8.js"></script>
+    <script type="text/javascript" src="~/Scripts/app/ViewModels/vendorContacts-0.1.js"></script>
+    <script type="text/javascript" src="~/Scripts/app/main.js"></script>
 }
 
-<style type="text/css">
-    label { display: compact; }
-    .validationMessage { color: Red; }
-</style>
+
 
 
 <div>

@@ -11,12 +11,13 @@
     bn.ajaxService = (function (bn) {
 
         //Load Vendors from Server
-        var ajaxGetVendors = function (jsonIn, callback, onError) {
+        var
+            ajaxGetVendors = function (jsonIn, callback, onError) {
             //console.log("inside GetAjaxVendor");
             $.ajax({
-                url: serviceBaseVendors + "GetVendors",
+                url: serviceBaseVendors + "GetAllVendors",
                 type: "GET",
-                data: ko.toJSON(jsonIn),
+                data: jsonIn,
                 datatType: "json",
                 contentType: "application/json",
                 success: function (vendors) {
@@ -28,10 +29,10 @@
                     onError(xhr);
                 }
             });
-        },
+            },
             ajaxPostVendors = function (jsonIn, callback, onError) {
                 $.ajax({
-                    url: serviceBaseVendors + "Edit",
+                    url: serviceBaseVendors + "Save",
                     type: "POST",
                     data: ko.toJSON(jsonIn),
                     datatType: "json",
@@ -41,7 +42,7 @@
                     },
                     error: function (xhr) {
                         var err = "Error";
-                        alert(err);
+                        //alert(err);
                         onError(xhr);
                     }
                 });

@@ -50,8 +50,10 @@
         update: function (element, valueAccessor, allBindingsAccessor, viewModel) {
             //alert(ko.utils.unwrapObservable(valueAccessor));
             var jsonDate = ko.utils.unwrapObservable(valueAccessor());
-            var regularDate = moment(jsonDate).format("MM-DD-YYYY");
-            $(element).val(regularDate);
+            if (jsonDate) {
+                var regularDate = moment(jsonDate).format("MM/DD/YYYY");
+                $(element).val(regularDate);
+            }
         }
 
     };
