@@ -98,7 +98,7 @@
             var start = curentPage - offset;
             if (start < 1) start = 1;
 
-            var end = start + pagerItemCount;
+            var end = start + pagerItemCount - 1;
             if (end > totalPages) end = totalPages;
 
 

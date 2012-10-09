@@ -51,16 +51,18 @@ bn.vmContactList = (function ($, bn, undefined) {
         contactsGridTotalPages = ko.observable(0),
         contactsGridCurrentPage = ko.observable(1),
 
-        
+
 
         fetchContacts = function () {
-            console.log('will fetch contact now');
-            $.getJSON("/vendorlisting/getvendorcontacts", { vendorId: vendorId(), pageSize: contactsGridPageSize(), currentPage: contactsGridCurrentPage() }, function (result) {
-                totalContacts(result.VirtualRowCount);
-                contactsGridTotalPages(Math.ceil(result.VirtualRowCount / contactsGridPageSize()));
-                var mappedContacts = $.map(result.Data, function (item) { return new bn.VendorContact(item); });
-                contacts(mappedContacts);
-            });
+            if (vendorId()) {
+                console.log('will fetch contact now');
+                $.getJSON("/vendorlisting/getvendorcontacts", { vendorId: vendorId(), pageSize: contactsGridPageSize(), currentPage: contactsGridCurrentPage() }, function (result) {
+                    totalContacts(result.VirtualRowCount);
+                    contactsGridTotalPages(Math.ceil(result.VirtualRowCount / contactsGridPageSize()));
+                    var mappedContacts = $.map(result.Data, function (item) { return new bn.VendorContact(item); });
+                    contacts(mappedContacts);
+                });
+            }
         },
 
         countries = ["USA", "Canada"],
@@ -125,7 +127,7 @@ bn.vmContactList = (function ($, bn, undefined) {
             if (id) {
                 vendorId(id);
                 vendorNum = num;
-                if(id)
+                if (id)
                     fetchContacts();    //Re-load on valid ID  
             }
 

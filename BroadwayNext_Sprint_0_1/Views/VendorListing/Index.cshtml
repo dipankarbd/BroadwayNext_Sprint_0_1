@@ -2,10 +2,16 @@
     ViewBag.Title = "Index";
 }
 <style type="text/css">
-    label { display: compact; }
-    .validationMessage { color: Red; }
+    label {
+        display: compact;
+    }
+
+    .validationMessage {
+        color: Red;
+    }
+
     .toast {
-	    font-weight: bold;
+        font-weight: bold;
     }
 </style>
 
@@ -26,10 +32,10 @@
     <link href="@Url.Content("~/Content/css/jquery.datepick.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/css/tcal.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/css/jquery.rating.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/css/bootstrap.css")" rel="stylesheet" type="text/css"> 
+    <link href="@Url.Content("~/Content/css/bootstrap.css")" rel="stylesheet" type="text/css">
     <link href="~/Content/toastr.css" rel="stylesheet" />
     <link href="~/Content/toastr-responsive.css" rel="stylesheet" />
-    
+
 
 }
 @section scripts
@@ -37,27 +43,27 @@
 
     @*Copied from Dipankar's
     =======================================================*@
-    
-   @* <script type="text/javascript" src="@Url.Content("~/Scripts/lib/ribbon.js")"></script>
+
+    @* <script type="text/javascript" src="@Url.Content("~/Scripts/lib/ribbon.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Scripts/lib/colResizable-1.3.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Scripts/lib/tcal.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Scripts/lib/maskedinput.js")"></script>*@
-   
-     @*=======================================================*@
-    <script  type="text/javascript" src="~/Scripts/jquery-ui-1.8.20.js"></script>
-    <script  type="text/javascript" src="~/Scripts/knockout-2.1.0.js"></script>
-    <script  type="text/javascript" src="~/Scripts/koExternalTemplateEngine_all.js"></script>
-    <script  type="text/javascript" src="~/Scripts/amplify.js"></script>
-    <script  type="text/javascript" src="~/Scripts/knockout.mapping-latest.js"></script>
-    <script  type="text/javascript" src="~/Scripts/bootstrap.js"></script>
-    <script  type="text/javascript" src="~/Scripts/ko.editables.js"></script>
-    <script  type="text/javascript" src="~/Scripts/moment.min.js"></script>
-    <script  type="text/javascript" src="~/Scripts/knockout.validation.debug.js"></script>
-    <script  type="text/javascript" src="~/Scripts/bootstrap.js"></script>
+
+    @*=======================================================*@ 
+    <script type="text/javascript" src="~/Scripts/jquery-ui-1.8.23.custom.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/knockout-2.1.0.js"></script>
+    <script type="text/javascript" src="~/Scripts/koExternalTemplateEngine_all.js"></script>
+    <script type="text/javascript" src="~/Scripts/amplify.js"></script>
+    <script type="text/javascript" src="~/Scripts/knockout.mapping-latest.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.js"></script>
+    <script type="text/javascript" src="~/Scripts/ko.editables.js"></script>
+    <script type="text/javascript" src="~/Scripts/moment.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/knockout.validation.debug.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.js"></script>
     <script src="~/Scripts/toastr.js"></script>
 
 
-   @* <script src="~/Scripts/KoGrid-1.2.0.debug.js"></script>
+    @* <script src="~/Scripts/KoGrid-1.2.0.debug.js"></script>
     <script src="~/Scripts/ko.datasource.js"></script>*@
 
     @*App Specific*@
@@ -136,9 +142,9 @@
 </div>
 
 <script id="detailsTmpl" type="text/html">
-   <li data-bind="if: selectedVendor">
-     <input data-bind="value: Vendnum" />
-   </li>
+    <li data-bind="if: selectedVendor">
+        <input data-bind="value: Vendnum" />
+    </li>
 </script>
 <div>
     @*<pre data-bind="text: ko.toJSON($root, null, 2)"></pre>*@
