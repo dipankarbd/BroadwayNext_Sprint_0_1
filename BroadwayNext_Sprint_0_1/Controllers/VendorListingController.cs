@@ -6,7 +6,9 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data;
 using System.Data.Common;
+using System.Data.Entity;
 using BroadwayNext_Sprint_0_1.Data;
+using System.Linq.Expressions;
 
 namespace BroadwayNext_Sprint_0_1.Controllers
 {
@@ -102,6 +104,80 @@ namespace BroadwayNext_Sprint_0_1.Controllers
         }
 
         //=================     /Dipankar      ================================================ 
+
+
+        public JsonResult GetAllVendorsTEST(int pageSize, int currentPage, int? vendorNum, string companyName = null)
+        {
+            TGFContext db = new TGFContext();
+
+            db.Configuration.ProxyCreationEnabled = false;
+
+            //var vendors, rowCount;
+            Expression<Func<Vendor, bool>> filterVendorNum= null;
+            if (vendorNum.HasValue)
+            {
+                filterVendorNum = (v => v.Vendnum == 1578511699);
+            }
+
+            Expression<Func<Vendor, bool>> filterActive = null;
+            if (string.IsNullOrEmpty(companyName))
+            {
+                filterActive = (v => v.Company.Equals(companyName, StringComparison.CurrentCultureIgnoreCase));
+            }
+
+            try
+            {
+
+                IQueryable<Vendor> vendors = db.Vendors;;
+                if (filterVendorNum != null)
+                {
+                    vendors = vendors.Where(filterVendorNum);
+                }
+
+                if (filterActive != null)
+                {
+                    vendors = vendors.Where(filterActive);
+                }
+                vendors = vendors.Include("VendorInsurances").Include("VendorRemitToes").Include("VendorNotes").OrderBy(v => v.Vendnum).Skip((currentPage - 1) * pageSize).Take(pageSize);
+
+                int rowCount = vendors.Count();
+                return Json(new { Data = vendors.ToList(), VirtualRowCount = rowCount }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+
+        }
+
+
+        //public JsonResult GetAllVendors(int pageSize, int currentPage)
+        //{
+        //    TGFContext db = new TGFContext();
+
+        //    db.Configuration.ProxyCreationEnabled = false;
+
+        //    //var vendors, rowCount;
+        //    try
+        //    {
+
+        //        var vendors = db.Vendors.Include("VendorInsurances").Include("VendorRemitToes").Include("VendorNotes").OrderBy(v => v.Vendnum).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+
+        //        int rowCount = db.Vendors.Count();
+
+        //        return Json(new { Data = vendors, VirtualRowCount = rowCount }, JsonRequestBehavior.AllowGet);
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        throw;
+        //    }
+        //}
+
 
 
         public JsonResult GetVendors()

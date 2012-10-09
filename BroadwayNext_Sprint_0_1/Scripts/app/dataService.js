@@ -15,7 +15,7 @@
             ajaxGetVendors = function (jsonIn, callback, onError) {
             //console.log("inside GetAjaxVendor");
             $.ajax({
-                url: serviceBaseVendors + "GetAllVendors",
+                url: serviceBaseVendors + "GetAllVendorsTEST",
                 type: "GET",
                 data: jsonIn,
                 datatType: "json",
