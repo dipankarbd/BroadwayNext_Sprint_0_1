@@ -201,10 +201,25 @@ bn.vmVendorList = (function ($, bn, undefined) {
         currentPage = ko.observable(1),
         totalRows = ko.observable(0),
         //-----
+
+        init = function () {
+            //cofigure the validation
+            ko.validation.configure({
+                insertMessages: false,
+                parseInputAttributes: true,
+                decorateElement: true,
+
+            });
+            //ko.validation.group(this);
+        },
+
+        //errors = ko.validation.group(vendors);
+        
         applyMask = function () {
             $("#vendorphone").mask("(999) 999-9999");
             $("#vendorfax").mask("(999) 999-9999");
         },
+
         selectedVendor = ko.observable(),
 
         selectVendor = function (p) {
@@ -258,9 +273,24 @@ bn.vmVendorList = (function ($, bn, undefined) {
 
 
         saveDetails = function () {
-            //var data = ko.toJSON(
-            alert(editingVendor().errors().length);
+
+            //-----------   TEST Validation ------
+            var errors = ko.utils.unwrapObservable(ko.validation.group(editingVendor()));
+            if (errors)
+                console.log('got ERROR!!!')
+            if (editingVendor().isValid)
+                console.log(editingVendor().isValid);
+            //if (theObservable.error) {
+            //    self.formIsNotValid(true);
+            //}
+
+
+
+
+
+            //-------------------------------------
             editingVendor().commit();
+            //Enable the next line after validtion
             //bn.ajaxService.updateVendors(editingVendor, onSuccessSaveDetails, onErrorSaveDetails);
 
         },
@@ -383,14 +413,17 @@ bn.vmVendorList = (function ($, bn, undefined) {
             loadVendors: loadVendors,
             saveDetails: saveDetails,
             showDetails: showDetails,
-            createVendor: createVendor
-            //init: init
+            createVendor: createVendor,
+            init: init
         };
 
 })(jQuery, bn);
 
 //var vm = {};
 $(function () {
+
+    bn.vmVendorList.init();
+
 
     $('#tabstwo').tabs(),
 
@@ -412,7 +445,7 @@ $(function () {
     
     amplify.subscribe("EditVendor", bn.vmVendorList.editVendor);
 
-    //bn.vmVendorList.init();
+   
 
     
 
