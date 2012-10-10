@@ -291,7 +291,7 @@ bn.vmVendorList = (function ($, bn, undefined) {
             //-------------------------------------
             editingVendor().commit();
             //Enable the next line after validtion
-            //bn.ajaxService.updateVendors(editingVendor, onSuccessSaveDetails, onErrorSaveDetails);
+            bn.ajaxService.updateVendors(editingVendor, onSuccessSaveDetails, onErrorSaveDetails);
 
         },
         //callback methods for 'saveDetails'
