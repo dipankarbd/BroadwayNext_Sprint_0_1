@@ -86,6 +86,9 @@
 </div>
 
 <div id="dialog-contact" title="Add/Edit Contact" data-bind="with:editingContact">
-    <div data-bind="template: { name: 'edit_contact' , templateUrl: 'Templates/VendorListing'}">
+    <div id="popUpWrapper">
+        <div id="popUp" data-bind="template: { name: 'edit_contact' , templateUrl: 'Templates/VendorListing'}">
+        </div>
     </div>
+        
 </div>

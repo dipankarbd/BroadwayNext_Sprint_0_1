@@ -1,5 +1,5 @@
 ﻿<div class="bottomwrapper" data-bind="with: selectedVendor">
-   <!-- <pre data-bind="text: ko.toJSON($root, null, 2)"></pre>-->
+    <pre data-bind="text: ko.toJSON($root, null, 2)"></pre>
     <div class="eightypercent ">
         <div class="boxholder">
             <div>
@@ -14,7 +14,7 @@
             </div>
             <div></div>
             <div class="reqlabel" >Company</div>
-            <input type="text" class="textbox" data-bind="value: Company, enable: $root.inEditMode"  />
+            <input type="text" class="textbox" data-bind="value: Company, enable: $root.inEditMode" required  />
             DBA
             <input type="text" class="textbox" data-bind="value: DBA, enable: $root.inEditMode" />
             <div class="reqlabel">Address 1</div>

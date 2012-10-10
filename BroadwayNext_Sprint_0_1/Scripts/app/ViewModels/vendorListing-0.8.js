@@ -259,9 +259,9 @@ bn.vmVendorList = (function ($, bn, undefined) {
 
         saveDetails = function () {
             //var data = ko.toJSON(
-            //alert(editingVendor().error().length);
+            alert(editingVendor().errors().length);
             editingVendor().commit();
-            bn.ajaxService.updateVendors(editingVendor, onSuccessSaveDetails, onErrorSaveDetails);
+            //bn.ajaxService.updateVendors(editingVendor, onSuccessSaveDetails, onErrorSaveDetails);
 
         },
         //callback methods for 'saveDetails'
@@ -384,6 +384,7 @@ bn.vmVendorList = (function ($, bn, undefined) {
             saveDetails: saveDetails,
             showDetails: showDetails,
             createVendor: createVendor
+            //init: init
         };
 
 })(jQuery, bn);
@@ -410,6 +411,10 @@ $(function () {
     });
     
     amplify.subscribe("EditVendor", bn.vmVendorList.editVendor);
+
+    //bn.vmVendorList.init();
+
+    
 
 });
 

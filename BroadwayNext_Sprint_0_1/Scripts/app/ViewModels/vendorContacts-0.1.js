@@ -73,12 +73,8 @@ bn.vmContactList = (function ($, bn, undefined) {
         selectContact = function (contact) {
             console.log('contact selected');
             selectedContact(contact);
-            $("#dialog-contact").dialog({
-                autoOpen: false,
-                height: 730,
-                width: 500,
-                modal: true
-            });
+            
+            prepareModalDialog();   //prepare the UI dialog
         },
 
         addNewContact = function () {
@@ -86,13 +82,27 @@ bn.vmContactList = (function ($, bn, undefined) {
             editingContact(new bn.VendorContact({ VendorID: vendorId() }));
             ko.editable(editingContact());
             editingContact().beginEdit();
+            
+            prepareModalDialog();
+            $("#dialog-contact").dialog("open");
+        },
+
+        prepareModalDialog = function () {
             $("#dialog-contact").dialog({
                 autoOpen: false,
                 height: 730,
                 width: 500,
-                modal: true
+                modal: true,
+                open: function (event, ui) {
+                    //console.log('tab being Opened...');
+                    //var l = $('#popUpWrapper').length;
+                    //console.log('inside Open popUpWrapper : ' + l);
+                    $('#popUpWrapper').on('focus', '#lastName', function () {
+                        $('#contactphone').mask("(999) 999-9999");
+                        $('#contactfax').mask("(999) 999-9999");
+                    });
+                }
             });
-            $("#dialog-contact").dialog("open");
         },
 
         editContact = function () {
@@ -169,6 +179,7 @@ bn.vmContactList = (function ($, bn, undefined) {
         contactsGridTotalPages: contactsGridTotalPages,
         contactsGridCurrentPage: contactsGridCurrentPage,
         editVendor: editVendor
+
     };
 
 
@@ -186,4 +197,23 @@ $(function () {
 
     bn.vmContactList.fetchContacts();
 
+    ////$('#dialog-contact').on('focus', '#contactphone',function () {
+    ////     console.log('found it');
+    ////});
+    //$("#dialog-contact").dialog({
+    //    //autoOpen: false,
+    //    //height: 730,
+    //    //width: 500,
+    //    //modal: false,
+    //    create: function (event, ui) {
+    //        console.log('tab being created...');
+    //        alert("Created");
+    //    },
+    //    open: function (event, ui) {
+    //        console.log('tab being created...');
+    //        alert("Created");
+    //    }
+    //})
+
+        
 });
