@@ -93,14 +93,11 @@ bn.vmContactList = (function ($, bn, undefined) {
                 height: 730,
                 width: 500,
                 modal: true,
-                open: function (event, ui) {
-                    //console.log('tab being Opened...');
-                    //var l = $('#popUpWrapper').length;
-                    //console.log('inside Open popUpWrapper : ' + l);
-                    $('#popUpWrapper').on('focus', '#lastName', function () {
-                        $('#contactphone').mask("(999) 999-9999");
-                        $('#contactfax').mask("(999) 999-9999");
-                    });
+                focus: function (event, ui) {
+                    //var l = $('#contactphone').length;
+                    //console.log('inside FOCUS --> contactPhone : ' + l);
+                    $('#contactphone').mask("(999) 999-9999");
+                    $('#contactfax').mask("(999) 999-9999");
                 }
             });
         },
