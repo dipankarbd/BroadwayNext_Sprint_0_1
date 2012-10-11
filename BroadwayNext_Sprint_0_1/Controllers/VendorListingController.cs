@@ -76,6 +76,47 @@ namespace BroadwayNext_Sprint_0_1.Controllers
             // }
         }
 
+        public JsonResult GetVendorShipTos(Guid vendorId, int pageSize, int currentPage)
+        {
+            TGFContext db = new TGFContext();
+
+            db.Configuration.ProxyCreationEnabled = false;
+
+            var shiptosQuery = db.VendorShipToes.Where(c => c.VendorID == vendorId);
+            var rowCount = shiptosQuery.Count();
+            var shiptos = shiptosQuery.OrderBy(s =>s.Recipient).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+
+            return Json(new { Data = shiptos, VirtualRowCount = rowCount }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult SaveVendorShipTo(VendorShipTo shipto)
+        {
+            shipto.InputDate = DateTime.Now;
+            shipto.LastModifiedDate = DateTime.Now;
+            var result = false;
+            //if (ModelState.IsValid)
+            //{
+            using (this.Uow)
+            {
+                if (shipto.VendorShipToID == Guid.Empty)
+                {
+                    shipto.VendorShipToID= Guid.NewGuid();
+                    this.Uow.VendorShipTos.Insert(shipto);
+                    result = this.Uow.Commit() > 0;
+                }
+                else
+                {
+                    this.Uow.VendorShipTos.Update(shipto);
+                    result = this.Uow.Commit() > 0;
+                }
+            }
+            return Json(new { Success = result, VendorShipTo = shipto });
+            // }
+            //else
+            //{
+            //   return Json(new { Success = result, Message = "Invalid Model" });
+            // }
+        }
         //=================     /Dipankar      ================================================ 
 
 

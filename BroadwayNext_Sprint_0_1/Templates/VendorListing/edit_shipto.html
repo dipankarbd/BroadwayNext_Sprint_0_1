@@ -1,0 +1,65 @@
+﻿<div class="popupwindow">
+    <div id="pagetitle">Ship To Add/Edit</div>
+    <div class="popupwindowgrid">
+        Recipient
+     
+        <input type="text" class="textbox" data-bind="value : Recipient" />
+        Contact
+     
+        <input type="text" class="textbox" />
+        Address1
+     
+        <input type="text" class="textbox" data-bind="value : Address1" />
+        Address2
+     
+        <input type="text" class="textbox" data-bind="value : Address2" />
+        City
+     
+        <input type="text" class="textbox" data-bind="value : Recipient" />
+        <br>
+        <div class="btn-group">
+            <button class="btn" data-bind="click:$root.saveShipTo">Save</button>
+            <button class="btn" data-bind="click:$root.cancelEdit">Cancel</button>
+        </div>
+
+    </div>
+    <div class="popupwindowgrid">
+        <div class="state">
+            State
+     
+            <select class="dropdownbox" data-bind="options: $root.states,value: State">
+            </select>
+        </div>
+        <div class="zip">
+            Zip
+      
+            <input type="text" class="textbox" data-bind="value : Zip" />
+        </div>
+        Country 
+
+        <select class="dropdownbox" data-bind="options: $root.countries">
+        </select>
+        Province
+     
+        <input type="text" class="textbox" />
+        <div class="threequarterboxholder">
+            Phone
+       
+            <input id="shiptophone" type="text" class="textbox" data-bind="value: Phone" />
+        </div>
+        <div class="onethirdboxholder">
+            Ext
+       
+            <input type="text" class="textbox" data-bind="value:PhoneExt" />
+        </div>
+        Fax
+     
+        <input id="shiptofax" type="text" class="textbox" data-bind="value: Fax" />
+        Email
+     
+        <input type="text" class="textbox" data-bind="value: Email" />
+    </div>
+
+    <p>&nbsp;</p>
+</div>
+
