@@ -231,7 +231,7 @@ bn.vmVendorList = (function ($, bn, undefined) {
 
         editingVendor = ko.observable(),
 
-        createVendor = function (vm, v) {
+        createVendor = function () {
             inEditMode(true);
             //make blank skeleton and pass it over
             var remiTo = [new bn.RemitTo({})];
@@ -249,7 +249,7 @@ bn.vmVendorList = (function ($, bn, undefined) {
         },
 
         //Command for the Edit Button... Set VM to 'Editing' mode...
-        editVendor = function (vm, v) {
+        editVendor = function () {
 
             inEditMode(true);   //Set the editMode flag
             fixTabNavigation();    //Fix tab States
