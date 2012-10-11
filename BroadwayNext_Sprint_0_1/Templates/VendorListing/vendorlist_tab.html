@@ -54,7 +54,7 @@
             </thead>
 
             <tbody data-bind="foreach: $root.vendors">
-                <tr data-bind="click: $root.selectVendor">
+                <tr data-bind="click: $root.selectVendor, css:{'tablerowselect': $root.selectedVendor() === $data}">
                     <td class="left" data-bind="text:Vendnum"></td>
                     <td class="left" data-bind="text:Company"></td>
                     <td class="left" data-bind="text:Address1"></td>
