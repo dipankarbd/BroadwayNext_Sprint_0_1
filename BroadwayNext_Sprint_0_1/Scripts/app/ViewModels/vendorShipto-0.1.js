@@ -114,6 +114,22 @@ bn.vmShipToList = (function ($, bn, undefined) {
             });
         },
 
+         deleteShipTo = function () {
+             if (confirm('Are you sure you want to delete this ship to address?')) {
+                 $.ajax("/vendorlisting/deletevendorshipto", {
+                     data: ko.toJSON({ shipto: selectedShipTo() }),
+                     type: "post", contentType: "application/json",
+                     success: function (result) {
+                         selectedShipTo(undefined);
+                         if (result.Success === true) {
+                             fetchShipTos();
+                             toastr.success("Ship to information deleted successfully", "Success");
+                         }
+                     }
+                 });
+             }
+         },
+
         //subscribe to receive Selected Vendor ID & Num
         onVendorSelectionChanged = function (id, num) {
             if (id) {
@@ -135,6 +151,7 @@ bn.vmShipToList = (function ($, bn, undefined) {
         addNewShipTo: addNewShipTo,
         editShipTo: editShipTo,
         saveShipTo: saveShipTo,
+        deleteShipTo: deleteShipTo,
         cancelEdit: cancelEdit,
 
         selectShipTo: selectShipTo,

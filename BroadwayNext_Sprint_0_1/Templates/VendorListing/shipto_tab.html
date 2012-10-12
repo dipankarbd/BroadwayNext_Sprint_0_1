@@ -50,8 +50,8 @@
             <button class="btn btn-small">View</button>
             <button class="btn btn-small" data-bind="click:addNewShipTo">Add</button>
 
-            <button class="btn btn-small" data-bind="click:editShipTo">Edit*</button>
-            <button class="btn btn btn-danger btn btn-small">Delete*</button>
+            <button class="btn btn-small" data-bind="click:editShipTo, enable: selectedShipTo()">Edit*</button>
+            <button class="btn btn btn-danger btn btn-small" data-bind="click:deleteShipTo, enable: selectedShipTo()">Delete*</button>
         </div>
 
     </div>

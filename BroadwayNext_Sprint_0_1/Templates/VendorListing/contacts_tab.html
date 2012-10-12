@@ -67,8 +67,8 @@
             <button class="btn btn-small">View</button>
             <button class="btn btn-small" data-bind="click:addNewContact">Add</button>
 
-            <button class="btn btn-small" data-bind="click:editContact">Edit*</button>
-            <button class="btn btn btn-danger btn btn-small">Delete*</button>
+            <button class="btn btn-small" data-bind="click:editContact, enable: selectedContact()">Edit*</button>
+            <button class="btn btn btn-danger btn btn-small" data-bind="click : deleteContact, enable: selectedContact()">Delete*</button>
         </div>
 
         <br>

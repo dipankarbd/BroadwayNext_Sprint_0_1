@@ -75,7 +75,16 @@ namespace BroadwayNext_Sprint_0_1.Controllers
             //   return Json(new { Success = result, Message = "Invalid Model" });
             // }
         }
-
+        public JsonResult DeleteVendorContact(VendorContact contact)
+        {
+            bool result = false;
+            using (this.Uow)
+            {
+                this.Uow.VendorContacts.Delete(contact);
+                result = this.Uow.Commit() > 0;
+            }
+            return Json(new { Success = result });
+        }
         public JsonResult GetVendorShipTos(Guid vendorId, int pageSize, int currentPage)
         {
             TGFContext db = new TGFContext();
@@ -84,7 +93,7 @@ namespace BroadwayNext_Sprint_0_1.Controllers
 
             var shiptosQuery = db.VendorShipToes.Where(c => c.VendorID == vendorId);
             var rowCount = shiptosQuery.Count();
-            var shiptos = shiptosQuery.OrderBy(s =>s.Recipient).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+            var shiptos = shiptosQuery.OrderBy(s => s.Recipient).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 
             return Json(new { Data = shiptos, VirtualRowCount = rowCount }, JsonRequestBehavior.AllowGet);
         }
@@ -100,7 +109,7 @@ namespace BroadwayNext_Sprint_0_1.Controllers
             {
                 if (shipto.VendorShipToID == Guid.Empty)
                 {
-                    shipto.VendorShipToID= Guid.NewGuid();
+                    shipto.VendorShipToID = Guid.NewGuid();
                     this.Uow.VendorShipTos.Insert(shipto);
                     result = this.Uow.Commit() > 0;
                 }
@@ -117,6 +126,16 @@ namespace BroadwayNext_Sprint_0_1.Controllers
             //   return Json(new { Success = result, Message = "Invalid Model" });
             // }
         }
+        public JsonResult DeleteVendorShipTo(VendorShipTo shipto)
+        {
+            bool result = false;
+            using (this.Uow)
+            {
+                this.Uow.VendorShipTos.Delete(shipto);
+                result = this.Uow.Commit() > 0;
+            }
+            return Json(new { Success = result });
+        }
         //=================     /Dipankar      ================================================ 
 
 
@@ -127,7 +146,7 @@ namespace BroadwayNext_Sprint_0_1.Controllers
             db.Configuration.ProxyCreationEnabled = false;
 
             //var vendors, rowCount;
-            Expression<Func<Vendor, bool>> filterVendorNum= null;
+            Expression<Func<Vendor, bool>> filterVendorNum = null;
             if (vendorNum.HasValue)
             {
                 filterVendorNum = (v => v.Vendnum == vendorNum);   //1578511699
@@ -142,7 +161,7 @@ namespace BroadwayNext_Sprint_0_1.Controllers
             try
             {
 
-                IQueryable<Vendor> vendors = db.Vendors;;
+                IQueryable<Vendor> vendors = db.Vendors; ;
                 if (filterVendorNum != null)
                 {
                     vendors = vendors.Where(filterVendorNum);
@@ -168,7 +187,7 @@ namespace BroadwayNext_Sprint_0_1.Controllers
         }
 
 
-       
+
         public JsonResult GetVendors()
         {
             //Tested -- Works
@@ -184,14 +203,14 @@ namespace BroadwayNext_Sprint_0_1.Controllers
 
             //-- /Test
 
-            
+
 
             // Test 1 -- Works
             try
             {
                 int num = 1;
                 var db = new TGFContext();
-                
+
                 db.Configuration.LazyLoadingEnabled = false;
                 db.Configuration.ProxyCreationEnabled = false;
                 IEnumerable<Vendor> vendor = db.Vendors
@@ -199,18 +218,18 @@ namespace BroadwayNext_Sprint_0_1.Controllers
                                                     .Include("VendorRemitToes")
                                                     .Include("VendorNotes")
                                                     .OrderBy(v => v.VendorID)
-                                                    //.Where(v => v.Vendnum == num)
+                    //.Where(v => v.Vendnum == num)
                                                     .Skip(0)
                                                     .Take(2)
                                                     .ToList();
 
-                
+
                 var test = vendor;
                 return (Json(vendor, JsonRequestBehavior.AllowGet));
             }
             catch (Exception ex)
             {
-                
+
                 throw;
             }
             //-- /Test
@@ -235,30 +254,30 @@ namespace BroadwayNext_Sprint_0_1.Controllers
             {
 
                 string error = "";
-               
-                    if (vendor.VendorID == Guid.Empty)  //This is New
-                    {
-                        vendor.VendorID = Guid.NewGuid();
-                        Uow.Vendors.Insert(vendor);
-                        foreach (var remitToes in vendor.VendorRemitToes)
-                        {
-                            Uow.RemitTo.Insert(remitToes);
-                        }
-                        result = Uow.Commit() > 0;
-                    }
-                    else
-                    {
-                        foreach (var remitToes in vendor.VendorRemitToes)
-                        {
-                            Uow.RemitTo.Update(remitToes);
-                        }
-                        Uow.Vendors.Update(vendor);
 
-                        result = Uow.Commit() > 0;
+                if (vendor.VendorID == Guid.Empty)  //This is New
+                {
+                    vendor.VendorID = Guid.NewGuid();
+                    Uow.Vendors.Insert(vendor);
+                    foreach (var remitToes in vendor.VendorRemitToes)
+                    {
+                        Uow.RemitTo.Insert(remitToes);
                     }
+                    result = Uow.Commit() > 0;
+                }
+                else
+                {
+                    foreach (var remitToes in vendor.VendorRemitToes)
+                    {
+                        Uow.RemitTo.Update(remitToes);
+                    }
+                    Uow.Vendors.Update(vendor);
+
+                    result = Uow.Commit() > 0;
+                }
 
                 //return Json(new { Success = result, VendorContact = contact });
-                return Json (new { Sucess = result} ); 
+                return Json(new { Sucess = result });
             }
         }
 

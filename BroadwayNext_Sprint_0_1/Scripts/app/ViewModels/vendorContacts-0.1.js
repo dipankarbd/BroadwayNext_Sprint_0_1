@@ -73,7 +73,7 @@ bn.vmContactList = (function ($, bn, undefined) {
         selectContact = function (contact) {
             console.log('contact selected');
             selectedContact(contact);
-            
+
             prepareModalDialog();   //prepare the UI dialog
         },
 
@@ -82,7 +82,7 @@ bn.vmContactList = (function ($, bn, undefined) {
             editingContact(new bn.VendorContact({ VendorID: vendorId() }));
             ko.editable(editingContact());
             editingContact().beginEdit();
-            
+
             prepareModalDialog();
             $("#dialog-contact").dialog("open");
         },
@@ -128,6 +128,21 @@ bn.vmContactList = (function ($, bn, undefined) {
                 }
             });
         },
+        deleteContact = function () {
+            if (confirm('Are you sure you want to delete this contact?')) {
+                $.ajax("/vendorlisting/deletevendorcontact", {
+                    data: ko.toJSON({ contact: selectedContact() }),
+                    type: "post", contentType: "application/json",
+                    success: function (result) {
+                        selectedContact(undefined);
+                        if (result.Success === true) {
+                            fetchContacts();
+                            toastr.success("Contact information deleted successfully", "Success");
+                        }
+                    }
+                });
+            }
+        },
 
         editVendor = function () {
             amplify.publish("EditVendor");
@@ -159,6 +174,7 @@ bn.vmContactList = (function ($, bn, undefined) {
         addNewContact: addNewContact,
         editContact: editContact,
         saveContact: saveContact,
+        deleteContact: deleteContact,
         cancelEdit: cancelEdit,
 
         selectContact: selectContact,
@@ -212,5 +228,5 @@ $(function () {
     //    }
     //})
 
-        
+
 });
