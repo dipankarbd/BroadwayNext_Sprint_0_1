@@ -59,42 +59,28 @@ bn.vmShipToList = (function ($, bn, undefined) {
 
         selectShipTo = function (shiptto) {
             console.log('shipto selected');
-            selectedShipTo(shiptto);
-
-            prepareModalDialog();   //prepare the UI dialog
+            selectedShipTo(shiptto); 
         },
 
        addNewShipTo = function () {
            console.log('Adding new shipto for vendor: ' + vendorId());
            editingShipTo(new bn.VendorShipTo({ VendorID: vendorId() }));
            ko.editable(editingShipTo());
-           editingShipTo().beginEdit();
-
-           prepareModalDialog();
-           $("#dialog-shipto").dialog("open");
+           editingShipTo().beginEdit(); 
        },
 
        editShipTo = function () {
            console.log('Will edit shipto now');
            editingShipTo(selectedShipTo());
            ko.editable(editingShipTo());
-           editingShipTo().beginEdit();
-           $("#dialog-shipto").dialog("open");
+           editingShipTo().beginEdit(); 
        },
-
-        prepareModalDialog = function () {
-            $("#dialog-shipto").dialog({
-                autoOpen: false,
-                height: 730,
-                width: 500,
-                modal: true,
-                focus: function (event, ui) {
-                   // $('#shiptophone').mask("(999) 999-9999");
-                   // $('#shiptofax').mask("(999) 999-9999");
-                }
-            });
+ 
+        prepareModal = function () {
+            console.log('#shiptophone: ' + $('#shiptophone').val());
+            $('#shiptophone').mask("(999) 999-9999");
+            $('#shiptofax').mask("(999) 999-9999");
         },
-
         saveShipTo = function () {
             console.log('saving shipto...');
             editingShipTo().commit();
@@ -108,7 +94,8 @@ bn.vmShipToList = (function ($, bn, undefined) {
                     if (result.Success === true) {
                         fetchShipTos();
                         toastr.success("Shipt To information updated successfully", "Success");
-                        $("#dialog-shipto").dialog("close");
+                        //$("#dialog-shipto").dialog("close");
+                        $("#modal-shipto").modal("hide");
                     }
                 }
             });
@@ -142,8 +129,8 @@ bn.vmShipToList = (function ($, bn, undefined) {
         },
 
         cancelEdit = function () {
-            editingShipTo().rollback();
-            $("#dialog-shipto").dialog("close");
+            editingShipTo().rollback(); 
+            $("#modal-shipto").modal("hide");
         };
 
     return {
@@ -167,7 +154,8 @@ bn.vmShipToList = (function ($, bn, undefined) {
         totalShipTos: totalShipTos,
         shipTosGridPageSize: shipTosGridPageSize,
         shipTosGridTotalPages: shipTosGridTotalPages,
-        shipTosGridCurrentPage: shipTosGridCurrentPage
+        shipTosGridCurrentPage: shipTosGridCurrentPage,
+        prepareModal: prepareModal
     };
 })(jQuery, bn);
 

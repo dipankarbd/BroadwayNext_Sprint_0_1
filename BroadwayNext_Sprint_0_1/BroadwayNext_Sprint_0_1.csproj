@@ -479,7 +479,6 @@
     <Content Include="Scripts\app\ViewModels\vendorListing-0.8.js" />
     <Content Include="Scripts\app\ViewModels\vendorShipto-0.2.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
-    <Content Include="Scripts\app\ViewModels\vendorShipto-0.1.js" />
     <Content Include="Scripts\app\ViewModels\vendorTermination-0.1.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
