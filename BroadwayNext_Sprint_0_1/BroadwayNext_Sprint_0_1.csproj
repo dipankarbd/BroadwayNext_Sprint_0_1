@@ -475,6 +475,7 @@
     <Content Include="Scripts\app\ViewModels\vendorContacts-0.1.js" />
     <Content Include="Scripts\app\ViewModels\vendorListing-0.8.js" />
     <Content Include="Scripts\app\ViewModels\vendorShipto-0.1.js" />
+    <Content Include="Scripts\app\ViewModels\vendorTermination-0.1.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\GPL-LICENSE.txt" />
@@ -535,6 +536,7 @@
     <Content Include="Templates\VendorListing\documents_tab.html" />
     <Content Include="Templates\VendorListing\edit_contact.html" />
     <Content Include="Templates\VendorListing\edit_shipto.html" />
+    <Content Include="Templates\VendorListing\edit_termination.html" />
     <Content Include="Templates\VendorListing\feedback_tab.html" />
     <Content Include="Templates\VendorListing\insurance_tab.html" />
     <Content Include="Templates\VendorListing\notes_tab.html" />
