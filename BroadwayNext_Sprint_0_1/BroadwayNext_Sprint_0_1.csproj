@@ -175,6 +175,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\css\bootstrap-responsive.css" />
     <Content Include="Content\css\bootstrap-responsive.min.css" />
     <Content Include="Content\css\bootstrap.css" />
@@ -473,9 +474,11 @@
     <Content Include="Scripts\app\binding-handlers.js" />
     <Content Include="Scripts\app\dataService.js" />
     <Content Include="Scripts\app\main.js" />
+    <Content Include="Scripts\app\ViewModels\Copy of vendorContacts-0.1.js" />
     <Content Include="Scripts\app\ViewModels\vendorContacts-0.1.js" />
     <Content Include="Scripts\app\ViewModels\vendorListing-0.8.js" />
     <Content Include="Scripts\app\ViewModels\vendorShipto-0.2.js" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\GPL-LICENSE.txt" />
@@ -530,9 +533,13 @@
     <Content Include="Scripts\TrafficCop.js" />
     <Content Include="Scripts\TrafficCop.min.gz.js" />
     <Content Include="Scripts\TrafficCop.min.js" />
+    <Content Include="Scripts\underscore.js" />
+    <Content Include="Scripts\underscore.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Templates\VendorListing\audittrail_tab.html" />
     <Content Include="Templates\VendorListing\contacts_tab.html" />
+    <Content Include="Templates\VendorListing\Copy of contacts_tab.html" />
+    <Content Include="Templates\VendorListing\Copy of edit_contact.html" />
     <Content Include="Templates\VendorListing\documents_tab.html" />
     <Content Include="Templates\VendorListing\edit_contact.html" />
     <Content Include="Templates\VendorListing\edit_shipto.html" />

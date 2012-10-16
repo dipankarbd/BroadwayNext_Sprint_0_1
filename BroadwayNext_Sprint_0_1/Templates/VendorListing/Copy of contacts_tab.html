@@ -85,24 +85,10 @@
     </div>-->
 </div>
 
-<!--<div id="dialog-contact" title="Add/Edit Contact" data-bind="with:editingContact">
+<div id="dialog-contact" title="Add/Edit Contact" data-bind="with:editingContact">
     <div id="popUpWrapper" tabindex="1">
         <div id="popUp" data-bind="template: { name: 'edit_contact' , templateUrl: 'Templates/VendorListing'}">
         </div>
     </div>
-</div>-->
 
-<div id="modal-contact" title="Add/Edit Contact" class = "modal hide" data-bind="modal: editingContact">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" >x</button>
-        <h4>Add/Edit/View Contacts</h4>
-    </div>
-    <div class="modal-body" id="Div2">
-        <div id="Div3" data-bind="template: { name: 'edit_contact' , afterRender: $root.prepareModal, templateUrl: 'Templates/VendorListing'}">
-        </div>
-    </div>
-    <div class="btn-group modal-footer">
-            <button class="btn btn-primary" data-bind="click: $root.saveContact">Save</button>
-            <button class="btn" data-bind="click: $root.cancelEdit">Cancel</button>
-    </div>
 </div>

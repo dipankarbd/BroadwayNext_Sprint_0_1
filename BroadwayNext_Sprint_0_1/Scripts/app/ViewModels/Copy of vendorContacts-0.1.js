@@ -69,14 +69,12 @@ bn.vmContactList = (function ($, bn, undefined) {
         states = ["WI", "MT", "MD"],
 
         selectedContact = ko.observable(),
-
         editingContact = ko.observable(),
-
         selectContact = function (contact) {
             console.log('contact selected');
             selectedContact(contact);
 
-            //prepareModalDialog();   //prepare the UI dialog
+            prepareModalDialog();   //prepare the UI dialog
         },
 
         addNewContact = function () {
@@ -85,16 +83,23 @@ bn.vmContactList = (function ($, bn, undefined) {
             ko.editable(editingContact());
             editingContact().beginEdit();
 
-            //prepareModalDialog();
-            //$("#dialog-contact").dialog("open");
+            prepareModalDialog();
+            $("#dialog-contact").dialog("open");
         },
 
-        prepareModal = function () {
-            $('#dpInputDate').datepicker({ autoclose: true });
-            $('#dpInputDate').datepicker('place');
-
-            $('#contactphone').mask("(999) 999-9999");
-            $('#contactfax').mask("(999) 999-9999");
+        prepareModalDialog = function () {
+            $("#dialog-contact").dialog({
+                autoOpen: false,
+                height: 730,
+                width: 500,
+                modal: true,
+                focus: function (event, ui) {
+                    //var l = $('#contactphone').length;
+                    //console.log('inside FOCUS --> contactPhone : ' + l);
+                    $('#contactphone').mask("(999) 999-9999");
+                    $('#contactfax').mask("(999) 999-9999");
+                }
+            });
         },
 
         editContact = function () {
@@ -102,8 +107,7 @@ bn.vmContactList = (function ($, bn, undefined) {
             editingContact(selectedContact());
             ko.editable(editingContact());
             editingContact().beginEdit();
-
-            //$("#dialog-contact").dialog("open");
+            $("#dialog-contact").dialog("open");
         },
 
         saveContact = function () {
@@ -119,9 +123,7 @@ bn.vmContactList = (function ($, bn, undefined) {
                     if (result.Success === true) {
                         fetchContacts();
                         toastr.success("Contact information updated successfully", "Success");
-                        $("#modal-contact").modal("hide");
-
-                        //$("#dialog-contact").dialog("close");
+                        $("#dialog-contact").dialog("close");
                     }
                 }
             });
@@ -160,9 +162,7 @@ bn.vmContactList = (function ($, bn, undefined) {
 
         cancelEdit = function () {
             editingContact().rollback();
-            $("#modal-contact").modal("hide");
-
-            //$("#dialog-contact").dialog("close");
+            $("#dialog-contact").dialog("close");
         };
 
 
@@ -191,8 +191,7 @@ bn.vmContactList = (function ($, bn, undefined) {
         contactsGridPageSize: contactsGridPageSize,
         contactsGridTotalPages: contactsGridTotalPages,
         contactsGridCurrentPage: contactsGridCurrentPage,
-        editVendor: editVendor,
-        prepareModal: prepareModal
+        editVendor: editVendor
 
     };
 

@@ -1,5 +1,5 @@
 ﻿(function ($, undefined) {
-    ko.bindingHandlers['modal'] = {
+    ko.bindingHandlers['modalOld'] = {
         init: function (element, valueAccessor, allBindingsAccessor) {
             var allBindings = allBindingsAccessor();
             var $element = $(element);
@@ -27,6 +27,28 @@
             }
 
             //return returnValue;
+        }
+    };
+
+    ko.bindingHandlers.modal = {
+        init: function (element, valueAccessor, allBindingsAccessor) {
+
+            var allBindings = allBindingsAccessor();
+            var $element = $(element);
+            $element.addClass('hide modal');
+
+            return ko.bindingHandlers.with.init.apply(this, arguments);
+        },
+        update: function (element, valueAccessor) {
+
+            var value = ko.utils.unwrapObservable(valueAccessor());
+            if (value) {
+                $(element).modal('show');
+            } else {
+                $(element).modal('hide');
+            }
+
+            return ko.bindingHandlers.with.update.apply(this, arguments);
         }
     };
 
