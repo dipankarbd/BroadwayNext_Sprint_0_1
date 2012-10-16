@@ -89,8 +89,8 @@ bn.vmShipToList = (function ($, bn, undefined) {
                 width: 500,
                 modal: true,
                 focus: function (event, ui) {
-                    $('#shiptophone').mask("(999) 999-9999");
-                    $('#shiptofax').mask("(999) 999-9999");
+                   // $('#shiptophone').mask("(999) 999-9999");
+                   // $('#shiptofax').mask("(999) 999-9999");
                 }
             });
         },
