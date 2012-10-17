@@ -14,11 +14,14 @@
             </div>
             <div></div>
             <div class="reqlabel" >Company</div>
-            <input type="text" class="textbox" data-bind="value: Company, enable: $root.inEditMode" required  />
+            <input type="text" class="textbox" data-bind="value: Company, enable: $root.inEditMode,
+                                                          event: {blur: function(data, event) 
+                                                                    {bn.utils.validateObservable('Company', $root, data, event)} }"/>
             DBA
             <input type="text" class="textbox" data-bind="value: DBA, enable: $root.inEditMode" />
             <div class="reqlabel">Address 1</div>
-            <input type="text" class="textbox" data-bind="value: Address1 , enable: $root.inEditMode" />
+            <input type="text" class="textbox" data-bind="value: Address1 , enable: $root.inEditMode,
+                                                             event: {blur: function(data, event) {bn.utils.validateObservable('Address1', $root, data, event)} }" />
             Address 2
             <input type="text" class="textbox" data-bind="value: Address2 , enable: $root.inEditMode" />
             <div class="reqlabel">City</div>
@@ -188,7 +191,7 @@
     </div>
     <div class="btn-group btn-group-vertical" data-bind="if: ($root.inEditMode)">
         <!-- ko with: $root.editingVendor -->
-        <button class="btn btn-large btn-success" id="remitToSave" data-bind="click: $root.saveDetails">Save</button>
+        <button class="btn btn-large btn-success" id="remitToSave" data-bind="enable: $root.modelIsValid, command: $root.saveDetailsCmd, activity: $root.saveDetailsCmd.isExecuting">Save</button>
         <button class="btn btn-large" id="remitToCancel" data-bind="click: $root.cancelEdit">Cancel</button>
         <!-- /ko -->
     </div>

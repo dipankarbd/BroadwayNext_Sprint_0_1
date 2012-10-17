@@ -474,9 +474,11 @@
     <Content Include="Scripts\app\binding-handlers.js" />
     <Content Include="Scripts\app\dataService.js" />
     <Content Include="Scripts\app\main.js" />
+    <Content Include="Scripts\app\util.js" />
     <Content Include="Scripts\app\ViewModels\Copy of vendorContacts-0.1.js" />
+    <Content Include="Scripts\app\ViewModels\Copy of vendorListing-0.8.js" />
     <Content Include="Scripts\app\ViewModels\vendorContacts-0.1.js" />
-    <Content Include="Scripts\app\ViewModels\vendorListing-0.8.js" />
+    <Content Include="Scripts\app\ViewModels\vendorListing-0.9.js" />
     <Content Include="Scripts\app\ViewModels\vendorShipto-0.2.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\app\ViewModels\vendorTermination-0.1.js" />
@@ -509,6 +511,9 @@
     <Content Include="Scripts\json2.min.js" />
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
+    <Content Include="Scripts\knockout.activity.js" />
+    <Content Include="Scripts\knockout.asyncCommand.js" />
+    <Content Include="Scripts\knockout.dirtyFlag.js" />
     <Content Include="Scripts\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />
     <Content Include="Scripts\knockout.validation.debug.js" />
