@@ -118,9 +118,9 @@ bn.RemitTo = function (data) {
 bn.Vendor = function (data) {
     this.VendorID = ko.observable(data.VendorID);
     this.Vendnum = ko.observable(data.Vendnum);
-    this.Company = ko.observable(data.Company).extend({required : true});
+    this.Company = ko.observable(data.Company).extend({ required: true });
     this.DBA = ko.observable(data.DBA);
-    this.Address1 = ko.observable(data.Address1).extend({required : true});
+    this.Address1 = ko.observable(data.Address1).extend({ required: true });
     this.Address2 = ko.observable(data.Address2);
     this.City = ko.observable(data.City).extend({ required: true });
     this.State = ko.observable(data.State).extend({ required: true });
@@ -184,10 +184,10 @@ bn.Vendor = function (data) {
 
 bn.vmVendorList = (function ($, bn, undefined) {
 
-    
+
     this.infuser.defaults.templateSuffix = ".html";
     this.infuser.defaults.templateUrl = "/Templates/VendorListing";
-    
+
     var
         self = this,
         vendors = ko.observableArray([]),
@@ -211,7 +211,7 @@ bn.vmVendorList = (function ($, bn, undefined) {
             //debugger;
             selectedVendor(p);
             //set Selected Flag
-            isSelected(true); 
+            isSelected(true);
         },
 
         editingVendor = ko.observable(),
@@ -277,7 +277,7 @@ bn.vmVendorList = (function ($, bn, undefined) {
             inEditMode(false);
             //--
             fixTabNavigation();
-            
+
 
         },
         onErrorSaveDetails = function (error) {
@@ -361,44 +361,44 @@ bn.vmVendorList = (function ($, bn, undefined) {
                 $('#tabstwo').tabs("select", 0);
             }
         };
-        //#endregion
+    //#endregion
 
-        return {
-            states: states,
-            countries : countries,
-            vendors: vendors,
-            inEditMode: inEditMode,
-            selectVendor: selectVendor,
-            selectedVendor: selectedVendor,
-            isSelected: isSelected,
-            editVendor: editVendor,
-            editingVendor: editingVendor,
-            cancelEdit: cancelEdit,
-            //--pager options
-            pageSize : pageSize,
-            totalPages : totalPages,
-            currentPage: currentPage,
-            totalRows: totalRows,
-            //--methods
-            loadVendors: loadVendors,
-            saveDetails: saveDetails,
-            showDetails: showDetails,
-            createVendor: createVendor
-            //init: init
-        };
+    return {
+        states: states,
+        countries: countries,
+        vendors: vendors,
+        inEditMode: inEditMode,
+        selectVendor: selectVendor,
+        selectedVendor: selectedVendor,
+        isSelected: isSelected,
+        editVendor: editVendor,
+        editingVendor: editingVendor,
+        cancelEdit: cancelEdit,
+        //--pager options
+        pageSize: pageSize,
+        totalPages: totalPages,
+        currentPage: currentPage,
+        totalRows: totalRows,
+        //--methods
+        loadVendors: loadVendors,
+        saveDetails: saveDetails,
+        showDetails: showDetails,
+        createVendor: createVendor
+        //init: init
+    };
 
 })(jQuery, bn);
 
 //var vm = {};
 $(function () {
 
-    $('#tabstwo').tabs(),
+    //$('#tabstwo').tabs(),
 
-    $("#tabstwo").bind("tabsselect", function (e, tab) {
-        if (tab.index > 0) {
-            bn.vmVendorList.showDetails(tab, e);
-        }
-    });
+    //$("#tabstwo").bind("tabsselect", function (e, tab) {
+    //    if (tab.index > 0) {
+    //        bn.vmVendorList.showDetails(tab, e);
+    //    }
+    //});
 
     //Set up notification when selecttion changes
     bn.vmVendorList.selectedVendor.subscribe(function (data) {
@@ -409,12 +409,12 @@ $(function () {
             amplify.publish("VendorSelectionChanged", vendorID, vendorNum);
         }
     });
-    
+
     amplify.subscribe("EditVendor", bn.vmVendorList.editVendor);
 
     //bn.vmVendorList.init();
 
-    
+
 
 });
 
