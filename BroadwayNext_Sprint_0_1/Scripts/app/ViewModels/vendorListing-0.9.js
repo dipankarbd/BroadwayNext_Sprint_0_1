@@ -400,13 +400,13 @@ bn.vmVendorList = (function ($, bn, undefined) {
 //var vm = {};
 $(function () {
 
-    $('#tabstwo').tabs(),
+    //$('#tabstwo').tabs(),
 
-    $("#tabstwo").bind("tabsselect", function (e, tab) {
-        if (tab.index > 0) {
-            bn.vmVendorList.showDetails(tab, e);
-        }
-    });
+    //$("#tabstwo").bind("tabsselect", function (e, tab) {
+    //    if (tab.index > 0) {
+    //        bn.vmVendorList.showDetails(tab, e);
+    //    }
+    //});
 
     //Set up notification when selecttion changes
     bn.vmVendorList.selectedVendor.subscribe(function (data) {
