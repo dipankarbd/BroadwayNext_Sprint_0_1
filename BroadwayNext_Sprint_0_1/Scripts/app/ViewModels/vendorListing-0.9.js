@@ -118,16 +118,16 @@ bn.RemitTo = function (data) {
 bn.Vendor = function (data) {
     this.VendorID = ko.observable(data.VendorID);
     this.Vendnum = ko.observable(data.Vendnum);
-    this.Company = ko.observable(data.Company).extend({required : true});
+    this.Company = ko.observable(data.Company); //.extend({required : true});
     this.DBA = ko.observable(data.DBA);
-    this.Address1 = ko.observable(data.Address1).extend({required : true});
+    this.Address1 = ko.observable(data.Address1);   //.extend({required : true});
     this.Address2 = ko.observable(data.Address2);
-    this.City = ko.observable(data.City).extend({ required: true });
-    this.State = ko.observable(data.State).extend({ required: true });
-    this.Zip = ko.observable(data.Zip).extend({ required: true });
+    this.City = ko.observable(data.City);   //.extend({ required: true });
+    this.State = ko.observable(data.State); //.extend({ required: true });
+    this.Zip = ko.observable(data.Zip); //.extend({ required: true });
     this.Country = ko.observable(data.Country);
     this.Province = ko.observable(data.Province);
-    this.Phone = ko.observable(data.Phone).extend({ required: true });
+    this.Phone = ko.observable(data.Phone); //.extend({ required: true });
     this.PhoneExt = ko.observable(data.PhoneExt);
     this.Fax = ko.observable(data.Fax);
     this.Mobile = ko.observable(data.Mobile);
@@ -138,7 +138,7 @@ bn.Vendor = function (data) {
     this.Comment = ko.observable(data.Comment);
     this.VendorType = ko.observable(data.VendorType);
     this.GLnum = ko.observable(data.GLnum);
-    this.TaxID = ko.observable(data.TaxID).extend({ required: true });
+    this.TaxID = ko.observable(data.TaxID); //.extend({ required: true });
     this.NetDays = ko.observable(data.NetDays);
     this.CheckTax1099 = ko.observable(data.CheckTax1099);
     this.PVA = ko.observable(data.PVA);
@@ -359,14 +359,29 @@ bn.vmVendorList = (function ($, bn, undefined) {
 
         //#region Private Members
         fixTabNavigation = function () {
+
             if (inEditMode()) {
-                $('#tabstwo').tabs("select", 1);
-                $('#tabstwo').tabs("option", "disabled", [0, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+                $('#tabstwo li:eq(1) a').tab('show');   // Set the Details tab as 'Active'
+                $('#tabstwo li a').filter(function (index) {
+                    return (index == 0) || (index > 3);
+                })
+                .removeAttr('data-toggle');
             }
             else {
-                $('#tabstwo').tabs("option", "disabled", []);
-                $('#tabstwo').tabs("select", 0);
+                $('#tabstwo li a').attr('data-toggle', 'tab');
+                $('#tabstwo li:eq(0) a').tab('show');     // Reset the Listing tab to be 'Active' again
+
             }
+
+
+            //if (inEditMode()) {
+            //    $('#tabstwo').tabs("select", 1);
+            //    $('#tabstwo').tabs("option", "disabled", [0, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+            //}
+            //else {
+            //    $('#tabstwo').tabs("option", "disabled", []);
+            //    $('#tabstwo').tabs("select", 0);
+            //}
         };
         //#endregion
 
@@ -407,6 +422,13 @@ $(function () {
     //        bn.vmVendorList.showDetails(tab, e);
     //    }
     //});
+
+    $('#tabstwo a').click(function (e) {
+        bn.vmVendorList.showDetails(e);
+        //e.preventDefault();
+        //$(this).tab('show');
+    })
+
 
     //Set up notification when selecttion changes
     bn.vmVendorList.selectedVendor.subscribe(function (data) {

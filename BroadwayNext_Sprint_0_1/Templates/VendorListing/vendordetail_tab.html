@@ -1,5 +1,5 @@
 ﻿<div class="bottomwrapper" data-bind="with: selectedVendor">
-   <!-- <pre data-bind="text: ko.toJSON($root, null, 2)"></pre>-->
+  <!-- <pre data-bind="text: ko.toJSON($root.selectedVendor, null, 4)"></pre>-->
     <div class="eightypercent ">
         <div class="boxholder">
             <div>
@@ -18,14 +18,14 @@
                                                           event: {blur: function(data, event) 
                                                                     {bn.utils.validateObservable('Company', $root, data, event)} }"/>
             DBA
-            <input type="text" class="textbox" data-bind="value: DBA, enable: $root.inEditMode" />
+            <input type="text" class="textbox" data-bind="value:  DBA, enable: $root.inEditMode" />
             <div class="reqlabel">Address 1</div>
             <input type="text" class="textbox" data-bind="value: Address1 , enable: $root.inEditMode,
                                                              event: {blur: function(data, event) {bn.utils.validateObservable('Address1', $root, data, event)} }" />
             Address 2
             <input type="text" class="textbox" data-bind="value: Address2 , enable: $root.inEditMode" />
             <div class="reqlabel">City</div>
-            <input type="text" class="textbox" data-bind="value: City , enable: $root.inEditMode" />
+            <input type="text" class="textbox" data-bind="value:  City , enable: $root.inEditMode" />
 
             <div class="state">
                 <div class="reqlabel">State</div>
@@ -35,7 +35,7 @@
             </div>
             <div class="zip">
                 <div class="reqlabel">Zip</div>
-                <input type="text" class="textbox" data-bind="value: Zip , enable: $root.inEditMode" />
+                <input type="text" class="textbox" data-bind="value:  Zip , enable: $root.inEditMode" />
             </div>
             <div class="reqlabel">Required</div>
             <span class="texttypeinstructions">* zipcode is typed automatically pull state, province and country</span>
@@ -46,33 +46,33 @@
             Country
             
             <select class="dropdownbox" data-bind="options: $root.countries,
-                                                    value: Country,
+                                                    value:  Country,
                                                     enable: $root.inEditMode">
             </select>
             Province
             <input type="text" class="textbox" data-bind="value: Province , enable: $root.inEditMode"  />
             <div class="threequarterboxholder">
                 <div class="reqlabel">Phone</div>
-                <input id="vendorphone" type="text" class="textbox" data-bind="value: Phone , enable: $root.inEditMode" />
+                <input id="vendorphone" type="text" class="textbox" data-bind="value:  Phone , enable: $root.inEditMode" />
             </div>
             <div class="onethirdboxholder">
                 Ext
            
-                <input type="text" class="textbox" data-bind="value: PhoneExt , enable: $root.inEditMode" />
+                <input type="text" class="textbox" data-bind="value:  PhoneExt , enable: $root.inEditMode" />
             </div>
             <div class="halfoffield">Fax </div>
-            <input id="vendorfax" type="text" class="textbox" data-bind="value: Fax , enable: $root.inEditMode"  />
+            <input id="vendorfax" type="text" class="textbox" data-bind="value:  Fax , enable: $root.inEditMode"  />
             Mobile
            
-            <input type="text" class="textbox" data-bind="value: Mobile , enable: $root.inEditMode" />
+            <input type="text" class="textbox" data-bind="value:  Mobile , enable: $root.inEditMode" />
             Emergency
-            <input type="text" class="textbox" data-bind="value: Emergency , enable: $root.inEditMode"  />
+            <input type="text" class="textbox" data-bind="value:  Emergency , enable: $root.inEditMode"  />
             Contact
            
-            <input type="text" class="textbox" data-bind="value: Contact , enable: $root.inEditMode" />
+            <input type="text" class="textbox" data-bind="value:  Contact , enable: $root.inEditMode" />
             Email
          
-            <input type="text" class="textbox" data-bind="value: Email , enable: $root.inEditMode" />
+            <input type="text" class="textbox" data-bind="value:  Email , enable: $root.inEditMode" />
             Auto Email
  
             <select multiple="multiple">
@@ -89,13 +89,13 @@
         <div class="boxholder">
             Comment
              
-            <input type="text" class="textbox" data-bind="value: Comment , enable: $root.inEditMode" />
+            <input type="text" class="textbox" data-bind="value:  Comment , enable: $root.inEditMode" />
             Type <span class="rdgrid">
                 <select class="dropdownbox">
                 </select>
             </span>GL#
            
-            <input type="text" class="textbox" data-bind="value: GLnum, enable: $root.inEditMode" />
+            <input type="text" class="textbox" data-bind="value:  GLnum, enable: $root.inEditMode" />
             <div class="thirtypercent">
                 <div class="reqlabel">Tax ID</div>
             </div>
@@ -104,7 +104,7 @@
                 <div class="reqlabel">SSN</div>
             </div>
             <div class="halfoffield">
-                <input type="text" class="textbox" data-bind="value: TaxID, enable: $root.inEditMode" />
+                <input type="text" class="textbox" data-bind="value:  TaxID, enable: $root.inEditMode" />
             </div>
             <div class="thirdoffield">
                 <input type="text" class="textbox" data-bind="enable: $root.inEditMode" />
@@ -112,7 +112,7 @@
             <br />
             Net Days
          
-            <input type="text" class="textbox" data-bind="value: NetDays, enable: $root.inEditMode" />
+            <input type="text" class="textbox" data-bind="value:  NetDays, enable: $root.inEditMode" />
             <span class="texttypesmallercheckbox">
                 <input type="checkbox" data-bind="checked: CheckTax1099, enable: $root.inEditMode">
                 Checked for 1099</span><span class="texttypesmallercheckbox">
@@ -154,7 +154,7 @@
             Input Date
    
            <!-- <input type="text" class="textboxfilled" value="08/15/2012" />-->
-            <input type="text" class="textboxfilled" data-bind="value: InputDate"/>
+            <input type="text" class="textboxfilled" data-bind="value:  InputDate"/>
             <br />
 
             Pricing Schedule
