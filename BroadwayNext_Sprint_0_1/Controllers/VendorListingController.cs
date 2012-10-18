@@ -52,8 +52,8 @@ namespace BroadwayNext_Sprint_0_1.Controllers
             contact.InputDate = DateTime.Now;
             contact.LastModifiedDate = DateTime.Now;
             var result = false;
-            //if (ModelState.IsValid)
-            //{
+            if (ModelState.IsValid)
+            {
             using (this.Uow)
             {
                 if (contact.VendorContactID == Guid.Empty)
@@ -69,11 +69,11 @@ namespace BroadwayNext_Sprint_0_1.Controllers
                 }
             }
             return Json(new { Success = result, VendorContact = contact });
-            // }
-            //else
-            //{
-            //   return Json(new { Success = result, Message = "Invalid Model" });
-            // }
+            }
+            else
+            {
+                return Json(new { Success = result, Message = "Invalid Model" });
+            }
         }
         public JsonResult DeleteVendorContact(VendorContact contact)
         {

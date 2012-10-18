@@ -20,23 +20,25 @@ bn.VendorContact = function (data) {
     self.Email = ko.observable(data.Email);
     self.Notes = ko.observable(data.Notes);
     self.ActiveType = ko.observable(data.ActiveType);
-    self.InputDate = ko.observable(data.InputDate);
+    // self.InputDate = ko.observable(moment(data.InputDate).toDate());
+    self.InputDate = ko.observable(moment(data.InputDate).toDate());
+    self.InputDate.formatted = moment(data.InputDate).format("MM/DD/YYYY");
     self.InputBy = ko.observable(data.InputBy);
-    self.LastModifiedDate = ko.observable(data.LastModifiedDate);
+    self.LastModifiedDate = ko.observable(moment(data.LastModifiedDate).toDate());
     self.LastModifiedBy = ko.observable(data.LastModifiedBy);
     self.Vendnum = ko.observable(data.Vendnum);
     self.IsActive = ko.computed(function () {
         if (self.ActiveType() === 'true') return 'Yes';
         else return 'No';
     });
-    self.InputDateFormated = ko.computed(function () {
-        if (self.InputDate() != undefined) {
-            var value = new Date(parseInt(self.InputDate().replace("/Date(", "").replace(")/", ""), 10));
-            var ret = value.getMonth() + 1 + "/" + value.getDate() + "/" + value.getFullYear();
-            return ret;
-        }
-        else return "";
-    });
+    //self.InputDateFormated = ko.computed(function () {
+    //    if (self.InputDate() != undefined) {
+    //        var value = new Date(parseInt(self.InputDate().replace("/Date(", "").replace(")/", ""), 10));
+    //        var ret = value.getMonth() + 1 + "/" + value.getDate() + "/" + value.getFullYear();
+    //        return ret;
+    //    }
+    //    else return "";
+    //});
 };
 
 bn.vmContactList = (function ($, bn, undefined) {
@@ -90,8 +92,8 @@ bn.vmContactList = (function ($, bn, undefined) {
         },
 
         prepareModal = function () {
-            $('#dpInputDate').datepicker({ autoclose: true });
-            $('#dpInputDate').datepicker('place');
+            //$('#dpInputDate').datepicker({ autoclose: true });
+            //$('#dpInputDate').datepicker('place');
 
             $('#contactphone').mask("(999) 999-9999");
             $('#contactfax').mask("(999) 999-9999");
