@@ -1,7 +1,7 @@
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
-using BroadwayNext_Sprint_0_1.Models.Mapping;
 using System.Data.Objects;
+using BroadwayNext_Sprint_0_1.Models.Mapping;
 
 namespace BroadwayNext_Sprint_0_1.Models
 {
@@ -12,17 +12,19 @@ namespace BroadwayNext_Sprint_0_1.Models
             Database.SetInitializer<TGFContext>(null);
         }
 
-		public TGFContext()
-			: base("Name=TGFContext")
-		{
-		}
+        public TGFContext()
+            : base("Name=TGFContext")
+        {
+        }
 
         public ObjectContext ObjectContext
         {
             get { return (this as IObjectContextAdapter).ObjectContext; }
         }
 
+        public DbSet<Division> Divisions { get; set; }
         public DbSet<sysdiagram> sysdiagrams { get; set; }
+        public DbSet<TerminationReason> TerminationReasons { get; set; }
         public DbSet<VendorCategory> VendorCategories { get; set; }
         public DbSet<VendorContact> VendorContacts { get; set; }
         public DbSet<VendorFeedback> VendorFeedbacks { get; set; }
@@ -40,7 +42,9 @@ namespace BroadwayNext_Sprint_0_1.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Configurations.Add(new DivisionMap());
             modelBuilder.Configurations.Add(new sysdiagramMap());
+            modelBuilder.Configurations.Add(new TerminationReasonMap());
             modelBuilder.Configurations.Add(new VendorCategoryMap());
             modelBuilder.Configurations.Add(new VendorContactMap());
             modelBuilder.Configurations.Add(new VendorFeedbackMap());

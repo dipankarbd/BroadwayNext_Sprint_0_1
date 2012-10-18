@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Web.Script.Serialization;
 
 namespace BroadwayNext_Sprint_0_1.Models
 {
@@ -14,6 +13,8 @@ namespace BroadwayNext_Sprint_0_1.Models
         public string City { get; set; }
         public string State { get; set; }
         public string Zip { get; set; }
+        public string Country { get; set; }
+        public string Province { get; set; }
         public string Phone { get; set; }
         public string PhoneExt { get; set; }
         public string Fax { get; set; }
@@ -22,7 +23,6 @@ namespace BroadwayNext_Sprint_0_1.Models
         public string InputBy { get; set; }
         public Nullable<System.DateTime> LastModifiedDate { get; set; }
         public string LastModifiedBy { get; set; }
-        [ScriptIgnore]
         public virtual Vendor Vendor { get; set; }
     }
 }

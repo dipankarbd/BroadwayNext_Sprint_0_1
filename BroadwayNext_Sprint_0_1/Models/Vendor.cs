@@ -22,7 +22,7 @@ namespace BroadwayNext_Sprint_0_1.Models
         public int Vendnum { get; set; }
         [Required]
         public string Company { get; set; }
-        [Required]
+          [Required]
         public string DBA { get; set; }
         public string Address1 { get; set; }
         public string Address2 { get; set; }
