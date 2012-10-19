@@ -41,6 +41,9 @@ namespace BroadwayNext_Sprint_0_1.Models.Mapping
             this.Property(t => t.LastModifiedDate).HasColumnName("LastModifiedDate");
 
             // Relationships
+            this.HasOptional(t => t.VendorInsuranceType)
+                .WithMany(t => t.VendorInsurances)
+                .HasForeignKey(d => d.InsuranceType);
             this.HasRequired(t => t.Vendor)
                 .WithMany(t => t.VendorInsurances)
                 .HasForeignKey(d => d.VendorID);

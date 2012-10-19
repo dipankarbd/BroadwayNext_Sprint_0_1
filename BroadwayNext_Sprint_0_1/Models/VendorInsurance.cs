@@ -8,7 +8,7 @@ namespace BroadwayNext_Sprint_0_1.Models
     {
         public System.Guid VendorInsuranceID { get; set; }
         public System.Guid VendorID { get; set; }
-        public Nullable<int> InsuranceType { get; set; }
+        public Nullable<System.Guid> InsuranceType { get; set; }
         public string InsuranceName { get; set; }
         public Nullable<long> Policynum { get; set; }
         public Nullable<System.DateTime> ExpiryDate { get; set; }
@@ -20,6 +20,7 @@ namespace BroadwayNext_Sprint_0_1.Models
         public Nullable<System.DateTime> InputDate { get; set; }
         public string LastModifiedBy { get; set; }
         public Nullable<System.DateTime> LastModifiedDate { get; set; }
+        public virtual VendorInsuranceType VendorInsuranceType { get; set; }
         [ScriptIgnore]
         public virtual Vendor Vendor { get; set; }
     }

@@ -1,20 +1,48 @@
 ﻿var bn = bn || {};
 
+bn.Division = function (data) {
+    var self = this;
+    self.DivisionID = ko.observable(data.DivisionID);
+    self.Code = ko.observable(data.Code);
+    self.Prefix = ko.observable(data.Prefix);
+    self.GLNum = ko.observable(data.GLNum);
+    self.Address1 = ko.observable(data.Address1);
+    self.Address2 = ko.observable(data.Address2);
+    self.City = ko.observable(data.City);
+    self.State = ko.observable(data.State);
+    self.Zip = ko.observable(data.Zip);
+    self.Phone = ko.observable(data.Phone);
+    self.Fax = ko.observable(data.Fax);
+    self.ComplaintEmail = ko.observable(data.ComplaintEmail);
+    self.VendorInstructions = ko.observable(data.VendorInstructions);
+    self.AutofaxNotice = ko.observable(data.AutofaxNotice);
+    self.Inputdate = ko.observable(moment(data.InputDate).toDate());
+    self.InputBy = ko.observable(data.InputBy);
+};
+bn.TerminationReason = function (data) {
+    var self = this;
+    self.TerminationReasonID = ko.observable(data.TerminationReasonID);
+    self.Code = ko.observable(data.Code);
+    self.Inputdate = ko.observable(moment(data.InputDate).toDate());
+    self.InputBy = ko.observable(data.InputBy);
+};
 bn.VendorTermination = function (data) {
     var self = this;
 
     self.VendorTerminationID = ko.observable(data.VendorTerminationID);
     self.VendorID = ko.observable(data.VendorID);
-    self.TerminationDate = ko.observable(data.TerminationDate);
-    self.TerminationEffDate = ko.observable(data.TerminationEffDate);
+    self.TerminationDate = ko.observable(moment(data.TerminationDate).toDate());
+    self.TerminationDate.formatted = moment(data.TerminationDate).format("MM/DD/YYYY");
+    self.TerminationEffDate = ko.observable(moment(data.TerminationEffDate).toDate());
+    self.TerminationEffDate.formatted = moment(data.TerminationEffDate).format("MM/DD/YYYY");
     self.TerminatedBy = ko.observable(data.TerminatedBy);
     self.TerminationReason = ko.observable(data.TerminationReason);
     self.Rehire = ko.observable(data.Rehire);
     self.Division = ko.observable(data.Division);
     self.InputBy = ko.observable(data.InputBy);
-    self.InputDate = ko.observable(data.InputDate);
+    self.InputDate = ko.observable(moment(data.InputDate).toDate());
     self.LastModifiedBy = ko.observable(data.LastModifiedBy);
-    self.LastModifiedDate = ko.observable(data.LastModifiedDate);
+    self.LastModifiedDate = ko.observable(moment(data.LastModifiedDate).toDate());
 };
 
 bn.vmTerminationList = (function ($, bn, undefined) {
@@ -28,29 +56,59 @@ bn.vmTerminationList = (function ($, bn, undefined) {
        terminationsGridPageSize = ko.observable(10),
        terminationsGridTotalPages = ko.observable(0),
        terminationsGridCurrentPage = ko.observable(1),
+
+       reasons = ko.observableArray([]),
+       divisions = ko.observableArray([]),
+
        fetchTerminations = function () {
            if (vendorId()) {
                console.log('will fetch termination now');
                $.getJSON("/vendorlisting/getvendorterminations", { vendorId: vendorId(), pageSize: terminationsGridPageSize(), currentPage: terminationsGridCurrentPage() }, function (result) {
                    totalTerminations(result.VirtualRowCount);
                    terminationsGridTotalPages(Math.ceil(result.VirtualRowCount / terminationsGridPageSize()));
-                   var mappedTerminations = $.map(result.Data, function (item) { return new bn.VendorTermination(item); });
+                   var mappedTerminations = $.map(result.Data, function (item) {
+                       var terminationReason = ko.utils.arrayMap(item.TerminationReason1, function (reason1) {
+                           return new bn.TerminationReason(reason1);
+                       });
+                       var division = ko.utils.arrayMap(item.Division1, function (division1) {
+                           return new bn.Division(division1);
+                       });
+
+                       item.Division = division;
+                       item.TerminationReason = division;
+
+                       return new bn.VendorTermination(item);
+                   });
+
                    terminations(mappedTerminations);
                });
            }
        },
-       reasons = ["Reason 1", "Reason 2", "Reason 3"],
-       rehires = ["A", "B", "C"],
-       divisions = [{ "id": 1, "name": "Division 1" }, { "id": 2, "name": "Division 2" }, { "id": 3, "name": "Division 3" }],
+
+       fetchReasons = function () {
+           $.getJSON("/vendorlisting/getreasons", function (result) {
+               var mappedReasons = $.map(result.Data, function (item) { 
+                   return new bn.TerminationReason(item);
+               });
+               reasons(mappedReasons);
+           });
+       },
+       fetchDivisions = function () {
+           $.getJSON("/vendorlisting/getdivisions", function (result) {
+               var mappedDivisions = $.map(result.Data, function (item) {
+                   return new bn.Division(item);
+               });
+
+               divisions(mappedDivisions);
+           });
+       },
 
        selectedTermination = ko.observable(),
        editingTermination = ko.observable(),
 
        selectTermination = function (termination) {
-           console.log('shipto termination');
+           console.log('select termination');
            selectedTermination(termination);
-
-           prepareModalDialog();   //prepare the UI dialog
        },
 
        addNewTermination = function () {
@@ -58,9 +116,6 @@ bn.vmTerminationList = (function ($, bn, undefined) {
            editingTermination(new bn.VendorTermination({ VendorID: vendorId() }));
            ko.editable(editingTermination());
            editingTermination().beginEdit();
-
-           prepareModalDialog();
-           $("#dialog-termination").dialog("open");
        },
 
        editTermination = function () {
@@ -68,18 +123,10 @@ bn.vmTerminationList = (function ($, bn, undefined) {
            editingTermination(selectedTermination());
            ko.editable(editingTermination());
            editingTermination().beginEdit();
-           $("#dialog-termination").dialog("open");
        },
 
-       prepareModalDialog = function () {
-           $("#dialog-termination").dialog({
-               autoOpen: false,
-               height: 730,
-               width: 500,
-               modal: true,
-               focus: function (event, ui) {
-               }
-           });
+       prepareModal = function () {
+           //initialize datepicker here
        },
 
        saveTermination = function () {
@@ -87,7 +134,7 @@ bn.vmTerminationList = (function ($, bn, undefined) {
            editingTermination().commit();
 
            $.ajax("/vendorlisting/savevendortermination", {
-               data: ko.toJSON({ shipto: editingTermination() }),
+               data: ko.toJSON({ termination: editingTermination() }),
                type: "post", contentType: "application/json",
                success: function (result) {
                    selectedTermination(undefined);
@@ -95,7 +142,7 @@ bn.vmTerminationList = (function ($, bn, undefined) {
                    if (result.Success === true) {
                        fetchTerminations();
                        toastr.success("Termination information updated successfully", "Success");
-                       $("#dialog-termination").dialog("close");
+                       $("#modal-termination").modal("hide");
                    }
                }
            });
@@ -104,7 +151,7 @@ bn.vmTerminationList = (function ($, bn, undefined) {
        deleteTermination = function () {
            if (confirm('Are you sure you want to delete this termination?')) {
                $.ajax("/vendorlisting/deletevendortermination", {
-                   data: ko.toJSON({ shipto: selectedTermination() }),
+                   data: ko.toJSON({ termination: selectedTermination() }),
                    type: "post", contentType: "application/json",
                    success: function (result) {
                        selectedTermination(undefined);
@@ -116,20 +163,26 @@ bn.vmTerminationList = (function ($, bn, undefined) {
                });
            }
        },
-
-       //subscribe to receive Selected Vendor ID & Num
+       editVendor = function () {
+           amplify.publish("EditVendor");
+       },
+    //subscribe to receive Selected Vendor ID & Num
        onVendorSelectionChanged = function (id, num) {
            if (id) {
                vendorId(id);
                vendorNum = num;
-               if (id)
+               if (id) {
                    fetchTerminations();    //Re-load on valid ID  
+                   fetchReasons();
+                   fetchDivisions();
+               }
+
            }
        },
 
        cancelEdit = function () {
-           editingShipTo().rollback();
-           $("#dialog-termination").dialog("close");
+           editingTermination().rollback();
+           $("#modal-termination").modal("hide");
        };
 
     return {
@@ -140,13 +193,12 @@ bn.vmTerminationList = (function ($, bn, undefined) {
         deleteTermination: deleteTermination,
         cancelEdit: cancelEdit,
 
-        selectShipTo: selectShipTo,
-        editingShipTo: editingShipTo,
+        selectTermination: selectTermination,
+        editingTermination: editingTermination,
         selectedTermination: selectedTermination,
         vendorSelectionChanged: onVendorSelectionChanged,
 
         reasons: reasons,
-        rehires: rehires,
         divisions: divisions,
         vendorId: vendorId,
         terminations: terminations,
@@ -155,7 +207,9 @@ bn.vmTerminationList = (function ($, bn, undefined) {
 
         terminationsGridPageSize: terminationsGridPageSize,
         terminationsGridTotalPages: terminationsGridTotalPages,
-        terminationsGridCurrentPage: terminationsGridCurrentPage
+        terminationsGridCurrentPage: terminationsGridCurrentPage,
+        editVendor: editVendor,
+        prepareModal: prepareModal
     };
 })(jQuery, bn);
 

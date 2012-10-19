@@ -14,9 +14,6 @@ namespace BroadwayNext_Sprint_0_1.Models.Mapping
             this.Property(t => t.TerminatedBy)
                 .HasMaxLength(50);
 
-            this.Property(t => t.TerminationReason)
-                .HasMaxLength(100);
-
             this.Property(t => t.Rehire)
                 .IsFixedLength()
                 .HasMaxLength(1);
@@ -43,6 +40,12 @@ namespace BroadwayNext_Sprint_0_1.Models.Mapping
             this.Property(t => t.LastModifiedDate).HasColumnName("LastModifiedDate");
 
             // Relationships
+            this.HasOptional(t => t.Division1)
+                .WithMany(t => t.VendorTerminations)
+                .HasForeignKey(d => d.Division);
+            this.HasOptional(t => t.TerminationReason1)
+                .WithMany(t => t.VendorTerminations)
+                .HasForeignKey(d => d.TerminationReason);
             this.HasRequired(t => t.Vendor)
                 .WithMany(t => t.VendorTerminations)
                 .HasForeignKey(d => d.VendorID);

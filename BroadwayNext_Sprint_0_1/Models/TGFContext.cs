@@ -16,12 +16,10 @@ namespace BroadwayNext_Sprint_0_1.Models
             : base("Name=TGFContext")
         {
         }
-
         public ObjectContext ObjectContext
         {
             get { return (this as IObjectContextAdapter).ObjectContext; }
         }
-
 
         public DbSet<Division> Divisions { get; set; }
         public DbSet<State> States { get; set; }
@@ -33,6 +31,7 @@ namespace BroadwayNext_Sprint_0_1.Models
         public DbSet<VendorFeedback> VendorFeedbacks { get; set; }
         public DbSet<VendorGrade> VendorGrades { get; set; }
         public DbSet<VendorInsurance> VendorInsurances { get; set; }
+        public DbSet<VendorInsuranceType> VendorInsuranceTypes { get; set; }
         public DbSet<VendorNote> VendorNotes { get; set; }
         public DbSet<VendorRemitTo> VendorRemitToes { get; set; }
         public DbSet<VendorRemitToType> VendorRemitToTypes { get; set; }
@@ -55,6 +54,7 @@ namespace BroadwayNext_Sprint_0_1.Models
             modelBuilder.Configurations.Add(new VendorFeedbackMap());
             modelBuilder.Configurations.Add(new VendorGradeMap());
             modelBuilder.Configurations.Add(new VendorInsuranceMap());
+            modelBuilder.Configurations.Add(new VendorInsuranceTypeMap());
             modelBuilder.Configurations.Add(new VendorNoteMap());
             modelBuilder.Configurations.Add(new VendorRemitToMap());
             modelBuilder.Configurations.Add(new VendorRemitToTypeMap());

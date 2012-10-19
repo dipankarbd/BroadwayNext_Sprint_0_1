@@ -51,7 +51,7 @@
     <script type="text/javascript" src="@Url.Content("~/Scripts/lib/maskedinput.js")"></script>*@
 
     @*=======================================================*@
-  @*  <script type="text/javascript" src="~/Scripts/jquery-ui-1.8.23.custom.min.js"></script>*@
+    @*  <script type="text/javascript" src="~/Scripts/jquery-ui-1.8.23.custom.min.js"></script>*@
     <script type="text/javascript" src="~/Scripts/knockout-2.1.0.js"></script>
     <script type="text/javascript" src="~/Scripts/koExternalTemplateEngine_all.js"></script>
     <script type="text/javascript" src="~/Scripts/amplify.js"></script>
@@ -64,7 +64,7 @@
     <script type="text/javascript" src="~/Scripts/bootstrap.js"></script>
     <script src="~/Scripts/toastr.js"></script>
     <script src="~/Scripts/underscore.min.js"></script>
-     <script src="~/Scripts/knockout.asyncCommand.js"></script>
+    <script src="~/Scripts/knockout.asyncCommand.js"></script>
     <script src="~/Scripts/knockout.activity.js"></script>
     @* <script src="~/Scripts/bootstrap-datepicker.js"></script>*@
 
@@ -80,6 +80,7 @@
     <script type="text/javascript" src="~/Scripts/app/ViewModels/vendorListing-0.9.js"></script>
     <script type="text/javascript" src="~/Scripts/app/ViewModels/vendorContacts-0.1.js"></script>
     <script type="text/javascript" src="~/Scripts/app/ViewModels/vendorShipto-0.2.js"></script>
+    <script type="text/javascript" src="~/Scripts/app/ViewModels/vendorTermination-0.1.js"></script>
     <script type="text/javascript" src="~/Scripts/app/main.js"></script>
 }
 
@@ -101,7 +102,7 @@
     <br />
     <br />
     <div id="tabs1">
-        <div >
+        <div>
             <ul id="tabstwo" class="nav nav-tabs">
                 <li class="active"><a href="#tabs-1" data-toggle="tab">Listing</a></li>
                 <li><a href="#tabs-2" data-toggle="tab">Vendor Detail</a></li>
@@ -138,7 +139,7 @@
                 </div>
                 <div class="tab-pane" id="tabs-10" data-bind="template: { name: 'feedback_tab'}">
                 </div>
-                <div class="tab-pane" id="tabs-11">
+                <div class="tab-pane" id="tabs-11" data-bind="template: { name: 'termination_tab'}">
                 </div>
                 <div class="tab-pane" id="tabs-12" data-bind="template: { name: 'notes_tab'}">
                 </div>

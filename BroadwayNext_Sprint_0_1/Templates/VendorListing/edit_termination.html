@@ -1,25 +1,26 @@
 ﻿<div class="popupwindow">
-    <div id="pagetitle">Add/Edit Termination </div>
-
-    Termination Date
+    <div id="Div1">Add/Edit Termination </div>
+    <div class="popupwindowgrid">
+        Termination Date
  
-    <input id="terminationdate" type="text" class="textbox" /><br />
-
-    Termination Effective Date
-    <input id="effectivedate" type="text" class="textbox" /><br />
-    Termination By
-    <input type="text" class="textbox" />
-    Reason
-    <select class="dropdownbox">
-    </select>
-    Rehire
-    <select class="dropdownbox">
-    </select>
-    Division
-    <select class="dropdownbox">
-    </select>
-    <div class="btn-group">
-        <button class="btn">Save</button>
-        <button class="btn">Cancel</button>
+        <input type="text" class="textbox" data-bind="value:TerminationDate.formatted" />
+        Termination Effective Date
+        <input type="text" class="textbox" data-bind="value:TerminationEffDate.formatted" />
+        Termination By
+        <input type="text" class="textbox" data-bind="value:TerminatedBy" />
+    </div>
+    <div class="popupwindowgrid">
+        Reason
+ 
+        <select class="dropdownbox" data-bind="options: $root.reasons,value:TerminationReason,optionsText: 'Code'">
+        </select>
+        Rehire
+        <select class="dropdownbox" data-bind="value:Rehire">
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select>
+        Division
+        <select class="dropdownbox" data-bind="options: $root.divisions,value:Division,optionsText: 'Code'">
+        </select>
     </div>
 </div>

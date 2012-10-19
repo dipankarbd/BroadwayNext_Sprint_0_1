@@ -54,21 +54,21 @@ namespace BroadwayNext_Sprint_0_1.Controllers
             var result = false;
             if (ModelState.IsValid)
             {
-            using (this.Uow)
-            {
-                if (contact.VendorContactID == Guid.Empty)
+                using (this.Uow)
                 {
-                    contact.VendorContactID = Guid.NewGuid();
-                    this.Uow.VendorContacts.Insert(contact);
-                    result = this.Uow.Commit() > 0;
+                    if (contact.VendorContactID == Guid.Empty)
+                    {
+                        contact.VendorContactID = Guid.NewGuid();
+                        this.Uow.VendorContacts.Insert(contact);
+                        result = this.Uow.Commit() > 0;
+                    }
+                    else
+                    {
+                        this.Uow.VendorContacts.Update(contact);
+                        result = this.Uow.Commit() > 0;
+                    }
                 }
-                else
-                {
-                    this.Uow.VendorContacts.Update(contact);
-                    result = this.Uow.Commit() > 0;
-                }
-            }
-            return Json(new { Success = result, VendorContact = contact });
+                return Json(new { Success = result, VendorContact = contact });
             }
             else
             {
@@ -132,6 +132,58 @@ namespace BroadwayNext_Sprint_0_1.Controllers
             using (this.Uow)
             {
                 this.Uow.VendorShipTos.Delete(shipto);
+                result = this.Uow.Commit() > 0;
+            }
+            return Json(new { Success = result });
+        }
+
+        public JsonResult GetVendorTerminations(Guid vendorId, int pageSize, int currentPage)
+        {
+            TGFContext db = new TGFContext();
+
+            db.Configuration.ProxyCreationEnabled = false;
+
+            var terminationsQuery = db.VendorTerminations.Where(c => c.VendorID == vendorId);
+            var rowCount = terminationsQuery.Count();
+            var terminations = terminationsQuery.OrderByDescending(s => s.TerminationDate).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+
+            return Json(new { Data = terminations, VirtualRowCount = rowCount }, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult SaveVendorTermination(VendorTermination termination)
+        {
+            var result = false;
+            if (ModelState.IsValid)
+            {
+                using (this.Uow)
+                {
+                    if (termination.VendorTerminationID == Guid.Empty)
+                    {
+                        termination.InputDate = DateTime.Now;
+                        termination.LastModifiedDate = DateTime.Now;
+                        termination.VendorTerminationID = Guid.NewGuid();
+                        this.Uow.VendorTerminations.Insert(termination);
+                        result = this.Uow.Commit() > 0;
+                    }
+                    else
+                    {
+                        termination.LastModifiedDate = DateTime.Now;
+                        this.Uow.VendorTerminations.Update(termination);
+                        result = this.Uow.Commit() > 0;
+                    }
+                }
+                return Json(new { Success = result, VendorShipTo = termination });
+            }
+            else
+            {
+                return Json(new { Success = result, Message = "Invalid Model" });
+            }
+        }
+        public JsonResult DeleteVendorTermination(VendorTermination termination)
+        {
+            bool result = false;
+            using (this.Uow)
+            {
+                this.Uow.VendorTerminations.Delete(termination);
                 result = this.Uow.Commit() > 0;
             }
             return Json(new { Success = result });
@@ -279,6 +331,32 @@ namespace BroadwayNext_Sprint_0_1.Controllers
                 //return Json(new { Success = result, VendorContact = contact });
                 return Json(new { Sucess = result });
             }
+        }
+
+
+        public JsonResult GetReasons()
+        {
+            TGFContext db = new TGFContext();
+
+            db.Configuration.ProxyCreationEnabled = false;
+
+            var terminationsQuery = db.TerminationReasons.OrderBy(obj => obj.Code);
+            var rowCount = terminationsQuery.Count();
+            var terminations = terminationsQuery.ToList();
+
+            return Json(new { Data = terminations, VirtualRowCount = rowCount }, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetDivisions()
+        {
+            TGFContext db = new TGFContext();
+
+            db.Configuration.ProxyCreationEnabled = false;
+
+            var divisionsQuery = db.Divisions.OrderBy(obj => obj.Code);
+            var rowCount = divisionsQuery.Count();
+            var divisions = divisionsQuery.ToList();
+
+            return Json(new { Data = divisions, VirtualRowCount = rowCount }, JsonRequestBehavior.AllowGet);
         }
 
     }

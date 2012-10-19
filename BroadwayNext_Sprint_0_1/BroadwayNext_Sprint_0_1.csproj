@@ -149,6 +149,7 @@
     <Compile Include="Models\Mapping\VendorFeedbackMap.cs" />
     <Compile Include="Models\Mapping\VendorGradeMap.cs" />
     <Compile Include="Models\Mapping\VendorInsuranceMap.cs" />
+    <Compile Include="Models\Mapping\VendorInsuranceTypeMap.cs" />
     <Compile Include="Models\Mapping\VendorMap.cs" />
     <Compile Include="Models\Mapping\VendorNoteMap.cs" />
     <Compile Include="Models\Mapping\VendorRemitToMap.cs" />
@@ -169,6 +170,7 @@
     <Compile Include="Models\VendorFeedback.cs" />
     <Compile Include="Models\VendorGrade.cs" />
     <Compile Include="Models\VendorInsurance.cs" />
+    <Compile Include="Models\VendorInsuranceType.cs" />
     <Compile Include="Models\VendorNote.cs" />
     <Compile Include="Models\VendorRemitTo.cs" />
     <Compile Include="Models\VendorRemitToType.cs" />

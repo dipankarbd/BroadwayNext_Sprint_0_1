@@ -1,43 +1,65 @@
-﻿<div class="bottomwrapper">
+﻿<div class="tab-pane" id="tabs-11">
+    <pre data-bind="text: ko.toJSON($root, null, 2)"></pre>
+    <div class="bottomwrapper">
+        <div class="eightypercent">
+            <div class="threequarterboxholder">
+                <div class="nintyeightscroll">
+                    <div class="gridholder">
+                        <div class="texttypebar">Division Termination</div>
+                        <table style="width: 100%;" border="0" cellpadding="0" cellspacing="0" id="Table1">
+                            <thead>
+                                <tr>
+                                    <th style="width: 60px;">Termination Date</th>
+                                    <th style="width: 80px;">Termination By</th>
+                                    <th style="width: 20px;">Rehire</th>
+                                    <th style="width: 70px;">Termination Effective Date</th>
+                                    <th style="width: 120px;">Reason</th>
+                                    <th style="width: 80px;">Division Termination</th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind="foreach: terminations">
+                                <tr data-bind="click : $root.selectTermination, css:{'tablerowselect': $root.selectedTermination() === $data}">
+                                    <td class="left" data-bind="text:TerminationDate.formatted"></td>
+                                    <td class="left" data-bind="text:TerminatedBy"></td>
+                                    <td class="left" align="center">
+                                        <input type="checkbox" data-bind="checked: Rehire" />
+                                    </td>
+                                    <td class="left" data-bind="text:TerminationReason.Code"></td>
+                                    <td class="right" data-bind="text:Division.Code"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="recordfooter"><span data-bind="text:totalTerminations"></span>&nbsp;Division Termination Records </div>
+                    <div data-bind="gridpager: $root.terminationsGridTotalPages, pagesize: $root.terminationsGridPageSize, currentpage: $root.terminationsGridCurrentPage, datasource: $root.fetchTerminations">
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn btn-small" data-bind="click:addNewTermination">Add</button>
+                        <button class="btn btn-small" data-bind="click:editTermination, enable: selectedTermination()">Edit*</button>
+                        <button class="btn btn-small">Audit</button>
 
-    <div class="eightypercent">
-        <div class="gridholder">
-            <div class="texttypebar">Division Termination</div>
-            <table style="width: 100%;" border="0" cellpadding="0" cellspacing="0" id="sample10">
-                <thead>
-                    <tr>
-                        <th>Termination Date</th>
-                        <th>Termination By</th>
-                        <th>Rehire</th>
-                        <th>Termination Effective Date</th>
-                        <th>Reason</th>
-                        <th>Division Termination</th>
-                    </tr>
-                </thead>
-                <tbody data-bind="foreach: terminations">
-                    <tr data-bind="click : $root.selectTermination, css:{'tablerowselect': $root.selectedTermination() === $data}">
-                        <td class="left" data-bind="text : TerminationDate"></td>
-                        <td class="left" data-bind="text : TerminatedBy"></td>
-                        <td class="left" data-bind="text : Rehire"></td>
-                        <td class="left" data-bind="text : TerminationEffDate"></td>
-                        <td class="right" data-bind="text : TerminationReason"></td>
-                        <td class="right" data-bind="text : Division"></td>
-                    </tr>
-                </tbody>
-            </table>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="recordfooter">3,456 Division Termination Records </div>
-        <div class="btn-group">
-            <button class="btn btn-small">Add</button>
-            <button class="btn btn-small">Edit*</button>
+        <div class="btn-group btn-group-vertical">
+            <button class="btn">Edit Vendor*</button>
+            <button class="btn">Price List(3)*</button>
         </div>
-
     </div>
+</div>
 
-    <div class="btn-group btn-group-vertical">
-        <button class="btn">Edit Vendor*</button>
-
-        <button class="btn">Price List(3)*</button>
+<div id="modal-termination" title="Add/Edit termination" class="modal hide" data-bind="modal: editingTermination">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">x</button>
+        <h4>Add/Edit/View Termination</h4>
     </div>
-
+    <div class="modal-body" id="Div2">
+        <div id="Div3" data-bind="template: { name: 'edit_termination' , afterRender: $root.prepareModal, templateUrl: 'Templates/VendorListing'}">
+        </div>
+    </div>
+    <div class="btn-group modal-footer">
+        <button class="btn btn-primary" data-bind="click: $root.saveTermination">Save</button>
+        <button class="btn" data-bind="click: $root.cancelEdit">Cancel</button>
+    </div>
 </div>

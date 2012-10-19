@@ -14,6 +14,7 @@ namespace BroadwayNext_Sprint_0_1.Data
         private EFRepository<VendorRemitTo> remitToRepository;
         private EFRepository<VendorContact> vendorContactRepository;
         private EFRepository<VendorShipTo> vendorShipToRepository;
+        private EFRepository<VendorTermination> vendorTerminationRepository;
 
         public UnitOfWork()
         {
@@ -68,6 +69,17 @@ namespace BroadwayNext_Sprint_0_1.Data
                     this.vendorShipToRepository = new EFRepository<VendorShipTo>(DbContext);
                 }
                 return vendorShipToRepository;
+            }
+        }
+        public EFRepository<VendorTermination> VendorTerminations
+        {
+            get
+            {
+                if (this.vendorTerminationRepository== null)
+                {
+                    this.vendorTerminationRepository = new EFRepository<VendorTermination>(DbContext);
+                }
+                return vendorTerminationRepository;
             }
         }
         //----------------------------
