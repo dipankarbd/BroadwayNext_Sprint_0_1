@@ -90,6 +90,14 @@ bn.Insurance = function (data) {
 };
 
 //#region "MODEL"
+bn.Insurance = function (data) {
+    this.VendorInsuranceID = ko.observable(data.VendorInsuranceID);
+    this.VendorID = ko.observable(data.VendorID);
+    this.InsuranceType = ko.observable(data.InsuranceType);
+    //this.
+    
+}
+
 bn.RemitTo = function (data) {
     this.VendorRemitToID = ko.observable(data.VendorRemitToID);
     this.VendorID = ko.observable(data.VendorID);
@@ -175,7 +183,7 @@ bn.Vendor = function (data) {
     this.VendorRemitToes = ko.observableArray(data.VendorRemitToes);
 
     // Vendor Insurances
-
+    this.VendorInsurances = ko.observable(data.VendorInsurances);
 
     //this.VendorNotes = ko.observableArray(data.VendorNotes);
 };
