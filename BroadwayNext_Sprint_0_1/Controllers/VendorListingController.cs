@@ -143,7 +143,7 @@ namespace BroadwayNext_Sprint_0_1.Controllers
 
             db.Configuration.ProxyCreationEnabled = false;
 
-            var terminationsQuery = db.VendorTerminations.Where(c => c.VendorID == vendorId);
+            var terminationsQuery = db.VendorTerminations.Include("Division1").Include("TerminationReason1").Where(c => c.VendorID == vendorId);
             var rowCount = terminationsQuery.Count();
             var terminations = terminationsQuery.OrderByDescending(s => s.TerminationDate).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 
@@ -166,6 +166,7 @@ namespace BroadwayNext_Sprint_0_1.Controllers
                     }
                     else
                     {
+                        TGFContext db = new TGFContext();
                         termination.LastModifiedDate = DateTime.Now;
                         this.Uow.VendorTerminations.Update(termination);
                         result = this.Uow.Commit() > 0;

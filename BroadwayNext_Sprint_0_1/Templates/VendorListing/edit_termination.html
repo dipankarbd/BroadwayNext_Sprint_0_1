@@ -12,7 +12,7 @@
     <div class="popupwindowgrid">
         Reason
  
-        <select class="dropdownbox" data-bind="options: $root.reasons,value:TerminationReason,optionsText: 'Code'">
+        <select class="dropdownbox" data-bind="options: $root.reasons,value:TerminationReason,optionsText: 'Code', optionsValue: 'TerminationReasonID'">
         </select>
         Rehire
         <select class="dropdownbox" data-bind="value:Rehire">
@@ -20,7 +20,7 @@
             <option value="0">No</option>
         </select>
         Division
-        <select class="dropdownbox" data-bind="options: $root.divisions,value:Division,optionsText: 'Code'">
+        <select class="dropdownbox" data-bind="options: $root.divisions,value:Division,optionsText: 'Code', optionsValue: 'DivisionID'">
         </select>
     </div>
 </div>

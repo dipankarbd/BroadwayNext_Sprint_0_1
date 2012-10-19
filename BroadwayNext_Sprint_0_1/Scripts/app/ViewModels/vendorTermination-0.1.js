@@ -37,8 +37,10 @@ bn.VendorTermination = function (data) {
     self.TerminationEffDate.formatted = moment(data.TerminationEffDate).format("MM/DD/YYYY");
     self.TerminatedBy = ko.observable(data.TerminatedBy);
     self.TerminationReason = ko.observable(data.TerminationReason);
+    self.TerminationReasonText = ko.observable(data.TerminationReasonText);
     self.Rehire = ko.observable(data.Rehire);
     self.Division = ko.observable(data.Division);
+    self.DivisionText = ko.observable(data.DivisionText);
     self.InputBy = ko.observable(data.InputBy);
     self.InputDate = ko.observable(moment(data.InputDate).toDate());
     self.LastModifiedBy = ko.observable(data.LastModifiedBy);
@@ -67,16 +69,11 @@ bn.vmTerminationList = (function ($, bn, undefined) {
                    totalTerminations(result.VirtualRowCount);
                    terminationsGridTotalPages(Math.ceil(result.VirtualRowCount / terminationsGridPageSize()));
                    var mappedTerminations = $.map(result.Data, function (item) {
-                       var terminationReason = ko.utils.arrayMap(item.TerminationReason1, function (reason1) {
-                           return new bn.TerminationReason(reason1);
-                       });
-                       var division = ko.utils.arrayMap(item.Division1, function (division1) {
-                           return new bn.Division(division1);
-                       });
-
-                       item.Division = division;
-                       item.TerminationReason = division;
-
+                       var division = new bn.Division(item.Division1);
+                       var termination = new bn.Division(item.TerminationReason1);
+                       item.DivisionText = division.Code();
+                       item.TerminationReasonText = termination.Code();
+                       item.Rehire = item.Rehire === '1' ? true : false;
                        return new bn.VendorTermination(item);
                    });
 
@@ -87,7 +84,7 @@ bn.vmTerminationList = (function ($, bn, undefined) {
 
        fetchReasons = function () {
            $.getJSON("/vendorlisting/getreasons", function (result) {
-               var mappedReasons = $.map(result.Data, function (item) { 
+               var mappedReasons = $.map(result.Data, function (item) {
                    return new bn.TerminationReason(item);
                });
                reasons(mappedReasons);

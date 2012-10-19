@@ -1,5 +1,5 @@
 ﻿<div class="tab-pane" id="tabs-11">
-    <pre data-bind="text: ko.toJSON($root, null, 2)"></pre>
+    <!-- <pre data-bind="text: ko.toJSON($root, null, 2)"></pre>-->
     <div class="bottomwrapper">
         <div class="eightypercent">
             <div class="threequarterboxholder">
@@ -24,8 +24,9 @@
                                     <td class="left" align="center">
                                         <input type="checkbox" data-bind="checked: Rehire" />
                                     </td>
-                                    <td class="left" data-bind="text:TerminationReason.Code"></td>
-                                    <td class="right" data-bind="text:Division.Code"></td>
+                                    <td class="left" data-bind="text:TerminationDate.formatted"></td>
+                                    <td class="left" data-bind="text:TerminationReasonText"></td>
+                                    <td class="right" data-bind="text:DivisionText"></td>
                                 </tr>
                             </tbody>
                         </table>
