@@ -29,10 +29,10 @@
         <div align="left">
             Country
     
-             <select class="dropdownbox" data-bind="options: $root.countries"></select>
+             <select class="dropdownbox" data-bind="options: $root.countries, value: Country"></select>
             Province
  
-            <input type="text" class="textbox" />
+            <input type="text" class="textbox" data-bind="value:Province" />
         </div>
     </div>
     <div class="popupwindowgrid">
@@ -58,18 +58,18 @@
         <input type="text" class="textbox" data-bind="value: Title" />
         Vendor#
    
-        <input type="text" class="textboxfilled" data-bind="value: Vendnum" />
+        <input type="text" class="textboxfilled" data-bind="value: Vendnum, enable:false" />
         <div class="halfoffield">
             Input Date
-            <input type="text" class="span2" data-bind="value: InputDate.formatted" id="dpInputDate" />
+            <input type="text" class="textboxfilled" data-bind="value: InputDate.formatted, enable:false" id="dpInputDate" />
 
-           <!-- <input type="text" class="span2" data-bind="datepicker: InputDate" id="dpInputDate" />-->
+            <!-- <input type="text" class="span2" data-bind="datepicker: InputDate" id="dpInputDate" />-->
             <!--<input type="text" class="textboxfilled" data-bind="value: InputDateFormated" />-->
         </div>
         <div class="halfoffield">
             Input By
    
-            <input type="text" class="textboxfilled" data-bind="value: InputBy" />
+            <input type="text" class="textboxfilled" data-bind="value: InputBy, enable:false" />
         </div>
 
         <input type="checkbox" data-bind="checked: ActiveType" />

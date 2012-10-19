@@ -11,6 +11,8 @@ bn.VendorContact = function (data) {
     self.City = ko.observable(data.City);
     self.State = ko.observable(data.State);
     self.Zip = ko.observable(data.Zip);
+    self.Country = ko.observable(data.Country);
+    self.Province = ko.observable(data.Province);
     self.Phone = ko.observable(data.Phone);
     self.PhoneExt = ko.observable(data.PhoneExt);
     self.Fax = ko.observable(data.Fax);
@@ -20,7 +22,6 @@ bn.VendorContact = function (data) {
     self.Email = ko.observable(data.Email);
     self.Notes = ko.observable(data.Notes);
     self.ActiveType = ko.observable(data.ActiveType);
-    // self.InputDate = ko.observable(moment(data.InputDate).toDate());
     self.InputDate = ko.observable(moment(data.InputDate).toDate());
     self.InputDate.formatted = moment(data.InputDate).format("MM/DD/YYYY");
     self.InputBy = ko.observable(data.InputBy);
@@ -31,14 +32,6 @@ bn.VendorContact = function (data) {
         if (self.ActiveType() === 'true') return 'Yes';
         else return 'No';
     });
-    //self.InputDateFormated = ko.computed(function () {
-    //    if (self.InputDate() != undefined) {
-    //        var value = new Date(parseInt(self.InputDate().replace("/Date(", "").replace(")/", ""), 10));
-    //        var ret = value.getMonth() + 1 + "/" + value.getDate() + "/" + value.getFullYear();
-    //        return ret;
-    //    }
-    //    else return "";
-    //});
 };
 
 bn.vmContactList = (function ($, bn, undefined) {
@@ -83,7 +76,7 @@ bn.vmContactList = (function ($, bn, undefined) {
 
         addNewContact = function () {
             console.log('Adding new contact for vendor: ' + vendorId());
-            editingContact(new bn.VendorContact({ VendorID: vendorId() }));
+            editingContact(new bn.VendorContact({ VendorID: vendorId(), Vendnum: vendorNum }));
             ko.editable(editingContact());
             editingContact().beginEdit();
 

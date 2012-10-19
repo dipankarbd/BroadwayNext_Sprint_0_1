@@ -22,7 +22,10 @@ namespace BroadwayNext_Sprint_0_1.Models
             get { return (this as IObjectContextAdapter).ObjectContext; }
         }
 
+
         public DbSet<Division> Divisions { get; set; }
+        public DbSet<State> States { get; set; }
+        public DbSet<StateTaxable> StateTaxables { get; set; }
         public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<TerminationReason> TerminationReasons { get; set; }
         public DbSet<VendorCategory> VendorCategories { get; set; }
@@ -43,6 +46,8 @@ namespace BroadwayNext_Sprint_0_1.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new DivisionMap());
+            modelBuilder.Configurations.Add(new StateMap());
+            modelBuilder.Configurations.Add(new StateTaxableMap());
             modelBuilder.Configurations.Add(new sysdiagramMap());
             modelBuilder.Configurations.Add(new TerminationReasonMap());
             modelBuilder.Configurations.Add(new VendorCategoryMap());

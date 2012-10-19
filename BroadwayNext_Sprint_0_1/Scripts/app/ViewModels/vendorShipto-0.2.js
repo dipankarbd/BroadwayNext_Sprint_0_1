@@ -10,22 +10,17 @@ bn.VendorShipTo = function (data) {
     self.City = ko.observable(data.City);
     self.State = ko.observable(data.State);
     self.Zip = ko.observable(data.Zip);
+    self.Country = ko.observable(data.Country);
+    self.Province = ko.observable(data.Province);
     self.Phone = ko.observable(data.Phone);
     self.PhoneExt = ko.observable(data.PhoneExt);
     self.Fax = ko.observable(data.Fax);
     self.Email = ko.observable(data.Email);
-    self.InputDate = ko.observable(data.InputDate);
+    self.InputDate = ko.observable(moment(data.InputDate).toDate());
+    self.InputDate.formatted = moment(data.InputDate).format("MM/DD/YYYY");
     self.InputBy = ko.observable(data.InputBy);
-    self.LastModifiedDate = ko.observable(data.LastModifiedDate);
+    self.LastModifiedDate = ko.observable(moment(data.LastModifiedDate).toDate());
     self.LastModifiedBy = ko.observable(data.LastModifiedBy);
-    self.InputDateFormated = ko.computed(function () {
-        if (self.InputDate() != undefined) {
-            var value = new Date(parseInt(self.InputDate().replace("/Date(", "").replace(")/", ""), 10));
-            var ret = value.getMonth() + 1 + "/" + value.getDate() + "/" + value.getFullYear();
-            return ret;
-        }
-        else return "";
-    });
 };
 
 bn.vmShipToList = (function ($, bn, undefined) {
@@ -59,23 +54,23 @@ bn.vmShipToList = (function ($, bn, undefined) {
 
         selectShipTo = function (shiptto) {
             console.log('shipto selected');
-            selectedShipTo(shiptto); 
+            selectedShipTo(shiptto);
         },
 
        addNewShipTo = function () {
            console.log('Adding new shipto for vendor: ' + vendorId());
            editingShipTo(new bn.VendorShipTo({ VendorID: vendorId() }));
            ko.editable(editingShipTo());
-           editingShipTo().beginEdit(); 
+           editingShipTo().beginEdit();
        },
 
        editShipTo = function () {
            console.log('Will edit shipto now');
            editingShipTo(selectedShipTo());
            ko.editable(editingShipTo());
-           editingShipTo().beginEdit(); 
+           editingShipTo().beginEdit();
        },
- 
+
         prepareModal = function () {
             console.log('#shiptophone: ' + $('#shiptophone').val());
             $('#shiptophone').mask("(999) 999-9999");
@@ -129,7 +124,7 @@ bn.vmShipToList = (function ($, bn, undefined) {
         },
 
         cancelEdit = function () {
-            editingShipTo().rollback(); 
+            editingShipTo().rollback();
             $("#modal-shipto").modal("hide");
         };
 

@@ -1,5 +1,5 @@
 ﻿<div class="bottomwrapper">
-   <!-- <pre data-bind="text: ko.toJSON($root, null, 2)"></pre>-->
+    <!-- <pre data-bind="text: ko.toJSON($root, null, 2)"></pre>-->
     <div class="eightypercent">
         <div class="nintyeight">
             <div class="texttypebar">Contacts</div>
@@ -40,8 +40,8 @@
                                 <td class="left" data-bind="text:City"></td>
                                 <td class="left" data-bind="text:State"></td>
                                 <td class="left" data-bind="text:Zip"></td>
-                                <td class="left">&nbsp;</td>
-                                <td class="left">&nbsp;</td>
+                                <td class="left" data-bind="text:Country"></td>
+                                <td class="left" data-bind="text:Province"></td>
                                 <td class="left" data-bind="text:Phone"></td>
                                 <td class="left" data-bind="text:PhoneExt"></td>
                                 <td class="left" data-bind="text:Title"></td>
@@ -92,9 +92,9 @@
     </div>
 </div>-->
 
-<div id="modal-contact" title="Add/Edit Contact" class = "modal hide" data-bind="modal: editingContact">
+<div id="modal-contact" title="Add/Edit Contact" class="modal hide" data-bind="modal: editingContact">
     <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" >x</button>
+        <button type="button" class="close" data-dismiss="modal">x</button>
         <h4>Add/Edit/View Contacts</h4>
     </div>
     <div class="modal-body" id="Div2">
@@ -102,7 +102,7 @@
         </div>
     </div>
     <div class="btn-group modal-footer">
-            <button class="btn btn-primary" data-bind="click: $root.saveContact">Save</button>
-            <button class="btn" data-bind="click: $root.cancelEdit">Cancel</button>
+        <button class="btn btn-primary" data-bind="click: $root.saveContact">Save</button>
+        <button class="btn" data-bind="click: $root.cancelEdit">Cancel</button>
     </div>
 </div>
