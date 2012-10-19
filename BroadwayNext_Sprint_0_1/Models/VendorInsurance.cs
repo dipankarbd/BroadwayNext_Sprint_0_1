@@ -8,7 +8,7 @@ namespace BroadwayNext_Sprint_0_1.Models
     {
         public System.Guid VendorInsuranceID { get; set; }
         public System.Guid VendorID { get; set; }
-        public Nullable<System.Guid> InsuranceType { get; set; }
+        public System.Guid InsuranceType { get; set; }
         public string InsuranceName { get; set; }
         public Nullable<long> Policynum { get; set; }
         public Nullable<System.DateTime> ExpiryDate { get; set; }

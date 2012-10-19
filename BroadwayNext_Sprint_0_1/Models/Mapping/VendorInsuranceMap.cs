@@ -8,7 +8,7 @@ namespace BroadwayNext_Sprint_0_1.Models.Mapping
         public VendorInsuranceMap()
         {
             // Primary Key
-            this.HasKey(t => t.VendorInsuranceID);
+            this.HasKey(t => new { t.VendorInsuranceID, t.VendorID, t.InsuranceType });
 
             // Properties
             this.Property(t => t.InsuranceName)
@@ -41,7 +41,7 @@ namespace BroadwayNext_Sprint_0_1.Models.Mapping
             this.Property(t => t.LastModifiedDate).HasColumnName("LastModifiedDate");
 
             // Relationships
-            this.HasOptional(t => t.VendorInsuranceType)
+            this.HasRequired(t => t.VendorInsuranceType)
                 .WithMany(t => t.VendorInsurances)
                 .HasForeignKey(d => d.InsuranceType);
             this.HasRequired(t => t.Vendor)
