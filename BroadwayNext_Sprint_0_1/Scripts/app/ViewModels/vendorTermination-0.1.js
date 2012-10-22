@@ -81,8 +81,8 @@ bn.vmTerminationList = (function ($, bn, undefined) {
                });
            }
        },
-
-       fetchReasons = function () {
+       //To Do : make sure we fetch reasons only once...
+       fetchReasons = function () { 
            $.getJSON("/vendorlisting/getreasons", function (result) {
                var mappedReasons = $.map(result.Data, function (item) {
                    return new bn.TerminationReason(item);

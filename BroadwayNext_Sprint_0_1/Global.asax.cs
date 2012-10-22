@@ -18,6 +18,9 @@ namespace BroadwayNext_Sprint_0_1
         {
             AreaRegistration.RegisterAllAreas();
 
+            ViewEngines.Engines.Clear();
+            ViewEngines.Engines.Add(new RazorViewEngine());
+
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

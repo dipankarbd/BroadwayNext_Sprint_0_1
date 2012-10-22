@@ -1,11 +1,11 @@
 ﻿<div class="popupwindow">
-    <div id="Div1">Add/Edit Termination </div>
+    <!--<div id="Div1">Add/Edit Termination </div>-->
     <div class="popupwindowgrid">
         Termination Date
  
-        <input type="text" class="textbox" data-bind="value:TerminationDate.formatted" />
+        <input type="text" class="textbox" data-bind="datepicker: TerminationDate" id="dpTermDate"/>
         Termination Effective Date
-        <input type="text" class="textbox" data-bind="value:TerminationEffDate.formatted" />
+        <input type="text" class="textbox" data-bind="datepicker: TerminationEffDate" id="dpTermEffDate" />
         Termination By
         <input type="text" class="textbox" data-bind="value:TerminatedBy" />
     </div>
