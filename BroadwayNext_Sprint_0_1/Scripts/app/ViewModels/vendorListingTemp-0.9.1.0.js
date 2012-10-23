@@ -1,7 +1,7 @@
 ﻿/*
-// Version : 0.8
+// Version : 0.9.1.0 -- BACKUP for 0.9.1
 
-Goal ==> Simple , Manual Model + Manual Map + Validation + Tracking
+Goal ==> 
 
 Result: ==> 
 
@@ -12,91 +12,26 @@ Next Version ==>
 
 var bn = bn || {};
 
-//#region
-/*
-VendorID: "7bfbadb3-e64b-0691-7dc9-002012a97909"
-Vendnum: 1578511699
-Company: "Frodudefin International Inc"
-DBA: "EDKM8LA5I0Y9OOGEMQGG9ORI0AF50AO"
-Address1: "22 West First Boulevard"
-Address2: "110 Rocky Hague Freeway"
-City: "Des Moines"
-State: "South Carolina"
-Zip: "32702"
-Country: "Western Sahara"
 
-/-- Insurance
-"VendorInsurances": [
-        {
-          "VendorInsuranceID": "55dfb2b7-c6a7-bb51-2330-f5e69d1ed867",
-          "VendorID": "1d3b4a68-4917-87ec-11db-005add3f5006",
-          "InsuranceType": -1063312015,
-          "InsuranceName": "Lillian957",
-          "Policynum": -6900418022880996000,
-          "ExpiryDate": "/Date(-57823200000)/",
-          "AdditionalInsured": false,
-          "Not_onFile": false,
-          "InsuranceNotRequired": false,
-          "NotRequiredReason": "plorum linguens parte linguens vobis quis quoque apparens linguens vantis. si glavans non vantis. et",
-          "InputBy": "OEOZWEE372J6BQF2M1Q6KAFSMFAO5IZ",
-          "InputDate": "08-09-1959",
-          "LastModifiedBy": "MNHC4BHX7MEIKKBR6BAD53F1XEF09K7R",
-          "LastModifiedDate": "/Date(1000663200000)/"
-        },
-//------------
-/-- REMIT TO
-"VendorRemitToID": "7f861727-0b7a-fecc-62b5-cc67041adf27",
-        "VendorID": "1d3b4a68-4917-87ec-11db-005add3f5006",
-        "Company": "Tippebicator Direct ",
-        "RemitType": "quad regit, essit. quo quoque quantare in et",
-        "Address1": "93 Second Way",
-        "Address2": "90 South First Freeway",
-        "City": "dhaka",
-        "State": "Nevada",
-        "Zip": "29201",
-///---------
+/* Email Reply --
+InsuranceName : Name of the Insurnace company
+Insurance type is : GUID
+Insurance TypeName : General, Auto or Workman’s
+Policy number : I guess I did not see that coming. Lets make that nvarchar(50)
 */
-
-//bn.RemitTo = function (data) {
-//    this.VendorRemitToID = ko.observable(data.VendorRemitToID);
-//    this.VendorID = ko.observable(data.VendorID);
-//    this.Company = ko.observable(data.Company);
-//    this.RemitType = ko.observable(data.RemitType);
-//    this.City = ko.observable(data.City);
-//    this.Address1 = ko.observable();
-//}
-
-//bn.Vendor = function (data) {
-//    this.VendorID = ko.observable(data.VendorID);
-//    this.Vendnum = ko.observable(data.Vendnum);
-//    this.Company = ko.observable(data.Company).extend({ required: true });
-//    this.Address1 = ko.observable(data.address1);
-//    this.City = ko.observable(data.City);
-//    this.State = ko.observable(data.State);
-//    this.Zip = ko.observable(data.Zip);
-//    this.Phone = ko.observable(data.Phone);
-//    this.InputDate = ko.observable(data.InputDate);
-//    this.DBA = ko.observable(data.DBA);
-//    //this.VendorType = ko.observable(data.VendorType);
-//    //this.isActive = ko.observable();
-
-//    this.VendorRemitToes = ([]);
-//};
-//#endregion
-
-
-bn.Insurance = function (data) {
-
-};
-
 //#region "MODEL"
 bn.Insurance = function (data) {
     this.VendorInsuranceID = ko.observable(data.VendorInsuranceID);
     this.VendorID = ko.observable(data.VendorID);
-    this.InsuranceType = ko.observable(data.InsuranceType);
-    //this.
-    
-}
+    this.InsuranceType = ko.observable(data.InsuranceTypeID);         // Actual ID of the InsuranceType
+    this.InsuranceTypeName = ko.observable(data.InsuranceTypeName); // General, Auto etc.
+    this.InsuranceName = ko.observable(data.InsuranceName).extend({editable: { scope: 'Insurance' }}); //.extend({required: true});         // Name of the Insurance Company
+    this.Policynum = ko.observable(data.Policynum).extend({ editable: { scope: 'Insurance' } });
+    this.ExpiryDate = ko.observable(data.ExpiryDate).extend({ editable: { scope: 'Insurance' } });
+    this.AdditionalInsured = ko.observable(data.AdditionalInsured).extend({ editable: { scope: 'Insurance' } });
+    this.NOF = ko.observable(data.Not_onFile).extend({ editable: { scope: 'Insurance' } });
+
+};
 
 bn.RemitTo = function (data) {
     this.VendorRemitToID = ko.observable(data.VendorRemitToID);
@@ -126,16 +61,16 @@ bn.RemitTo = function (data) {
 bn.Vendor = function (data) {
     this.VendorID = ko.observable(data.VendorID);
     this.Vendnum = ko.observable(data.Vendnum);
-    this.Company = ko.observable(data.Company); //.extend({required : true});
+    this.Company = ko.observable(data.Company).extend({required : true});
     this.DBA = ko.observable(data.DBA);
-    this.Address1 = ko.observable(data.Address1);   //.extend({required : true});
+    this.Address1 = ko.observable(data.Address1).extend({required : true});
     this.Address2 = ko.observable(data.Address2);
-    this.City = ko.observable(data.City);   //.extend({ required: true });
-    this.State = ko.observable(data.State); //.extend({ required: true });
-    this.Zip = ko.observable(data.Zip); //.extend({ required: true });
+    this.City = ko.observable(data.City).extend({ required: true });
+    this.State = ko.observable(data.State).extend({ required: true });
+    this.Zip = ko.observable(data.Zip).extend({ required: true });
     this.Country = ko.observable(data.Country);
     this.Province = ko.observable(data.Province);
-    this.Phone = ko.observable(data.Phone); //.extend({ required: true });
+    this.Phone = ko.observable(data.Phone).extend({ required: true });
     this.PhoneExt = ko.observable(data.PhoneExt);
     this.Fax = ko.observable(data.Fax);
     this.Mobile = ko.observable(data.Mobile);
@@ -146,7 +81,7 @@ bn.Vendor = function (data) {
     this.Comment = ko.observable(data.Comment);
     this.VendorType = ko.observable(data.VendorType);
     this.GLnum = ko.observable(data.GLnum);
-    this.TaxID = ko.observable(data.TaxID); //.extend({ required: true });
+    this.TaxID = ko.observable(data.TaxID).extend({ required: true });
     this.NetDays = ko.observable(data.NetDays);
     this.CheckTax1099 = ko.observable(data.CheckTax1099);
     this.PVA = ko.observable(data.PVA);
@@ -183,7 +118,7 @@ bn.Vendor = function (data) {
     this.VendorRemitToes = ko.observableArray(data.VendorRemitToes);
 
     // Vendor Insurances
-    this.VendorInsurances = ko.observable(data.VendorInsurances);
+    this.VendorInsurances = ko.observableArray(data.VendorInsurances);
 
     //this.VendorNotes = ko.observableArray(data.VendorNotes);
 };
@@ -200,12 +135,14 @@ bn.vmVendorList = (function ($, bn, undefined) {
         self = this,
         vendors = ko.observableArray([]),
 
+        //-- Flags
         modelIsValid = ko.observable(true),
-
+        insHasChanged = ko.observable(false),
         //------
         countries = ["USA", "Canada"],
         states = ko.observableArray(["AL", "CA", "NY", "WI", "MT", "MD"]),  //Eventually they will come from DB
         selectedState = ko.observable(""),
+        _vendorInsTypes = [],
         //-----
 
         pageSize = ko.observable(10),
@@ -228,23 +165,50 @@ bn.vmVendorList = (function ($, bn, undefined) {
         editingVendor = ko.observable(),
 
         createVendor = function (vm, v) {
-            inEditMode(true);
+            //inEditMode(true);
             //make blank skeleton and pass it over
-            var remiTo = [new bn.RemitTo({})];
+            //RemitTo = [new bn.RemitTo({})];
+            var remitTo = new bn.RemitTo({});
+            //make mock Insurances
+            var insurance = [];
+            if (_vendorInsTypes.length) {
+                insurance = buildInsurances(_vendorInsTypes);
+                //create mock ins
+                //ko.utils.arrayForEach(_vendorInsTypes, function (insType) {
+                //    var emptyIns = createEmptyInsurance(insType);
+                //    insurance.push(emptyIns);
+                //});
+            }
+            else {
+                //fetch Insurance Types ...
+            }
             var vendor = new bn.Vendor({});
-            vendor.VendorRemitToes = remiTo;
-
+            vendor.VendorRemitToes(remitTo);
+            vendor.VendorInsurances(insurance);
             //now fix selection
             selectedVendor(vendor);
-            fixTabNavigation();
-
-            ko.editable(selectedVendor());
-            editingVendor(vendor);
-            editingVendor().beginEdit();
-            applyMask();
+            //start editing
+            editVendor();
         },
 
+        editVendor = function () {     //Command for the Edit Button... Set VM to 'Editing' mode...(vm, v)
+
+            inEditMode(true);   //Set the editMode flag
+            fixTabNavigation();    //Fix tab States
+
+            //--Make the row Editable with rollback option
+            //ko.editable(selectedVendor());
+            editingVendor(selectedVendor());
+            //** -- 
+            ko.editable.beginEdit('Insurance');
+            //** /--
+            ko.editable(editingVendor());
+            editingVendor().beginEdit();
+            //--
+            applyMask();
+        },
         
+        /* -- OLD editVendor[works]
         editVendor = function (vm, v) {     //Command for the Edit Button... Set VM to 'Editing' mode...
 
             inEditMode(true);   //Set the editMode flag
@@ -258,19 +222,61 @@ bn.vmVendorList = (function ($, bn, undefined) {
             //--
             applyMask();
         },
-
+        */
         cancelEdit = function () {
+
+            //--
+            var hasChange = ko.editable.hasChanges('Insurance');
+            //--
             editingVendor().rollback();
             //next call is not required if we simply close out the form...
             //editingVendor().beginEdit();
             inEditMode(false);
             modelIsValid(true); //Reset modelIsValid in case its been 'false'
+            editingVendor(undefined);
             fixTabNavigation(); //Reset Tab States
         },
 
         saveDetailsCmd = ko.asyncCommand({
             execute: function (complete) {
+                //prepare Ins before send
+                var hasInsChanged = ko.editable.hasChanges('Insurance');    // check if Insurance has changed or not
+                if(hasInsChanged){
+                    //send the ones with CompanyName and Policy [bare minimum checking...]
+                    //var cleanIns = [];
+                    //var cleanIns = clearInsurances(ko.utils.unwrapObservable(editingVendor().VendorInsurances()));
+                    var cleanIns = clearInsurances(editingVendor().VendorInsurances());
+
+                    //var cleanIns = ko.utils.arrayFilter(editingVendor().VendorInsurances(), function (ins) {
+                    //    console.log("Name: " + ins.InsuranceName());
+                    //    console.log("Policy: " + ins.Policynum());
+                    //    return ( ins.InsuranceName() && ins.Policynum() );
+                    //});
+                    console.log(cleanIns.length);
+                    editingVendor().VendorInsurances(cleanIns);
+                }
+                else {
+                    //remove all insurances
+                    editingVendor().VendorInsurances([]);
+                }
+                
+                
+                
+                //if (editingVendor().VendorID()) {                       //If VendorID -- Existing
+                //    if (hasInsChanged) {
+                //        console.log("Insurance has changed");
+                //    }
+                //    else {
+                //        //remove all insurances
+                //        editingVendor().VendorInsurances([]);
+                //    }
+                //}
+                //else {                                              //Else - New
+                //    if(
+                //}
+                //--
                 editingVendor().commit();
+                //Call this after fixing everything...
                 bn.ajaxService.updateVendors(editingVendor, onSuccessSaveDetails, onErrorSaveDetails);
                 complete();
             },
@@ -278,6 +284,17 @@ bn.vmVendorList = (function ($, bn, undefined) {
                 return !isExecuting && modelIsValid();
             }
         }),
+        //-- Old saveDetailsCmd [works]
+        //saveDetailsCmd = ko.asyncCommand({
+        //    execute: function (complete) {
+        //        editingVendor().commit();
+        //        bn.ajaxService.updateVendors(editingVendor, onSuccessSaveDetails, onErrorSaveDetails);
+        //        complete();
+        //    },
+        //    canExecute: function (isExecuting) {
+        //        return !isExecuting && modelIsValid();
+        //    }
+        //}),
       
         onSuccessSaveDetails = function (result) {      //callback methods for 'saveDetails'
             //alert('Inside onSuccessSaveDetails');
@@ -334,15 +351,51 @@ bn.vmVendorList = (function ($, bn, undefined) {
             //var mappedVendors = $.map(result.Data, function (item) { return new bn.Vendor(item) });
             var mappedVendors = $.map(result.Data, function (data) {
 
-                //Create the RemitTo
-                var RemitTo = ko.utils.arrayMap(data.VendorRemitToes, function (RemitTo) {
-                    return new bn.RemitTo(RemitTo);
-                });
-                //build the Insurance ... there will always be 3 [GL, WC, Auto]
-                //----
+                ////Create the RemitTo
+                var RemitTo = [{}];
+                if (data.VendorRemitToes.length) {
+                    RemitTo = ko.utils.arrayMap(data.VendorRemitToes, function (RemitTo) {
+                        return new bn.RemitTo(RemitTo);
+                    });
+                }
+                else {
+                    //Add blank
+                    RemitTo = [new bn.RemitTo({})];
+                    console.log("RemitTo length : " + RemitTo.length);
+                }
 
-                //----
+                //--------------    OLD
+                //var RemitTo = ko.utils.arrayMap(data.VendorRemitToes, function (RemitTo) {
+                //    //console.log('inside RemitTo');
+                //    if (RemitTo)
+                //        return new bn.RemitTo(RemitTo);
+                //    else
+                //        return new bn.RemitTo({});
+                //});
+                //--------------- /OLD
+                //build the Insurance ... there will always be 3 [GL, WC, Auto]
+                //--- NEW ----------
+                var insTemp = [];
+                
+                insTemp = buildInsurances(result.InsuranceTypes, data);
+                //Now do a sort so we can have the strage ordering in the array
+
+                data.VendorInsurances = insTemp;
+
+                //--- /NEW ----------
+                //var cleanIns = clearInsurances(insTemp);
+                //console.log("After call -> Length -> " + cleanIns.length);
+
+                //---- ABONDONED ----------------------------
+                //var Insurance = ko.utils.arrayMap(data.VendorInsurances, function (Insurance) {
+                //    var insTypeName = Insurance.VendorInsuranceType.InsuranceType;
+                //    Insurance.InsuranceTypeName = insTypeName;
+                //    return new bn.Insurance(Insurance);
+                //});
+                //---- /ABONDONED   -----------------------------
+
                 data.VendorRemitToes = RemitTo;
+                //data.VendorInsurances = Insurance;
                 //Now create the Parent vendor
                 return new bn.Vendor(data);
             });
@@ -363,6 +416,65 @@ bn.vmVendorList = (function ($, bn, undefined) {
             var vendorNum = $('#searchVendNum').val();
             //--
             bn.ajaxService.getVendors({ pageSize: pageSize(), currentPage: currentPage(), vendorNum: vendorNum }, onSuccessLoadVendor, onErrorLoadVendor);
+        },
+        
+        
+
+
+        buildInsurances = function (InsuranceTypes, data) {
+            var result = [];
+            ko.utils.arrayForEach(InsuranceTypes, function (insType) {
+                //Cache insTypes internally for later use
+                if(_vendorInsTypes.length < InsuranceTypes.length)
+                    _vendorInsTypes.push(insType);
+                //Check if we have it already or not
+                var vendorIns;
+                if (data) {
+                    vendorIns = ko.utils.arrayFirst(data.VendorInsurances, function (vndIns) {
+                        return (vndIns.InsuranceType === insType.InsuranceTypeID);
+                    });
+
+                }
+                if (vendorIns) {
+                    //console.log('found a match');
+                    vendorIns.InsuranceTypeName = insType.InsuranceType;
+                    vendorIns.InsuranceTypeID = insType.InsuranceTypeID;    //hack due to inconsistency of names in 2 tables
+                    var ins = new bn.Insurance(vendorIns);
+                    result.push(ins);
+                }
+                else {
+                    //didn't find any match, so build an empty one and add
+                    //var insData = {};
+                    //insData.InsuranceTypeID = insType.InsuranceTypeID;
+                    //insData.InsuranceTypeName = insType.InsuranceType;
+                    //emptyIns = new bn.Insurance(insData);
+                    var emptyIns = createEmptyInsurance(insType);
+                    result.push(emptyIns);
+                }
+            });
+           
+            //console.log("Length: " + result.length);   //every Vendor should have same number of Insurance by now.
+            //ko.utils.arrayForEach(result, function (ins) {
+            //    console.log("Name: " + ins.InsuranceName());
+            //});
+            //console.log("------------------------------------------");
+            return result;
+        },
+
+        createEmptyInsurance = function (insType) {
+            var insData = {};
+            insData.InsuranceTypeID = insType.InsuranceTypeID;
+            insData.InsuranceTypeName = insType.InsuranceType;
+            var emptyIns = new bn.Insurance(insData);
+            return emptyIns;
+        },
+
+        clearInsurances = function (insurances) {       //Only get the ones with valid Company and PolicyNum
+            return ko.utils.arrayFilter(insurances, function (ins) {
+                console.log("Name: " + ins.InsuranceName());
+                console.log("Policy: " + ins.Policynum());
+                return ( ins.InsuranceName() && ins.Policynum() );
+            });
         },
 
         //#region Private Members

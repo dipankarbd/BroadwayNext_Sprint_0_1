@@ -1,5 +1,5 @@
 ﻿<div class="bottomwrapper" data-bind="with: selectedVendor">
-   <pre data-bind="text: ko.toJSON($root.selectedVendor, null, 4)"></pre>
+   <!--<pre data-bind="text: ko.toJSON($data, null, 2)"></pre>-->
     <div class="eightypercent ">
         <div class="boxholder">
             <div>
@@ -192,7 +192,7 @@
     <div class="btn-group btn-group-vertical" data-bind="if: ($root.inEditMode)">
         <!-- ko with: $root.editingVendor -->
         <button class="btn btn-large btn-success" id="remitToSave" data-bind="enable: $root.modelIsValid, command: $root.saveDetailsCmd, activity: $root.saveDetailsCmd.isExecuting">Save</button>
-        <button class="btn btn-large" id="remitToCancel" data-bind="click: $root.cancelEdit">Cancel</button>
+        <button class="btn btn-large" id="vendorDetailCancel" data-bind="click: $root.cancelEdit">Cancel</button>
         <!-- /ko -->
     </div>
 </div>

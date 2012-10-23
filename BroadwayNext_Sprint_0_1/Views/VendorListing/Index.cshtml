@@ -57,7 +57,9 @@
 
     @*=======================================================*@
     @*  <script type="text/javascript" src="~/Scripts/jquery-ui-1.8.23.custom.min.js"></script>*@
-    <script type="text/javascript" src="~/Scripts/knockout-2.1.0.js"></script>
+    @*<script type="text/javascript" src="~/Scripts/knockout-2.1.0.js"></script>*@
+
+    <script type="text/javascript" src="~/Scripts/knockout-2.1.0.debug.js"></script>
     <script type="text/javascript" src="~/Scripts/koExternalTemplateEngine_all.js"></script>
     <script type="text/javascript" src="~/Scripts/amplify.js"></script>
     <script type="text/javascript" src="~/Scripts/knockout.mapping-latest.js"></script>
@@ -81,8 +83,8 @@
     @* <script src="~/Scripts/app/main.js"></script>*@
     <script src="~/Scripts/app/util.js"></script>
     <script type="text/javascript" src="~/Scripts/app/dataService.js"></script>
-    <script type="text/javascript" src="~/Scripts/app/binding-handlers.js"></script>
-    <script type="text/javascript" src="~/Scripts/app/ViewModels/vendorListing-0.9.js"></script>
+    <script type="text/javascript" src="~/Scripts/app/binding-handlers.0.1.js"></script>
+    <script type="text/javascript" src="~/Scripts/app/ViewModels/vendorListing-0.9.1.js"></script>
     <script type="text/javascript" src="~/Scripts/app/ViewModels/vendorContacts-0.1.js"></script>
     <script type="text/javascript" src="~/Scripts/app/ViewModels/vendorShipto-0.2.js"></script>
     <script type="text/javascript" src="~/Scripts/app/ViewModels/vendorTermination-0.1.js"></script>
@@ -124,7 +126,7 @@
                 <li><a href="#tabs-13" data-toggle="tab">Audit Trail</a></li>
             </ul>
             <div id="bottomwrapper" class="tab-content">
-                <div class="tab-pane active" id="tabs-1" data-bind="template: { name: 'vendorlist_tab'}">
+                <div class="tab-pane active" id="tabs-1" data-bind="template: { name: 'vendorlist_tab', templateUrl: 'Templates/VendorListing'}">
                 </div>
                 <div class="tab-pane" id="tabs-2" data-bind="template: { name: 'vendordetail_tab' }">
                 </div>

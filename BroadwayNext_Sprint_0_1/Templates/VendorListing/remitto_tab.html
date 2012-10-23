@@ -78,9 +78,10 @@
     </div>
     <div class="btn-group btn-group-vertical" data-bind="if: ($root.inEditMode)">
         <!-- ko with: $root.editingVendor -->
-        <button class="btn btn-large btn-success" id="remitToSave" data-bind="click: $root.saveDetails">Save</button>
-        <button class="btn btn-large" id="remitToCancel" data-bind="click: $root.cancelEdit">Cancel</button>
+        <button class="btn btn-large btn-success" data-bind="enable: $root.modelIsValid, command: $root.saveDetailsCmd, activity: $root.saveDetailsCmd.isExecuting">Save</button>
+        <button class="btn btn-large" data-bind="click: $root.cancelEdit">Cancel</button>
         <!-- /ko -->
     </div>
+    
 
 </div>

@@ -65,5 +65,12 @@ namespace BroadwayNext_Sprint_0_1.Models
             modelBuilder.Configurations.Add(new VendorTerminationMap());
             modelBuilder.Configurations.Add(new VendorTypeMap());
         }
+
+        protected override System.Data.Entity.Validation.DbEntityValidationResult ValidateEntity(DbEntityEntry entityEntry, System.Collections.Generic.IDictionary<object, object> items)
+        {
+            return base.ValidateEntity(entityEntry, items);
+        }
+
+        
     }
 }

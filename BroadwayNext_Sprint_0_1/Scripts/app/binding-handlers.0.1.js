@@ -1,34 +1,34 @@
 ﻿(function ($, undefined) {
-    ko.bindingHandlers['modalOld'] = {
-        init: function (element, valueAccessor, allBindingsAccessor) {
-            var allBindings = allBindingsAccessor();
-            var $element = $(element);
-            $element.addClass('hide modal');
+    //ko.bindingHandlers['modalOld'] = {
+    //    init: function (element, valueAccessor, allBindingsAccessor) {
+    //        var allBindings = allBindingsAccessor();
+    //        var $element = $(element);
+    //        $element.addClass('hide modal');
 
-            if (allBindings.modalOptions) {
-                if (allBindings.modalOptions.beforeClose) {
-                    $element.on('hide', function () {
-                        return allBindings.modalOptions.beforeClose();
-                    });
-                }
-            }
+    //        if (allBindings.modalOptions) {
+    //            if (allBindings.modalOptions.beforeClose) {
+    //                $element.on('hide', function () {
+    //                    return allBindings.modalOptions.beforeClose();
+    //                });
+    //            }
+    //        }
 
-            //return ko.bindingHandlers['with'].init.apply(this, arguments);
-        },
-        update: function (element, valueAccessor) {
-            var value = ko.utils.unwrapObservable(valueAccessor());
+    //        //return ko.bindingHandlers['with'].init.apply(this, arguments);
+    //    },
+    //    update: function (element, valueAccessor) {
+    //        var value = ko.utils.unwrapObservable(valueAccessor());
 
-            //var returnValue = ko.bindingHandlers['with'].update.apply(this, arguments);
+    //        //var returnValue = ko.bindingHandlers['with'].update.apply(this, arguments);
 
-            if (value) {
-                $(element).modal('show');
-            } else {
-                $(element).modal('hide');
-            }
+    //        if (value) {
+    //            $(element).modal('show');
+    //        } else {
+    //            $(element).modal('hide');
+    //        }
 
-            //return returnValue;
-        }
-    };
+    //        //return returnValue;
+    //    }
+    //};
 
     ko.bindingHandlers.datepicker = {
         init: function (element, valueAccessor, allBindingsAccessor) {
@@ -61,7 +61,9 @@
                     return;
                 }
                 if (_.isString(widget.date)) {
-                    widget.date = new Date(widget.date);
+                    var formattedDate = moment(widget.date).format("MM/DD/YYYY")
+                    widget.date = new Date(formattedDate);
+                    //widget.date = new Date(widget.date);
                 }
 
                 widget.set();

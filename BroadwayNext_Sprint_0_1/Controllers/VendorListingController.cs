@@ -9,6 +9,7 @@ using System.Data.Common;
 using System.Data.Entity;
 using BroadwayNext_Sprint_0_1.Data;
 using System.Linq.Expressions;
+using System.Data.Entity.Infrastructure;
 
 namespace BroadwayNext_Sprint_0_1.Controllers
 {
@@ -226,10 +227,34 @@ namespace BroadwayNext_Sprint_0_1.Controllers
                     vendors = vendors.Where(filterName);
                 }
                 int rowCount = vendors.Count();
-                
-                var vendors2 = vendors.Include("VendorInsurances").Include("VendorRemitToes").Include("VendorNotes").OrderBy(v => v.Vendnum).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 
-                return Json(new { Data = vendors, VirtualRowCount = rowCount }, JsonRequestBehavior.AllowGet);
+                //var vendors2 = vendors.Include("VendorInsurances").Include("VendorRemitToes").Include("VendorNotes").OrderBy(v => v.Vendnum).Skip((currentPage - 1) * pageSize).Take(pageSize);
+                
+                var vendorList= vendors.Include("VendorInsurances").Include("VendorRemitToes").OrderBy(v => v.Vendnum).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+
+                //if (vendorList != null)
+                //{
+                //    foreach (var vendor in vendorList)
+                //    {
+                //        foreach (var type in db.VendorInsuranceTypes)
+                //        {
+                //            if (vendor.VendorInsurances.Any(i => i.InsuranceType.Equals(type.InsuranceTypeID)))
+                //                continue;
+                //            vendor.VendorInsurances.Add(new VendorInsurance()
+                //            {
+                //                InsuranceType = type.InsuranceTypeID,
+                //                VendorInsuranceType = type,
+                //                VendorInsuranceID = Guid.NewGuid()
+                //            });
+                //        }
+                //        //vendor.VendorInsurances = vendor.VendorInsurances.OrderByDescending(v => v.VendorInsuranceType.InsuranceType).ToList();
+                //    }
+
+                //}
+
+
+
+                return Json(new { Data = vendorList, InsuranceTypes = db.VendorInsuranceTypes.ToList(), VirtualRowCount = rowCount }, JsonRequestBehavior.AllowGet);
 
             }
             catch (Exception ex)
@@ -318,7 +343,24 @@ namespace BroadwayNext_Sprint_0_1.Controllers
                     {
                         Uow.RemitTo.Insert(remitToes);
                     }
-                    result = Uow.Commit() > 0;
+                    //Handle insurance 
+                    foreach (var insurance in vendor.VendorInsurances)
+                    {
+                        if (insurance.VendorID == Guid.Empty)   //this is new Insurance
+                        {
+                            insurance.VendorID = vendor.VendorID;
+                            insurance.VendorInsuranceID = Guid.NewGuid();
+                            Uow.VendorInsurance.Insert(insurance);
+                        }
+                        else
+                        {
+                            Uow.VendorInsurance.Update(insurance);
+                        }
+
+                    }
+
+                    //
+                    //result = Uow.Commit() > 0;
                 }
                 else
                 {
@@ -326,14 +368,73 @@ namespace BroadwayNext_Sprint_0_1.Controllers
                     {
                         Uow.RemitTo.Update(remitToes);
                     }
+                    //Handle Insurance
+                    foreach (var insurance in vendor.VendorInsurances)
+                    {
+                        if (insurance.VendorID == Guid.Empty)   //this is new Insurance
+                        {
+                            insurance.VendorID = vendor.VendorID;
+                            insurance.VendorInsuranceID = Guid.NewGuid();
+                            Uow.VendorInsurance.Insert(insurance);
+                        }
+                        else
+                        {
+                            Uow.VendorInsurance.Update(insurance);
+                        }
+                    }
+                    //
                     Uow.Vendors.Update(vendor);
 
+                    //result = Uow.Commit() > 0;
+                }
+
+                try
+                {
                     result = Uow.Commit() > 0;
+
+                }
+                catch (DbUpdateConcurrencyException  ex)
+                {
+                    
+                    throw;
                 }
 
                 //return Json(new { Success = result, VendorContact = contact });
                 return Json(new { Sucess = result });
             }
+
+
+            //Older version ---
+            //using (Uow)
+            //{
+
+            //    string error = "";
+
+            //    if (vendor.VendorID == Guid.Empty)  //This is New
+            //    {
+            //        vendor.VendorID = Guid.NewGuid();
+            //        Uow.Vendors.Insert(vendor);
+            //        foreach (var remitToes in vendor.VendorRemitToes)
+            //        {
+            //            Uow.RemitTo.Insert(remitToes);
+            //        }
+            //        result = Uow.Commit() > 0;
+            //    }
+            //    else
+            //    {
+            //        foreach (var remitToes in vendor.VendorRemitToes)
+            //        {
+            //            Uow.RemitTo.Update(remitToes);
+            //        }
+            //        Uow.Vendors.Update(vendor);
+
+            //        result = Uow.Commit() > 0;
+            //    }
+
+            //    //return Json(new { Success = result, VendorContact = contact });
+            //    return Json(new { Sucess = result });
+            //}
+            // -- /Older version -----
         }
 
 
@@ -360,6 +461,12 @@ namespace BroadwayNext_Sprint_0_1.Controllers
             var divisions = divisionsQuery.ToList();
 
             return Json(new { Data = divisions, VirtualRowCount = rowCount }, JsonRequestBehavior.AllowGet);
+        }
+        
+        public JsonResult GetInsuranceTypes()
+        {
+            IEnumerable<VendorInsuranceType> insTypes = Uow.InsuranceTypes.Get();
+            return (Json(insTypes, JsonRequestBehavior.AllowGet));
         }
 
     }

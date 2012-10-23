@@ -12,6 +12,8 @@ namespace BroadwayNext_Sprint_0_1.Data
         private TGFContext DbContext;
         private EFRepository<Vendor> vendorRepository;
         private EFRepository<VendorRemitTo> remitToRepository;
+        private EFRepository<VendorInsuranceType> insTypeRepository;
+        private EFRepository<VendorInsurance> insuranceRepository;
         private EFRepository<VendorContact> vendorContactRepository;
         private EFRepository<VendorShipTo> vendorShipToRepository;
         private EFRepository<VendorTermination> vendorTerminationRepository;
@@ -82,6 +84,30 @@ namespace BroadwayNext_Sprint_0_1.Data
                 return vendorTerminationRepository;
             }
         }
+        public EFRepository<VendorInsuranceType> InsuranceTypes 
+        {
+            get
+            {
+                if (this.insTypeRepository == null)
+                {
+                    this.insTypeRepository = new EFRepository<VendorInsuranceType>(DbContext);
+                }
+                return insTypeRepository;
+            }
+        }
+        public EFRepository<VendorInsurance> VendorInsurance
+        {
+            get
+            {
+                if (this.insuranceRepository == null)
+                {
+                    this.insuranceRepository = new EFRepository<VendorInsurance>(DbContext);
+                }
+                return insuranceRepository;
+            }
+
+        }
+
         //----------------------------
 
         protected void CreateDbContext()
