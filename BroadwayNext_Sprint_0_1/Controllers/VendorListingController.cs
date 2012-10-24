@@ -190,7 +190,7 @@ namespace BroadwayNext_Sprint_0_1.Controllers
             }
             return Json(new { Success = result });
         }
-        //=================     /Dipankar      ================================================ 
+        //=================     /     ================================================ 
 
 
         public JsonResult GetAllVendors(int pageSize, int currentPage, int? vendorNum, string companyName = null)
@@ -402,39 +402,6 @@ namespace BroadwayNext_Sprint_0_1.Controllers
                 //return Json(new { Success = result, VendorContact = contact });
                 return Json(new { Sucess = result });
             }
-
-
-            //Older version ---
-            //using (Uow)
-            //{
-
-            //    string error = "";
-
-            //    if (vendor.VendorID == Guid.Empty)  //This is New
-            //    {
-            //        vendor.VendorID = Guid.NewGuid();
-            //        Uow.Vendors.Insert(vendor);
-            //        foreach (var remitToes in vendor.VendorRemitToes)
-            //        {
-            //            Uow.RemitTo.Insert(remitToes);
-            //        }
-            //        result = Uow.Commit() > 0;
-            //    }
-            //    else
-            //    {
-            //        foreach (var remitToes in vendor.VendorRemitToes)
-            //        {
-            //            Uow.RemitTo.Update(remitToes);
-            //        }
-            //        Uow.Vendors.Update(vendor);
-
-            //        result = Uow.Commit() > 0;
-            //    }
-
-            //    //return Json(new { Success = result, VendorContact = contact });
-            //    return Json(new { Sucess = result });
-            //}
-            // -- /Older version -----
         }
 
 
@@ -466,7 +433,7 @@ namespace BroadwayNext_Sprint_0_1.Controllers
         public JsonResult GetInsuranceTypes()
         {
             IEnumerable<VendorInsuranceType> insTypes = Uow.InsuranceTypes.Get();
-            return (Json(insTypes, JsonRequestBehavior.AllowGet));
+            return (Json(insTypes.ToList(), JsonRequestBehavior.AllowGet));
         }
 
     }

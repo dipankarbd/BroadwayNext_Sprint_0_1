@@ -119,13 +119,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\BootstrapBundleConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="BootstrapSupport\ControlGroupExtensions.cs" />
-    <Compile Include="Controllers\BootstrapBaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\VendorListController.cs" />
     <Compile Include="Controllers\VendorListingController.cs" />
@@ -457,15 +454,6 @@
     <Content Include="Content\toastr-responsive.css" />
     <Content Include="Content\toastr.css" />
     <Content Include="Global.asax" />
-    <Content Include="CodeTemplates\AddView\CSHTML\BootstrapForm.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>BootstrapForm.cshtml</LastGenOutput>
-    </Content>
-    <Content Include="CodeTemplates\AddView\CSHTML\BootstrapForm.cshtml">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BootstrapForm.tt</DependentUpon>
-    </Content>
     <Content Include="Content\css\.DS_Store" />
     <Content Include="Content\css\custom-theme\.DS_Store" />
     <Content Include="Content\css\custom-theme\images\.DS_Store" />
@@ -581,14 +569,12 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\VendorListing\IndexSelfLastOne.cshtml" />
     <Content Include="Views\Shared\_html5shiv.cshtml" />
     <Content Include="Views\Shared\_BootstrapLayout.cshtml" />
     <Content Include="Views\Shared\_alerts.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Home\Create.cshtml" />
-    <Content Include="Views\VendorListing\Copy of Index.cshtml" />
     <Content Include="Views\VendorListing\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

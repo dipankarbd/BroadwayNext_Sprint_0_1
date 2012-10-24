@@ -13,24 +13,19 @@ Next Version ==>
 var bn = bn || {};
 
 
-/* Email Reply --
-InsuranceName : Name of the Insurnace company
-Insurance type is : GUID
-Insurance TypeName : General, Auto or Workman’s
-Policy number : I guess I did not see that coming. Lets make that nvarchar(50)
-*/
 //#region "MODEL"
 bn.Insurance = function (data) {
     this.VendorInsuranceID = ko.observable(data.VendorInsuranceID);
     this.VendorID = ko.observable(data.VendorID);
-    this.InsuranceType = ko.observable(data.InsuranceTypeID);         // Actual ID of the InsuranceType
+    this.InsuranceType = ko.observable(data.InsuranceTypeID);       // Actual ID of the InsuranceType
     this.InsuranceTypeName = ko.observable(data.InsuranceTypeName); // General, Auto etc.
     this.InsuranceName = ko.observable(data.InsuranceName).extend({ editable: { scope: 'Insurance' } }); //.extend({required: true});         // Name of the Insurance Company
     this.Policynum = ko.observable(data.Policynum).extend({ editable: { scope: 'Insurance' } });
     this.ExpiryDate = ko.observable(data.ExpiryDate).extend({ editable: { scope: 'Insurance' } });
     this.AdditionalInsured = ko.observable(data.AdditionalInsured).extend({ editable: { scope: 'Insurance' } });
-    this.NOF = ko.observable(data.Not_onFile).extend({ editable: { scope: 'Insurance' } });
-
+    this.Not_onFile = ko.observable(data.Not_onFile).extend({ editable: { scope: 'Insurance' } });
+    this.InsuranceNotRequired = ko.observable(data.InsuranceNotRequired).extend({ editable: { scope: 'Insurance' } });
+    this.NotRequiredReason = ko.observable(data.NotRequiredReason);
 };
 
 bn.RemitTo = function (data) {
@@ -66,7 +61,7 @@ bn.Vendor = function (data) {
     this.Address1 = ko.observable(data.Address1).extend({ required: true });
     this.Address2 = ko.observable(data.Address2);
     this.City = ko.observable(data.City).extend({ required: true });
-    this.State = ko.observable(data.State).extend({ required: true });
+    this.State = ko.observable(data.State); //.extend({ required: true });  //disable until State Table
     this.Zip = ko.observable(data.Zip).extend({ required: true });
     this.Country = ko.observable(data.Country);
     this.Province = ko.observable(data.Province);
@@ -81,7 +76,7 @@ bn.Vendor = function (data) {
     this.Comment = ko.observable(data.Comment);
     this.VendorType = ko.observable(data.VendorType);
     this.GLnum = ko.observable(data.GLnum);
-    this.TaxID = ko.observable(data.TaxID).extend({ required: true });
+    this.TaxID = ko.observable(data.TaxID); //.extend({ required: true });  //What about SSN?
     this.NetDays = ko.observable(data.NetDays);
     this.CheckTax1099 = ko.observable(data.CheckTax1099);
     this.PVA = ko.observable(data.PVA);
@@ -136,10 +131,11 @@ bn.vmVendorList = (function ($, bn, undefined) {
         vendors = ko.observableArray([]),
 
         //-- Flags
-        modelIsValid = ko.observable(true),
+        modelIsValid = ko.observable(true),     //This flag is set from the ValidateObservable utility method
         insHasChanged = ko.observable(false),
-        //------
+        //---
         countries = ["USA", "Canada"],
+        insNotReqReasons = ["Reason 1", "Reason 2", "Reason 3", "Reason 4", "Reason 5"]
         states = ko.observableArray(["AL", "CA", "NY", "WI", "MT", "MD"]),  //Eventually they will come from DB
         selectedState = ko.observable(""),
         _vendorInsTypes = [],
@@ -165,24 +161,42 @@ bn.vmVendorList = (function ($, bn, undefined) {
         editingVendor = ko.observable(),
 
         createVendor = function (vm, v) {
+            var vendor = new bn.Vendor({});
             //make blank skeleton and pass it over
-            var remitTo = new bn.RemitTo({});
+            var remitTo = [new bn.RemitTo({})];
+            vendor.VendorRemitToes(remitTo);    //Set RemitTo
             //make mock Insurances
             var insurance = [];
             if (_vendorInsTypes.length) {
                 insurance = buildInsurances(_vendorInsTypes);
+                vendor.VendorInsurances(insurance); //Set Insurance
+                //now fix selection
+                selectedVendor(vendor);
+                //start editing
+                editVendor();
             }
             else {
                 //fetch Insurance Types ... this happens when someone hits New before Search
-
+                $.when($.getJSON("/VendorListing/GetInsuranceTypes"))
+                    .then(function (result) {
+                        if (result) {
+                            console.log('inside resolve');
+                            _vendorInsTypes.push.apply(_vendorInsTypes, result);
+                            insurance = buildInsurances(_vendorInsTypes);
+                        }
+                        vendor.VendorInsurances(insurance); //Set Insurance
+                        //now fix selection
+                        selectedVendor(vendor);
+                        //start editing
+                        editVendor();
+                    });
+                    //.done(function () {
+                        
+                    //});
+                //if (_vendorInsTypes.length)
+                //    insurance = buildInsurances(_vendorInsTypes);
             }
-            var vendor = new bn.Vendor({});
-            vendor.VendorRemitToes(remitTo);    //Set RemitTo
-            vendor.VendorInsurances(insurance); //Set Insurance
-            //now fix selection
-            selectedVendor(vendor);
-            //start editing
-            editVendor();
+            
         },
 
         editVendor = function () {     //Command for the Edit Button... Set VM to 'Editing' mode...(vm, v)
@@ -311,10 +325,18 @@ bn.vmVendorList = (function ($, bn, undefined) {
             toastr.error("An unexpected error occurred. Please try again", "Error");
         },
 
+        loadInsuranceTypes = function () {
+            $.getJSON("/VendorListing/GetInsuranceTypes", function (result) {
+                if (result) {
+                    console.log('got result back');
+                    return _vendorInsTypes.push.apply(_vendorInsTypes, result);
+                }
+            });
+        },
+
         loadVendors = function () {
             //get the SEARCH string...
             var vendorNum = $('#searchVendNum').val();
-            //--
             bn.ajaxService.getVendors({ pageSize: pageSize(), currentPage: currentPage(), vendorNum: vendorNum }, onSuccessLoadVendor, onErrorLoadVendor);
         },
 
@@ -366,7 +388,6 @@ bn.vmVendorList = (function ($, bn, undefined) {
         },
 
         fixTabNavigation = function () {
-
             if (inEditMode()) {
                 $('#tabstwo li:eq(1) a').tab('show');   // Set the Details tab as 'Active'
                 $('#tabstwo li a').filter(function (index) {

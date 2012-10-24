@@ -35,7 +35,15 @@
             //initialize datepicker with some optional options
             var options = allBindingsAccessor().datepickerOptions || {};
             $(element).datepicker(options);
-
+            //--Format the value of the actual observable at the beginning
+            var value = valueAccessor();
+            if (ko.isObservable(value)) {
+                if (_.isString(value())) {
+                    var formattedDate = moment(value()).format("MM/DD/YYYY");
+                    value(new Date(formattedDate));
+                }
+            }
+            //--
             //when a user changes the date, update the view model
             ko.utils.registerEventHandler(element, "changeDate", function (event) {
                 var value = valueAccessor();
@@ -65,7 +73,6 @@
                     widget.date = new Date(formattedDate);
                     //widget.date = new Date(widget.date);
                 }
-
                 widget.set();
             }
         }

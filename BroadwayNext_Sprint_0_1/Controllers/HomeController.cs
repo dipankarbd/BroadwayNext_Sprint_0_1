@@ -7,7 +7,7 @@ using BroadwayNext_Sprint_0_1.Models;
 
 namespace BroadwayNext_Sprint_0_1.Controllers
 {
-    public class HomeController : BootstrapBaseController
+    public class HomeController //: BootstrapBaseController
     {
         //private static List<HomeInputModel> _models = ModelIntializer.CreateHomeInputModels();
         //public ActionResult Index()

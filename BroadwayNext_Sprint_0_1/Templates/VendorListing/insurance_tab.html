@@ -58,17 +58,23 @@
                         <td align="center">
                             <input type="checkbox" data-bind="checked: AdditionalInsured, enable: $root.inEditMode"  />
                         <td align="center">
-                            <input type="checkbox" data-bind="checked: NOF, enable: $root.inEditMode"  />
+                            <input type="checkbox" data-bind="checked: Not_onFile, enable: $root.inEditMode"  />
                         <td class="left" align="center">
                             <div class="threequarterboxholder">
-                                <select class="dropdownbox">
+                                <select class="dropdownbox" data-bind="enable: InsuranceNotRequired()">
+                                        <option>TEST 1</option>
+                                        <option>TEST 2</option>
+                                        <option>TEST 3</option>
+                                        <option>TEST 4</option>
+                                </select>
+                                <!--<select class="dropdownbox">
                                     <option>test1</option>
                                     <option>test2</option>
                                     <option>test3</option>
-                                </select>
+                                </select>-->
                             </div>
                             <div class="onethirdboxholder">
-                                <input type="checkbox" />
+                                <input type="checkbox" data-bind="checked: InsuranceNotRequired" />
                             </div>
                         </td>
                     </tr>

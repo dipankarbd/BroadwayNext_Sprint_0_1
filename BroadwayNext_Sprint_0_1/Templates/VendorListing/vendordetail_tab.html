@@ -16,16 +16,19 @@
             <div class="reqlabel" >Company</div>
             <input type="text" class="textbox" data-bind="value: Company, enable: $root.inEditMode,
                                                           event: {blur: function(data, event) 
-                                                                    {bn.utils.validateObservable('Company', $root, data, event)} }"/>
+                                                                 {bn.utils.validateObservable('Company', $root, data, event)} }"/>
             DBA
             <input type="text" class="textbox" data-bind="value:  DBA, enable: $root.inEditMode" />
             <div class="reqlabel">Address 1</div>
             <input type="text" class="textbox" data-bind="value: Address1 , enable: $root.inEditMode,
-                                                             event: {blur: function(data, event) {bn.utils.validateObservable('Address1', $root, data, event)} }" />
+                                                             event: {blur: function(data, event) 
+                                                                    {bn.utils.validateObservable('Address1', $root, data, event)} }" />
             Address 2
             <input type="text" class="textbox" data-bind="value: Address2 , enable: $root.inEditMode" />
             <div class="reqlabel">City</div>
-            <input type="text" class="textbox" data-bind="value:  City , enable: $root.inEditMode" />
+            <input type="text" class="textbox" data-bind="value: City, enable: $root.inEditMode,
+                                                            event:  {blur: function(data, event) 
+                                                                    {bn.utils.validateObservable('City', $root, data, event)} }" />
 
             <div class="state">
                 <div class="reqlabel">State</div>
@@ -35,7 +38,9 @@
             </div>
             <div class="zip">
                 <div class="reqlabel">Zip</div>
-                <input type="text" class="textbox" data-bind="value:  Zip , enable: $root.inEditMode" />
+                <input type="text" class="textbox" data-bind="value:  Zip , enable: $root.inEditMode,
+                                                                event:  {blur: function(data, event) 
+                                                                        {bn.utils.validateObservable('Zip', $root, data, event)} }" />
             </div>
             <div class="reqlabel">Required</div>
             <span class="texttypeinstructions">* zipcode is typed automatically pull state, province and country</span>
