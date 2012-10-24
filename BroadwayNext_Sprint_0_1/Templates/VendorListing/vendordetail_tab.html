@@ -5,7 +5,7 @@
             <div>
                 Vendor #
              
-                <input type="checkbox" />
+                <input type="checkbox" data-bind= "enable: $root.inEditMode" />
                 <label for="checkbox2"></label>
                 Active
                 <input type="text" class="textboxfilled" data-bind="value: Vendnum, enable: $root.inEditMode"/>
@@ -96,7 +96,7 @@
              
             <input type="text" class="textbox" data-bind="value:  Comment , enable: $root.inEditMode" />
             Type <span class="rdgrid">
-                <select class="dropdownbox">
+                <select class="dropdownbox" data-bind="enable: $root.inEditMode">
                 </select>
             </span>GL#
            
@@ -146,25 +146,25 @@
         <div class="boxholder">
             Payment Terms
    
-            <select class="dropdownbox">
+            <select class="dropdownbox" data-bind= "enable: $root.inEditMode">
             </select>
 
             Cash Discount
-            <select class="dropdownbox">
+            <select class="dropdownbox" data-bind= "enable: $root.inEditMode">
             </select>
 
 
             Input By<br />
-            <input type="text" class="textboxfilled" value="Arun" />
+            <input type="text" class="textboxfilled" value="Arun" disabled />
             Input Date
    
            <!-- <input type="text" class="textboxfilled" value="08/15/2012" />-->
-            <input type="text" class="textboxfilled" data-bind="value:  InputDate"/>
+            <input type="text" class="textboxfilled" data-bind="value:  InputDate" disabled/>
             <br />
 
             Pricing Schedule
        
-            <input type="text" class="textboxfilled" value="2012 Pricing" />
+            <input type="text" class="textboxfilled" value="2012 Pricing" disabled/>
         </div>
 
 
@@ -181,10 +181,10 @@
 
             Price Reviewed Date
  
-            <input type="text" class="textboxfilled" />
+            <input type="text" class="textboxfilled" disabled />
             Price Reviewed By
  
-            <input type="text" class="textboxfilled" />
+            <input type="text" class="textboxfilled" disabled />
 
         </div>
 
