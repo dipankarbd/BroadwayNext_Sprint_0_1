@@ -263,13 +263,13 @@ bn.vmVendorList = (function ($, bn, undefined) {
         onSuccessSaveDetails = function (result) {      //callback methods for 'saveDetails'
             //alert('Inside onSuccessSaveDetails');
             toastr.success("Record has been updated successfully", "Success");
-            reloadAndReset();
+            reloadAndReset(true);
         },
 
         onErrorSaveDetails = function (error) {
             //alert('Inside onErrorSaveDetails');
             toastr.error("An unexpected error occurred. Please try again", "Error");
-            reloadAndReset();
+            reloadAndReset(true);
         },
 
         inEditMode = ko.observable(false),
@@ -317,7 +317,9 @@ bn.vmVendorList = (function ($, bn, undefined) {
             });
             //Load up in one go
             vendors([]);
+            reloadAndReset(false);
             return vendors.push.apply(vendors, mappedVendors);
+            
         },
 
         onErrorLoadVendor = function (err) {
@@ -341,7 +343,7 @@ bn.vmVendorList = (function ($, bn, undefined) {
         
         deleteVendor = function (data) {
             if (confirm('Are you sure you want to delete this vendor? All other information related to this Vendor will be deleted as well.')) {
-                console.log('inside DeleteVendor');
+                //console.log('inside DeleteVendor');
                 $.ajax("/vendorlisting/DeleteVendorAll", {
                     data: ko.toJSON({ vendorID: selectedVendor().VendorID()}),
                     type: "post", contentType: "application/json",
@@ -352,7 +354,7 @@ bn.vmVendorList = (function ($, bn, undefined) {
                         else {
                             toastr.error("An unexpected error occurred. Please try again", "Error");
                         }
-                        reloadAndReset();
+                        reloadAndReset(true);
                     }
                 });
             }
@@ -411,9 +413,10 @@ bn.vmVendorList = (function ($, bn, undefined) {
             });
         },
 
-        reloadAndReset = function () {
+        reloadAndReset = function (reLoad) {
             //Reload
-            loadVendors();
+            if (reLoad)
+                loadVendors();
             //--Reset
             selectedVendor(undefined);
             editingVendor(undefined);
