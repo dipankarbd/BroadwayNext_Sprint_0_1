@@ -65,7 +65,7 @@ bn.Vendor = function (data) {
     this.Zip = ko.observable(data.Zip).extend({ required: true });
     this.Country = ko.observable(data.Country);
     this.Province = ko.observable(data.Province);
-    this.Phone = ko.observable(data.Phone).extend({ required: true });
+    this.Phone = ko.observable(data.Phone); //.extend({ required: true });
     this.PhoneExt = ko.observable(data.PhoneExt);
     this.Fax = ko.observable(data.Fax);
     this.Mobile = ko.observable(data.Mobile);
@@ -180,7 +180,7 @@ bn.vmVendorList = (function ($, bn, undefined) {
                 $.when($.getJSON("/VendorListing/GetInsuranceTypes"))
                     .then(function (result) {
                         if (result) {
-                            console.log('inside resolve');
+                            //Console.log('inside resolve');
                             _vendorInsTypes.push.apply(_vendorInsTypes, result);
                             insurance = buildInsurances(_vendorInsTypes);
                         }
@@ -236,7 +236,7 @@ bn.vmVendorList = (function ($, bn, undefined) {
                 if (hasInsChanged) {
                     //send the ones with CompanyName and Policy [bare minimum checking...]
                     var cleanIns = clearInsurances(editingVendor().VendorInsurances());
-                    console.log(cleanIns.length);
+                    //Console.log(cleanIns.length);
                     editingVendor().VendorInsurances(cleanIns);
                 }
                 else {
@@ -256,21 +256,13 @@ bn.vmVendorList = (function ($, bn, undefined) {
         onSuccessSaveDetails = function (result) {      //callback methods for 'saveDetails'
             //alert('Inside onSuccessSaveDetails');
             toastr.success("Record has been updated successfully", "Success");
-            //Reload
-            loadVendors();
-            //--Reset
-            selectedVendor(undefined);
-            editingVendor(undefined);
-            isSelected(false);
-            inEditMode(false);
-            modelIsValid(true);
-            //--
-            fixTabNavigation();
+            reloadAndReset();
         },
 
         onErrorSaveDetails = function (error) {
             //alert('Inside onErrorSaveDetails');
             toastr.error("An unexpected error occurred. Please try again", "Error");
+            reloadAndReset();
         },
 
         inEditMode = ko.observable(false),
@@ -290,7 +282,7 @@ bn.vmVendorList = (function ($, bn, undefined) {
         onSuccessLoadVendor = function (result) {
             //debugger;
             totalPages(Math.ceil(result.VirtualRowCount / pageSize()));
-            console.log('--' + totalPages());
+            //Console.log('--' + totalPages());
             //--
             //Set Total Row Count
             totalRows(result.VirtualRowCount);
@@ -306,7 +298,7 @@ bn.vmVendorList = (function ($, bn, undefined) {
                 else {
                     //Add blank
                     RemitTo = [new bn.RemitTo({})];
-                    console.log("RemitTo length : " + RemitTo.length);
+                    //Console.log("RemitTo length : " + RemitTo.length);
                 }
                 //build the Insurance ... there will always be 3 [GL, WC, Auto]
                 var insTemp = [];
@@ -328,7 +320,7 @@ bn.vmVendorList = (function ($, bn, undefined) {
         loadInsuranceTypes = function () {
             $.getJSON("/VendorListing/GetInsuranceTypes", function (result) {
                 if (result) {
-                    console.log('got result back');
+                    //Console.log('got result back');
                     return _vendorInsTypes.push.apply(_vendorInsTypes, result);
                 }
             });
@@ -338,6 +330,25 @@ bn.vmVendorList = (function ($, bn, undefined) {
             //get the SEARCH string...
             var vendorNum = $('#searchVendNum').val();
             bn.ajaxService.getVendors({ pageSize: pageSize(), currentPage: currentPage(), vendorNum: vendorNum }, onSuccessLoadVendor, onErrorLoadVendor);
+        },
+        
+        deleteVendor = function (data) {
+            if (confirm('Are you sure you want to delete this vendor? All other information related to this Vendor will be deleted as well.')) {
+                console.log('inside DeleteVendor');
+                $.ajax("/vendorlisting/DeleteVendorAll", {
+                    data: ko.toJSON({ vendorID: selectedVendor().VendorID()}),
+                    type: "post", contentType: "application/json",
+                    success: function (result) {
+                        if (result.Success) {
+                            toastr.success("Vendor information deleted successfully", "Success");
+                        }
+                        else {
+                            toastr.error("An unexpected error occurred. Please try again", "Error");
+                        }
+                        reloadAndReset();
+                    }
+                });
+            }
         },
 
     //#region Utlity methods
@@ -356,7 +367,7 @@ bn.vmVendorList = (function ($, bn, undefined) {
                     });
                 }
                 if (vendorIns) {
-                    //console.log('found a match');
+                    ////Console.log('found a match');
                     vendorIns.InsuranceTypeName = insType.InsuranceType;
                     vendorIns.InsuranceTypeID = insType.InsuranceTypeID;    //hack due to inconsistency of names in 2 tables
                     var ins = new bn.Insurance(vendorIns);
@@ -381,10 +392,23 @@ bn.vmVendorList = (function ($, bn, undefined) {
 
         clearInsurances = function (insurances) {       //Only get the ones with valid Company and PolicyNum
             return ko.utils.arrayFilter(insurances, function (ins) {
-                console.log("Name: " + ins.InsuranceName());
-                console.log("Policy: " + ins.Policynum());
+                //Console.log("Name: " + ins.InsuranceName());
+                //Console.log("Policy: " + ins.Policynum());
                 return (ins.InsuranceName() && ins.Policynum());
             });
+        },
+
+        reloadAndReset = function () {
+            //Reload
+            loadVendors();
+            //--Reset
+            selectedVendor(undefined);
+            editingVendor(undefined);
+            isSelected(false);
+            inEditMode(false);
+            modelIsValid(true);
+            //--
+            fixTabNavigation();
         },
 
         fixTabNavigation = function () {
@@ -434,20 +458,9 @@ bn.vmVendorList = (function ($, bn, undefined) {
 //var vm = {};
 $(function () {
 
-    //$('#tabstwo').tabs(),
-
-    //$("#tabstwo").bind("tabsselect", function (e, tab) {
-    //    if (tab.index > 0) {
-    //        bn.vmVendorList.showDetails(tab, e);
-    //    }
-    //});
-
     $('#tabstwo a').click(function (e) {
         bn.vmVendorList.showDetails(e);
-        //e.preventDefault();
-        //$(this).tab('show');
     })
-
 
     //Set up notification when selecttion changes
     bn.vmVendorList.selectedVendor.subscribe(function (data) {
@@ -460,10 +473,6 @@ $(function () {
     });
 
     amplify.subscribe("EditVendor", bn.vmVendorList.editVendor);
-
-    //bn.vmVendorList.init();
-
-
 
 });
 

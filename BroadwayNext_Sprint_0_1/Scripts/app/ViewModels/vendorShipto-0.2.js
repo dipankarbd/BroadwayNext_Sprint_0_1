@@ -36,12 +36,19 @@ bn.vmShipToList = (function ($, bn, undefined) {
         shipTosGridCurrentPage = ko.observable(1),
         fetchShipTos = function () {
             if (vendorId()) {
-                console.log('will fetch shipto now');
+                //console.log('will fetch shipto now');
                 $.getJSON("/vendorlisting/getvendorshiptos", { vendorId: vendorId(), pageSize: shipTosGridPageSize(), currentPage: shipTosGridCurrentPage() }, function (result) {
                     totalShipTos(result.VirtualRowCount);
                     shipTosGridTotalPages(Math.ceil(result.VirtualRowCount / shipTosGridPageSize()));
                     var mappedShipTos = $.map(result.Data, function (item) { return new bn.VendorShipTo(item); });
                     shipTos(mappedShipTos);
+                    //set the Tab counter
+                    var tabName = 'Ship To';
+                    $('#tabstwo li:eq(6) a').html(tabName);
+                    if (totalShipTos() > 0) {
+                        tabName = tabName + '(' + totalShipTos() + ')';
+                        $('#tabstwo li:eq(6) a').html(tabName);
+                    }
                 });
             }
         },

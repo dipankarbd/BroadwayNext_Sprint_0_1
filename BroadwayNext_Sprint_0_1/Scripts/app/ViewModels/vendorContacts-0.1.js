@@ -50,12 +50,20 @@ bn.vmContactList = (function ($, bn, undefined) {
 
         fetchContacts = function () {
             if (vendorId()) {
-                console.log('will fetch contact now');
+                //console.log('will fetch contact now');
                 $.getJSON("/vendorlisting/getvendorcontacts", { vendorId: vendorId(), pageSize: contactsGridPageSize(), currentPage: contactsGridCurrentPage() }, function (result) {
                     totalContacts(result.VirtualRowCount);
                     contactsGridTotalPages(Math.ceil(result.VirtualRowCount / contactsGridPageSize()));
                     var mappedContacts = $.map(result.Data, function (item) { return new bn.VendorContact(item); });
                     contacts(mappedContacts);
+
+                    //set the Tab counter
+                    var tabName = 'Contacts';
+                    $('#tabstwo li:eq(5) a').html(tabName);
+                    if (totalContacts() > 0) {
+                        tabName = tabName + '(' + totalContacts() + ')';
+                        $('#tabstwo li:eq(5) a').html(tabName);
+                    }
                 });
             }
         },

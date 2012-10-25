@@ -13,7 +13,7 @@
         //Load Vendors from Server
         var
             ajaxGetVendors = function (jsonIn, callback, onError) {
-            //console.log("inside GetAjaxVendor");
+            //////Console.log("inside GetAjaxVendor");
             $.ajax({
                 url: serviceBaseVendors + "GetAllVendors",
                 type: "GET",

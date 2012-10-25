@@ -95,7 +95,7 @@ namespace BroadwayNext_Sprint_0_1.Data
                 return insTypeRepository;
             }
         }
-        public EFRepository<VendorInsurance> VendorInsurance
+        public EFRepository<VendorInsurance> VendorInsurances
         {
             get
             {

@@ -64,7 +64,7 @@ bn.vmTerminationList = (function ($, bn, undefined) {
 
        fetchTerminations = function () {
            if (vendorId()) {
-               console.log('will fetch termination now');
+               //Console.log('will fetch termination now');
                $.getJSON("/vendorlisting/getvendorterminations", { vendorId: vendorId(), pageSize: terminationsGridPageSize(), currentPage: terminationsGridCurrentPage() }, function (result) {
                    totalTerminations(result.VirtualRowCount);
                    terminationsGridTotalPages(Math.ceil(result.VirtualRowCount / terminationsGridPageSize()));
@@ -76,8 +76,14 @@ bn.vmTerminationList = (function ($, bn, undefined) {
                        item.Rehire = item.Rehire === '1' ? true : false;
                        return new bn.VendorTermination(item);
                    });
-
                    terminations(mappedTerminations);
+                   //set the Tab counter
+                   var tabName = 'Termination';
+                   $('#tabstwo li:eq(10) a').html(tabName);
+                   if (totalTerminations() > 0) {
+                       tabName = tabName + '(' + totalTerminations() + ')';
+                       $('#tabstwo li:eq(10) a').html(tabName);
+                   }
                });
            }
        },
@@ -104,19 +110,19 @@ bn.vmTerminationList = (function ($, bn, undefined) {
        editingTermination = ko.observable(),
 
        selectTermination = function (termination) {
-           console.log('select termination');
+           //Console.log('select termination');
            selectedTermination(termination);
        },
 
        addNewTermination = function () {
-           console.log('Adding new termination for vendor: ' + vendorId());
+           //Console.log('Adding new termination for vendor: ' + vendorId());
            editingTermination(new bn.VendorTermination({ VendorID: vendorId() }));
            ko.editable(editingTermination());
            editingTermination().beginEdit();
        },
 
        editTermination = function () {
-           console.log('Will edit termination now');
+           //Console.log('Will edit termination now');
            editingTermination(selectedTermination());
            ko.editable(editingTermination());
            editingTermination().beginEdit();
@@ -127,7 +133,7 @@ bn.vmTerminationList = (function ($, bn, undefined) {
        },
 
        saveTermination = function () {
-           console.log('saving termination...');
+           //Console.log('saving termination...');
            editingTermination().commit();
 
            $.ajax("/vendorlisting/savevendortermination", {
@@ -215,7 +221,7 @@ bn.vmTerminationList = (function ($, bn, undefined) {
 $(function () {
     //Set up subscription
     amplify.subscribe("VendorSelectionChanged", function (vID, vNum) {
-        console.log(vID);
+        //Console.log(vID);
         bn.vmTerminationList.vendorSelectionChanged(vID, vNum);
     });
     bn.vmTerminationList.fetchTerminations();

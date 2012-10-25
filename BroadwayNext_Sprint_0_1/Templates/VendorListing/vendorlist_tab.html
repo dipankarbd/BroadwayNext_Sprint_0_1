@@ -27,12 +27,12 @@
                     <th style="width: 100px;">SV</th>
                     <th style="width: 100px;">GL</th>
                     <th style="width: 100px;">GL Date</th>
+                    <th style="width: 100px;">GL Nof</th>
                     <th style="width: 100px;">WC</th>
                     <th style="width: 100px;">WC Date</th>
+                    <th style="width: 100px;">WC Nof</th>
                     <th style="width: 100px;">Auto</th>
                     <th style="width: 100px;">Auto Date</th>
-                    <th style="width: 100px;">GL Nof</th>
-                    <th style="width: 100px;">WC Nof</th>
                     <th style="width: 100px;">Auto Nif</th>
                     <th style="width: 100px;">GL Add.Insure</th>
                     <th style="width: 100px;">Rehire</th>
@@ -76,8 +76,10 @@
                     <td class="left">&nbsp;</td>
                     <td class="left">&nbsp;</td>
                     <td class="left">&nbsp;</td>
+                    <!-- ko foreach: $data.VendorInsurances -->
                     <td class="left">&nbsp;</td>
                     <td class="left">&nbsp;</td>
+                    <!-- /ko -->
                     <td class="left">&nbsp;</td>
                     <td class="left">&nbsp;</td>
                     <td class="left">&nbsp;</td>
@@ -128,6 +130,6 @@
 
         <button class="btn" data-bind="enable: selectedVendor">Price List(3)*</button>
 
-        <button class="btn btn-danger" data-bind="enable: selectedVendor">Delete*</button>
+        <button class="btn btn-danger" data-bind="enable: selectedVendor, click: deleteVendor">Delete*</button>
    <!-- /ko -->
 </div>

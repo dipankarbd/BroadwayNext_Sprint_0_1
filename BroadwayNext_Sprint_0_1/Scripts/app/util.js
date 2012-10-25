@@ -4,7 +4,7 @@ bn.utils = (function () {
     var
         self = this,
         validateObservable = function (itemToValidte, viewModel, data, event) {     //data == the editingEntity()
-            console.debug("inside validateObservable -- For : " + itemToValidte);
+            //console.log("inside validateObservable -- For : " + itemToValidte);
             for (var prop in data) {
                 if (prop === itemToValidte) {
                     var theObservable = data[prop];

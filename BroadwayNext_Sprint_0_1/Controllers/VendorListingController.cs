@@ -196,8 +196,6 @@ namespace BroadwayNext_Sprint_0_1.Controllers
         public JsonResult GetAllVendors(int pageSize, int currentPage, int? vendorNum, string companyName = null)
         {
             TGFContext db = new TGFContext();
-            
-
             db.Configuration.ProxyCreationEnabled = false;
             db.VendorInsuranceTypes.Load();
             //var vendors, rowCount;
@@ -206,56 +204,25 @@ namespace BroadwayNext_Sprint_0_1.Controllers
             {
                 filterVendorNum = (v => v.Vendnum == vendorNum);   //1578511699
             }
-
             Expression<Func<Vendor, bool>> filterName = null;
             if (!string.IsNullOrEmpty(companyName))
             {
                 filterName = (v => v.Company.Equals(companyName, StringComparison.CurrentCultureIgnoreCase));
             }
-
             try
             {
-
                 IQueryable<Vendor> vendors = db.Vendors; ;
                 if (filterVendorNum != null)
                 {
                     vendors = vendors.Where(filterVendorNum);
                 }
-
                 if (filterName != null)
                 {
                     vendors = vendors.Where(filterName);
                 }
                 int rowCount = vendors.Count();
-
-                //var vendors2 = vendors.Include("VendorInsurances").Include("VendorRemitToes").Include("VendorNotes").OrderBy(v => v.Vendnum).Skip((currentPage - 1) * pageSize).Take(pageSize);
-                
                 var vendorList= vendors.Include("VendorInsurances").Include("VendorRemitToes").OrderBy(v => v.Vendnum).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
-
-                //if (vendorList != null)
-                //{
-                //    foreach (var vendor in vendorList)
-                //    {
-                //        foreach (var type in db.VendorInsuranceTypes)
-                //        {
-                //            if (vendor.VendorInsurances.Any(i => i.InsuranceType.Equals(type.InsuranceTypeID)))
-                //                continue;
-                //            vendor.VendorInsurances.Add(new VendorInsurance()
-                //            {
-                //                InsuranceType = type.InsuranceTypeID,
-                //                VendorInsuranceType = type,
-                //                VendorInsuranceID = Guid.NewGuid()
-                //            });
-                //        }
-                //        //vendor.VendorInsurances = vendor.VendorInsurances.OrderByDescending(v => v.VendorInsuranceType.InsuranceType).ToList();
-                //    }
-
-                //}
-
-
-
                 return Json(new { Data = vendorList, InsuranceTypes = db.VendorInsuranceTypes.ToList(), VirtualRowCount = rowCount }, JsonRequestBehavior.AllowGet);
-
             }
             catch (Exception ex)
             {
@@ -319,14 +286,8 @@ namespace BroadwayNext_Sprint_0_1.Controllers
         public ActionResult Save(Vendor vendor)
         {
 
-            vendor.InputDate = DateTime.Now;
-            vendor.LastModifiedDate = DateTime.Now;
-
-            foreach (var remitTo in vendor.VendorRemitToes)
-            {
-                remitTo.InputDate = DateTime.Now;
-                remitTo.LastModifiedDate = DateTime.Now;
-            }
+            DateTime InputDate = DateTime.Now;
+            DateTime LastModifiedDate = DateTime.Now;
 
             var result = false;
 
@@ -338,10 +299,21 @@ namespace BroadwayNext_Sprint_0_1.Controllers
                 if (vendor.VendorID == Guid.Empty)  //This is New
                 {
                     vendor.VendorID = Guid.NewGuid();
+                    vendor.InputDate = InputDate;
+                    vendor.LastModifiedDate = LastModifiedDate;
+                    //
                     Uow.Vendors.Insert(vendor);
+
                     foreach (var remitToes in vendor.VendorRemitToes)
                     {
-                        Uow.RemitTo.Insert(remitToes);
+                        if (remitToes.VendorID == Guid.Empty)
+                        {
+                            remitToes.VendorID = vendor.VendorID;
+                            remitToes.VendorRemitToID = Guid.NewGuid();
+                            remitToes.InputDate = InputDate;
+                            remitToes.LastModifiedDate = LastModifiedDate;
+                            Uow.RemitTo.Insert(remitToes);
+                        }
                     }
                     //Handle insurance 
                     foreach (var insurance in vendor.VendorInsurances)
@@ -350,23 +322,29 @@ namespace BroadwayNext_Sprint_0_1.Controllers
                         {
                             insurance.VendorID = vendor.VendorID;
                             insurance.VendorInsuranceID = Guid.NewGuid();
-                            Uow.VendorInsurance.Insert(insurance);
+                            insurance.InputDate = InputDate;
+                            insurance.LastModifiedDate = LastModifiedDate;
+                            Uow.VendorInsurances.Insert(insurance);
                         }
-                        else
-                        {
-                            Uow.VendorInsurance.Update(insurance);
-                        }
-
                     }
-
-                    //
-                    //result = Uow.Commit() > 0;
                 }
                 else
                 {
                     foreach (var remitToes in vendor.VendorRemitToes)
                     {
-                        Uow.RemitTo.Update(remitToes);
+                        if (remitToes.VendorID == Guid.Empty)       //This is new
+                        {
+                            remitToes.VendorID = vendor.VendorID;
+                            remitToes.VendorRemitToID = Guid.NewGuid();
+                            remitToes.InputDate = InputDate;
+                            remitToes.LastModifiedDate = LastModifiedDate;
+                            Uow.RemitTo.Insert(remitToes);
+                        }
+                        else
+                        {
+                            remitToes.LastModifiedDate = LastModifiedDate;
+                            Uow.RemitTo.Update(remitToes);
+                        }
                     }
                     //Handle Insurance
                     foreach (var insurance in vendor.VendorInsurances)
@@ -375,34 +353,138 @@ namespace BroadwayNext_Sprint_0_1.Controllers
                         {
                             insurance.VendorID = vendor.VendorID;
                             insurance.VendorInsuranceID = Guid.NewGuid();
-                            Uow.VendorInsurance.Insert(insurance);
+                            insurance.InputDate = InputDate;
+                            insurance.LastModifiedDate = LastModifiedDate;
+                            Uow.VendorInsurances.Insert(insurance);
                         }
                         else
                         {
-                            Uow.VendorInsurance.Update(insurance);
+                            insurance.LastModifiedDate = LastModifiedDate;
+                            Uow.VendorInsurances.Update(insurance);
                         }
                     }
                     //
+                    vendor.LastModifiedDate = LastModifiedDate;
                     Uow.Vendors.Update(vendor);
-
-                    //result = Uow.Commit() > 0;
                 }
-
                 try
                 {
                     result = Uow.Commit() > 0;
-
                 }
-                catch (DbUpdateConcurrencyException  ex)
+                catch (DbUpdateConcurrencyException ex)
                 {
                     
-                    throw;
+                }
+                catch (Exception e)
+                {
+
                 }
 
                 //return Json(new { Success = result, VendorContact = contact });
                 return Json(new { Sucess = result });
             }
         }
+
+        [HttpPost]
+        public JsonResult DeleteVendorAll(Guid vendorID)
+        {
+            var result = false;
+            using (Uow)
+            {
+                IEnumerable<Vendor> vendors = Uow.Vendors.Get(includeProperties: "VendorRemitToes, VendorInsurances, VendorContacts, VendorShipToes, VendorTerminations").Where(v=> v.VendorID == vendorID).ToList();
+                try
+                {
+                    //vendors.for
+                    foreach (var vendor in vendors)
+                    {
+                        foreach (var remitToes in vendor.VendorRemitToes.ToList())
+                        {
+                            if (remitToes.VendorRemitToID != Guid.Empty)
+                                Uow.RemitTo.Delete(remitToes);
+                        }
+                        foreach (var insurance in vendor.VendorInsurances.ToList())
+                        {
+                            if (insurance.VendorInsuranceID != Guid.Empty)
+                                Uow.VendorInsurances.Delete(insurance);
+                        }
+                        foreach (var contact in vendor.VendorContacts.ToList())
+                        {
+                            if (contact.VendorContactID != Guid.Empty)
+                                Uow.VendorContacts.Delete(contact);
+                        }
+                        foreach (var shipTo in vendor.VendorShipToes.ToList())
+                        {
+                            if (shipTo.VendorShipToID != Guid.Empty)
+                                Uow.VendorShipTos.Delete(shipTo);
+                        }
+                        foreach (var termination in vendor.VendorTerminations.ToList())
+                        {
+                            if (termination.VendorTerminationID != Guid.Empty)
+                                Uow.VendorTerminations.Delete(termination);
+                        }
+                        vendor.VendorRemitToes = null;
+                        vendor.VendorInsurances = null;
+                        vendor.VendorContacts = null;
+                        vendor.VendorShipToes = null;
+                        vendor.VendorTerminations = null;
+                        //now delete the main Vendor
+                        Uow.Vendors.Delete(vendor);
+
+                        try
+                        {
+                            result = Uow.Commit() > 0;
+                        }
+                        catch (Exception ex)
+                        {
+                            throw;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    
+                    throw;
+                }
+            }
+            return Json(new { Success = result });
+        }
+
+
+
+        //[HttpPost]
+        //public JsonResult DeleteVendor(Vendor vendor)
+        //{
+        //    bool result = false;
+        //    using (Uow)
+        //    {
+        //        foreach (var remitToes in vendor.VendorRemitToes)
+        //        {
+        //            if(remitToes.VendorRemitToID != Guid.Empty)
+        //                Uow.RemitTo.Delete(remitToes);
+        //        }
+        //        foreach (var insurance in vendor.VendorInsurances)
+        //        {
+        //            if(insurance.VendorInsuranceID != Guid.Empty)
+        //                Uow.VendorInsurances.Delete(insurance);
+        //        }
+        //        vendor.VendorRemitToes = null;
+        //        vendor.VendorInsurances = null;
+        //        //now delete the main Vendor
+        //        Uow.Vendors.Delete(vendor);
+
+        //        try
+        //        {
+        //            result = Uow.Commit() > 0;  
+        //        }
+        //        catch (Exception ex)
+        //        {
+                    
+        //            throw;
+        //        }
+        //    }
+
+        //    return Json(new { Success = result });
+        //}
 
 
         public JsonResult GetReasons()
