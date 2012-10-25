@@ -123,8 +123,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\VendorListController.cs" />
     <Compile Include="Controllers\VendorListingController.cs" />
     <Compile Include="Data\EFRepository.cs" />
     <Compile Include="Data\UnitOfWork.cs" />
@@ -133,8 +131,6 @@
     </Compile>
     <Compile Include="Models\Division.cs" />
     <Compile Include="Models\Domain\VendorContact.cs" />
-    <Compile Include="Models\DummyModel\TheVendor.cs" />
-    <Compile Include="Models\DummyModel\TheVendorData.cs" />
     <Compile Include="Models\Domain\VendorRemitToManual.cs" />
     <Compile Include="Models\Mapping\DivisionMap.cs" />
     <Compile Include="Models\Mapping\StateMap.cs" />
@@ -176,8 +172,6 @@
     <Compile Include="Models\Vendors_Audit.cs" />
     <Compile Include="Models\VendorTermination.cs" />
     <Compile Include="Models\VendorType.cs" />
-    <Compile Include="NavigationRoutes\NamedRoute.cs" />
-    <Compile Include="NavigationRoutes\NavigationExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -472,8 +466,6 @@
     <Content Include="Scripts\app\dataService.js" />
     <Content Include="Scripts\app\main.js" />
     <Content Include="Scripts\app\util.js" />
-    <Content Include="Scripts\app\ViewModels\Copy of vendorListing-0.8.js" />
-    <Content Include="Scripts\app\ViewModels\vendorListingTemp-0.9.1.0.js" />
     <Content Include="Scripts\app\ViewModels\vendorContacts-0.1.js" />
     <Content Include="Scripts\app\ViewModels\vendorListing-0.9.1.js" />
     <Content Include="Scripts\app\ViewModels\vendorShipto-0.2.js" />
@@ -541,8 +533,6 @@
     <Content Include="Scripts\_references.js" />
     <Content Include="Templates\VendorListing\audittrail_tab.html" />
     <Content Include="Templates\VendorListing\contacts_tab.html" />
-    <Content Include="Templates\VendorListing\Copy of contacts_tab.html" />
-    <Content Include="Templates\VendorListing\Copy of edit_contact.html" />
     <Content Include="Templates\VendorListing\documents_tab.html" />
     <Content Include="Templates\VendorListing\edit_contact.html" />
     <Content Include="Templates\VendorListing\edit_shipto.html" />
@@ -569,12 +559,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Shared\_html5shiv.cshtml" />
-    <Content Include="Views\Shared\_BootstrapLayout.cshtml" />
-    <Content Include="Views\Shared\_alerts.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Details.cshtml" />
-    <Content Include="Views\Home\Create.cshtml" />
     <Content Include="Views\VendorListing\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
