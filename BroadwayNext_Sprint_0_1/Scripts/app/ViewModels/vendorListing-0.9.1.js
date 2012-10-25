@@ -15,6 +15,7 @@ var bn = bn || {};
 
 //#region "MODEL"
 bn.Insurance = function (data) {
+    this.Exists = data.Exists;
     this.VendorInsuranceID = ko.observable(data.VendorInsuranceID);
     this.VendorID = ko.observable(data.VendorID);
     this.InsuranceType = ko.observable(data.InsuranceTypeID);       // Actual ID of the InsuranceType
@@ -22,6 +23,12 @@ bn.Insurance = function (data) {
     this.InsuranceName = ko.observable(data.InsuranceName).extend({ editable: { scope: 'Insurance' } }); //.extend({required: true});         // Name of the Insurance Company
     this.Policynum = ko.observable(data.Policynum).extend({ editable: { scope: 'Insurance' } });
     this.ExpiryDate = ko.observable(data.ExpiryDate).extend({ editable: { scope: 'Insurance' } });
+    if (data.ExpiryDate) {
+        this.ExpiryDate.formatted = moment(data.ExpiryDate).format("MM/DD/YYYY");
+    }
+    //else {
+    //    this.ExpiryDate.formatted = this.ExpiryDate();
+    //}
     this.AdditionalInsured = ko.observable(data.AdditionalInsured).extend({ editable: { scope: 'Insurance' } });
     this.Not_onFile = ko.observable(data.Not_onFile).extend({ editable: { scope: 'Insurance' } });
     this.InsuranceNotRequired = ko.observable(data.InsuranceNotRequired).extend({ editable: { scope: 'Insurance' } });
@@ -368,6 +375,9 @@ bn.vmVendorList = (function ($, bn, undefined) {
                 }
                 if (vendorIns) {
                     ////Console.log('found a match');
+                    //--
+                    vendorIns.Exists = true;
+                    //--
                     vendorIns.InsuranceTypeName = insType.InsuranceType;
                     vendorIns.InsuranceTypeID = insType.InsuranceTypeID;    //hack due to inconsistency of names in 2 tables
                     var ins = new bn.Insurance(vendorIns);
@@ -376,6 +386,9 @@ bn.vmVendorList = (function ($, bn, undefined) {
                 else {
                     //didn't find any match, so build an empty one and add
                     var emptyIns = createEmptyInsurance(insType);
+                    //--
+                    emptyIns.Exists = false;
+                    //--
                     result.push(emptyIns);
                 }
             });

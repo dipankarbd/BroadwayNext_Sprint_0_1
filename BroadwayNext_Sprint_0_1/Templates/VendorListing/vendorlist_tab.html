@@ -33,7 +33,7 @@
                     <th style="width: 100px;">WC Nof</th>
                     <th style="width: 100px;">Auto</th>
                     <th style="width: 100px;">Auto Date</th>
-                    <th style="width: 100px;">Auto Nif</th>
+                    <th style="width: 100px;">Auto Nof</th>
                     <th style="width: 100px;">GL Add.Insure</th>
                     <th style="width: 100px;">Rehire</th>
                     <th style="width: 100px;">Grade</th>
@@ -44,7 +44,7 @@
                     <th style="width: 150px;">Remit To State</th>
                     <th style="width: 150px;">Remit To Zip</th>
                     <th style="width: 150px;">Remit To Phone</th>
-                    <th style="width: 150px;">Remit To Fax</th>
+                    <th style="width: 150px;">Remit To Email</th>
                     <th style="width: 150px;">Remit To Contact</th>
                     <th style="width: 150px;">Price List Count</th>
                     <th style="width: 100px;">Comment 1</th>
@@ -75,20 +75,14 @@
                     <td class="left">&nbsp;</td>
                     <td class="left">&nbsp;</td>
                     <td class="left">&nbsp;</td>
-                    <td class="left">&nbsp;</td>
                     <!-- ko foreach: $data.VendorInsurances -->
-                    <td class="left">&nbsp;</td>
-                    <td class="left">&nbsp;</td>
+                        <td class="left"><input type="checkbox" data-bind="checked: Exists" /></td>    
+                        <td class="left" data-bind="text: ExpiryDate.formatted"></td>
+                        <td class="left"><input type="checkbox" data-bind="checked: Not_onFile" /></td>
                     <!-- /ko -->
                     <td class="left">&nbsp;</td>
                     <td class="left">&nbsp;</td>
                     <td class="left">&nbsp;</td>
-                    <td class="left">&nbsp;</td>
-                    <td class="left">&nbsp;</td>
-                    <td class="left">&nbsp;</td>
-                    <td class="left">&nbsp;</td>
-                    <td class="left">&nbsp;</td>
-                     <td class="left">&nbsp;</td>
                     <!-- ko foreach: $data.VendorRemitToes -->
                         <td class="left" data-bind="text: Company"></td>
                         <td class="left" data-bind="text: Address1"></td>
