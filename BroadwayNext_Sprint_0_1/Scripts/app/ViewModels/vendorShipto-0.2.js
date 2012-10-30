@@ -42,13 +42,8 @@ bn.vmShipToList = (function ($, bn, undefined) {
                     shipTosGridTotalPages(Math.ceil(result.VirtualRowCount / shipTosGridPageSize()));
                     var mappedShipTos = $.map(result.Data, function (item) { return new bn.VendorShipTo(item); });
                     shipTos(mappedShipTos);
-                    //set the Tab counter
-                    var tabName = 'Ship To';
-                    $('#tabstwo li:eq(6) a').html(tabName);
-                    if (totalShipTos() > 0) {
-                        tabName = tabName + '(' + totalShipTos() + ')';
-                        $('#tabstwo li:eq(6) a').html(tabName);
-                    }
+                    //set the Total ShipTo counter on the Tab
+                    setShipToTabCounter(totalShipTos());
                 });
             }
         },
@@ -127,8 +122,21 @@ bn.vmShipToList = (function ($, bn, undefined) {
                 if (id)
                     fetchShipTos();    //Re-load on valid ID  
             }
+            else {
+                setShipToTabCounter();
+            }
             //console.log(vendorId() + " -- " + vendorNum);
         },
+
+        setShipToTabCounter = function (counter) {
+            //set the Tab counter
+            var tabName = 'Ship To';
+            if (counter > 0) {
+                tabName = tabName + '(' + counter + ')';
+            }
+            $('#tabstwo li:eq(6) a').html(tabName);
+
+        }
 
         cancelEdit = function () {
             editingShipTo().rollback();

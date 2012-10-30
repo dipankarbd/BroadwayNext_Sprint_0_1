@@ -78,12 +78,7 @@ bn.vmTerminationList = (function ($, bn, undefined) {
                    });
                    terminations(mappedTerminations);
                    //set the Tab counter
-                   var tabName = 'Termination';
-                   $('#tabstwo li:eq(10) a').html(tabName);
-                   if (totalTerminations() > 0) {
-                       tabName = tabName + '(' + totalTerminations() + ')';
-                       $('#tabstwo li:eq(10) a').html(tabName);
-                   }
+                   setTerminationTabCounter(totalTerminations());
                });
            }
        },
@@ -183,7 +178,18 @@ bn.vmTerminationList = (function ($, bn, undefined) {
                }
 
            }
+           else {
+               setTerminationTabCounter();
+           }
        },
+
+       setTerminationTabCounter = function (counter) {
+           var tabName = 'Termination';
+           if (counter && counter > 0) {
+               tabName = tabName + '(' + counter + ')';
+           }
+           $('#tabstwo li:eq(10) a').html(tabName);
+       }
 
        cancelEdit = function () {
            editingTermination().rollback();

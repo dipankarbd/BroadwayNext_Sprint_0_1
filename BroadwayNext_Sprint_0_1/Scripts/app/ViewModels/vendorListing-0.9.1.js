@@ -419,6 +419,7 @@ bn.vmVendorList = (function ($, bn, undefined) {
                 loadVendors();
             //--Reset
             selectedVendor(undefined);
+            selectedVendor.valueHasMutated();   //publish 'undefined'-ness
             editingVendor(undefined);
             isSelected(false);
             inEditMode(false);
@@ -485,6 +486,9 @@ $(function () {
             var vendorNum = ko.utils.unwrapObservable(data.Vendnum);
             //send notification
             amplify.publish("VendorSelectionChanged", vendorID, vendorNum);
+        }
+        else {
+            amplify.publish("VendorSelectionChanged");  //let subscribers do clean-up on empty selectedVendor()
         }
     });
 

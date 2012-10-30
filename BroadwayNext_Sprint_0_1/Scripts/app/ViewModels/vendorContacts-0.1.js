@@ -57,13 +57,15 @@ bn.vmContactList = (function ($, bn, undefined) {
                     var mappedContacts = $.map(result.Data, function (item) { return new bn.VendorContact(item); });
                     contacts(mappedContacts);
 
-                    //set the Tab counter
-                    var tabName = 'Contacts';
-                    $('#tabstwo li:eq(5) a').html(tabName);
-                    if (totalContacts() > 0) {
-                        tabName = tabName + '(' + totalContacts() + ')';
-                        $('#tabstwo li:eq(5) a').html(tabName);
-                    }
+                    setContactTabCounter(totalContacts());
+
+                    ////set the Tab counter
+                    //var tabName = 'Contacts';
+                    //$('#tabstwo li:eq(5) a').html(tabName);
+                    //if (totalContacts() > 0) {
+                    //    tabName = tabName + '(' + totalContacts() + ')';
+                    //    $('#tabstwo li:eq(5) a').html(tabName);
+                    //}
                 });
             }
         },
@@ -157,8 +159,21 @@ bn.vmContactList = (function ($, bn, undefined) {
                 if (id)
                     fetchContacts();    //Re-load on valid ID  
             }
+            else {
+                setContactTabCounter();
+            }
 
             //console.log(vendorId() + " -- " + vendorNum);
+        },
+
+        setContactTabCounter = function (count) {
+            //set the Tab counter
+            var tabName = 'Contacts';
+            if (count && count > 0) {
+                tabName = tabName + '(' + count + ')';
+            }
+            $('#tabstwo li:eq(5) a').html(tabName);
+
         },
 
         cancelEdit = function () {
