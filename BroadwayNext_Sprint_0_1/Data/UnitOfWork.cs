@@ -17,7 +17,10 @@ namespace BroadwayNext_Sprint_0_1.Data
         private EFRepository<VendorContact> vendorContactRepository;
         private EFRepository<VendorShipTo> vendorShipToRepository;
         private EFRepository<VendorTermination> vendorTerminationRepository;
+        private EFRepository<TerminationReason> terminationReasonsRepository;
+        private EFRepository<Division> divisionRepository;
 
+        
         public UnitOfWork()
         {
             CreateDbContext();
@@ -107,6 +110,30 @@ namespace BroadwayNext_Sprint_0_1.Data
             }
 
         }
+        public EFRepository<TerminationReason> TerminationReasons
+        {
+            get {
+                if (this.terminationReasonsRepository == null)
+                {
+                    this.terminationReasonsRepository = new EFRepository<TerminationReason>(DbContext);
+                }
+                return terminationReasonsRepository; 
+            }
+        }
+        public EFRepository<Division> Divisions
+        {
+            get
+            {
+                if (this.divisionRepository == null)
+                {
+                    this.divisionRepository = new EFRepository<Division>(DbContext);
+                }
+                return divisionRepository;
+            }
+        }
+
+
+
 
         //----------------------------
 
