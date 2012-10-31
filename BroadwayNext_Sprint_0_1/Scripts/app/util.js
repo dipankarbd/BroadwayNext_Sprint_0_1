@@ -1,5 +1,21 @@
 ﻿var bn = bn || {};
 
+
+
+
+bn.config = (function () {
+    var
+        self = this,
+        phoneMask = '(999) 999-9999';
+
+    return {
+        phoneMask: phoneMask
+    }
+
+}())
+
+
+
 bn.utils = (function () {
     var
         self = this,
@@ -8,7 +24,7 @@ bn.utils = (function () {
             for (var prop in data) {
                 if (prop === itemToValidte) {
                     var theObservable = data[prop];
-                    theObservable.valueHasMutated();
+                    //theObservable.valueHasMutated();
                     ko.validation.validateObservable(theObservable);
                     if (theObservable.error) {
                         viewModel.modelIsValid(false);

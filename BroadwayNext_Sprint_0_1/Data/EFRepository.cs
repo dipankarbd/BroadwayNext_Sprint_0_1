@@ -22,8 +22,40 @@ namespace BroadwayNext_Sprint_0_1.Data
             this.context = context;
             this.dbSet = context.Set<TEntity>();
         }
+        //Call this for paging capability
+        public virtual IEnumerable<TEntity> Get(out int rowCount,
+            Expression<Func<TEntity, bool>> filter = null,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
+            string includeProperties = "",
+            int pageSize = 10, int currentPage = 1)
+        {
+            IQueryable<TEntity> query = dbSet;
+            rowCount = 0;
 
 
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+            //get the rowCount
+            rowCount = query.Count();
+
+            foreach (var includeProperty in includeProperties.Split
+                (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                query = query.Include(includeProperty);
+            }
+
+            if (orderBy != null)
+            {
+                return orderBy(query).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+            }
+            else
+            {
+                return query.ToList();
+            }
+        }
+        //--
         public virtual IEnumerable<TEntity> Get(
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,

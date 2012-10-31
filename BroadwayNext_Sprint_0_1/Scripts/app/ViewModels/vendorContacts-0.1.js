@@ -57,15 +57,8 @@ bn.vmContactList = (function ($, bn, undefined) {
                     var mappedContacts = $.map(result.Data, function (item) { return new bn.VendorContact(item); });
                     contacts(mappedContacts);
 
+                    //set the Tab counter
                     setContactTabCounter(totalContacts());
-
-                    ////set the Tab counter
-                    //var tabName = 'Contacts';
-                    //$('#tabstwo li:eq(5) a').html(tabName);
-                    //if (totalContacts() > 0) {
-                    //    tabName = tabName + '(' + totalContacts() + ')';
-                    //    $('#tabstwo li:eq(5) a').html(tabName);
-                    //}
                 });
             }
         },

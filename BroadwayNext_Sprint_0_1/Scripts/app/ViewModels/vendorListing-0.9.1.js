@@ -72,7 +72,7 @@ bn.Vendor = function (data) {
     this.Zip = ko.observable(data.Zip).extend({ required: true });
     this.Country = ko.observable(data.Country);
     this.Province = ko.observable(data.Province);
-    this.Phone = ko.observable(data.Phone); //.extend({ required: true });
+    this.Phone = ko.observable(data.Phone).extend({ required: true });
     this.PhoneExt = ko.observable(data.PhoneExt);
     this.Fax = ko.observable(data.Fax);
     this.Mobile = ko.observable(data.Mobile);
@@ -154,8 +154,8 @@ bn.vmVendorList = (function ($, bn, undefined) {
         totalRows = ko.observable(0),
         //-----
         applyMask = function () {
-            $("#vendorphone").mask("(999) 999-9999");
-            $("#vendorfax").mask("(999) 999-9999");
+            //$("#vendorphone").mask("(999) 999-9999");
+            //$("#vendorfax").mask("(999) 999-9999");
         },
         selectedVendor = ko.observable(),
 
@@ -337,8 +337,8 @@ bn.vmVendorList = (function ($, bn, undefined) {
 
         loadVendors = function () {
             //get the SEARCH string...
-            var vendorNum = $('#searchVendNum').val();
-            bn.ajaxService.getVendors({ pageSize: pageSize(), currentPage: currentPage(), vendorNum: vendorNum }, onSuccessLoadVendor, onErrorLoadVendor);
+            var searchStr = $('#searchVendNum').val();
+            bn.ajaxService.getVendors({ pageSize: pageSize(), currentPage: currentPage(), searchStr: searchStr }, onSuccessLoadVendor, onErrorLoadVendor);
         },
         
         deleteVendor = function (data) {

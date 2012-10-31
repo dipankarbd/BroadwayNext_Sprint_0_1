@@ -141,6 +141,28 @@
         }
     };
 
+    ko.bindingHandlers.maskedvalue = {
+        init: function (element, valueAccessor, allBindingAccessor, data, context) {
+            var filter = allBindingAccessor().maskFilter || {};
+            $(element).mask(filter);
+            ko.bindingHandlers.value.init(element, valueAccessor, allBindingAccessor);
+        },
+        update: function (element, valueAccessor, allBindingAccessor, data) {
+            var value = ko.utils.unwrapObservable(valueAccessor());
+            if (value) {
+                var newVal = value.replace(/[^\d]/g, '');   //remove everything except the numerics
+                if (newVal) {
+                    //console.debug(newVal);
+                    var valueAcc = valueAccessor();
+                    valueAcc(newVal);
+                    ko.bindingHandlers.value.update(element, valueAcc); // update with the clean string
+                }
+                $(element).val(value);  //re-set the element text so that it remains masked
+            }
+        }
+    };
+
+
     ko.bindingHandlers.gridpager = {
         init: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
             var value = valueAccessor(), allBindings = allBindingsAccessor();

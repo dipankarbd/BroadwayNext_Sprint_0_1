@@ -49,8 +49,8 @@ bn.VendorTermination = function (data) {
 
 bn.vmTerminationList = (function ($, bn, undefined) {
     var
-        self = this,
-        vendorId = ko.observable(),
+       self = this,
+       vendorId = ko.observable(),
        vendorNum,
        terminations = ko.observableArray([]),
        totalTerminations = ko.observable(0),
@@ -82,7 +82,7 @@ bn.vmTerminationList = (function ($, bn, undefined) {
                });
            }
        },
-       //To Do : make sure we fetch reasons only once...
+
        fetchReasons = function () {
            $.getJSON("/vendorlisting/getreasons", function (result) {
                var mappedReasons = $.map(result.Data, function (item) {
@@ -91,6 +91,7 @@ bn.vmTerminationList = (function ($, bn, undefined) {
                reasons(mappedReasons);
            });
        },
+
        fetchDivisions = function () {
            $.getJSON("/vendorlisting/getdivisions", function (result) {
                var mappedDivisions = $.map(result.Data, function (item) {
@@ -102,6 +103,7 @@ bn.vmTerminationList = (function ($, bn, undefined) {
        },
 
        selectedTermination = ko.observable(),
+
        editingTermination = ko.observable(),
 
        selectTermination = function (termination) {
@@ -161,22 +163,21 @@ bn.vmTerminationList = (function ($, bn, undefined) {
                });
            }
        },
+
        editVendor = function () {
            amplify.publish("EditVendor");
        },
-    //subscribe to receive Selected Vendor ID & Num
+
+       //subscribe to receive Selected Vendor ID & Num
        onVendorSelectionChanged = function (id, num) {
            if (id) {
                vendorId(id);
                vendorNum = num;
-               if (id) {
-                   fetchTerminations();    //Re-load on valid ID  
-                   if (!reasons().length)    //Load if empty
-                       fetchReasons();
-                   if (!divisions().length)  //Load if empty
-                       fetchDivisions();
-               }
-
+               fetchTerminations();    //Re-load on valid ID  
+               if (!reasons().length)    //Load if empty
+                   fetchReasons();
+               if (!divisions().length)  //Load if empty
+                   fetchDivisions();
            }
            else {
                setTerminationTabCounter();
@@ -189,7 +190,7 @@ bn.vmTerminationList = (function ($, bn, undefined) {
                tabName = tabName + '(' + counter + ')';
            }
            $('#tabstwo li:eq(10) a').html(tabName);
-       }
+       },
 
        cancelEdit = function () {
            editingTermination().rollback();
