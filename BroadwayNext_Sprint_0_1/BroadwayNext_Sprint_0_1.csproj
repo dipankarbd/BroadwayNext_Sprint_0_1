@@ -468,6 +468,9 @@
     <Content Include="Scripts\app\util.js" />
     <Content Include="Scripts\app\ViewModels\vendorContacts-0.1.js" />
     <Content Include="Scripts\app\ViewModels\vendorListing-0.9.1.js" />
+    <Content Include="Scripts\app\ViewModels\vendorListing-0.9.1.min.js">
+      <DependentUpon>vendorListing-0.9.1.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\app\ViewModels\vendorShipto-0.2.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\app\ViewModels\vendorTermination-0.1.js" />
